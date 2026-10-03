@@ -2,19 +2,35 @@
 
 ## Current state
 
-PR 0C provides a local workflow, PR template, contribution guide, and reviewable
-branch-protection payload. At preparation time this checkout has no GitHub remote,
-the connected account lists no accessible repositories, and local GitHub CLI
-authentication is unavailable. Hosted CI, branch protection, and the failing-PR
-gate have not been exercised. PR 0C remains incomplete until that evidence exists.
+The private repository is
+[izar-hasson/monocular-collision-warning](https://github.com/izar-hasson/monocular-collision-warning).
+[PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1) contains
+PR 0C's workflow, PR template, contribution guide, and proposed protection payload.
+Hosted CI is verified. Inspection on 2026-10-04 reported `main` as unprotected
+with no required contexts. PR 0C remains open until protection and required-check
+merge enforcement are verified. The connector can publish repository changes but
+cannot change repository administration settings; no local CLI credentials are
+configured.
 
-Local verification on 2026-10-04 passed actionlint 1.7.12, workflow configuration
-consistency checks, and all workflow shell commands. Those commands also passed
-in a clean local clone of the committed PR 0B foundation with a new CPU environment:
-five tests, lint/format/types, and sdist/wheel import/CLI smoke. Adding a deliberate
-failing test only to that temporary clone returned pytest exit 1; restoring it
-returned five passing tests. The lockfile hash stayed unchanged. These results
-verify the run commands locally, not the GitHub setup actions or merge enforcement.
+## Hosted evidence — 2026-10-04
+
+| Check | Commit | Hosted run / result |
+| --- | --- | --- |
+| Initial PR #1 | `fbe70b44ea6d4847f362cc59010077300fb58642` | [37157161465](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37157161465): CPU checks passed all steps, five tests and isolated wheel smoke |
+| Deliberately incorrect CLI help assertion | `fd2c6dbd1d858517d3377e61c79a70ec538420ce` | [37157365906](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37157365906): lint/format/types passed; pytest failed with two failed, three passed and exit 1; wheel step skipped |
+| Original assertion restored in a new commit | `c75f0ab2e257ff2c9e9cec24d2672007365d56a9` | [37157690963](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37157690963): CPU checks passed all steps |
+
+The disposable [PR #2](https://github.com/izar-hasson/monocular-collision-warning/pull/2)
+was closed without merging. While `main` was unprotected, its merge state was
+`unstable` on the failed commit and `clean` after recovery. This proves hosted
+failure/recovery, but does not prove required-check enforcement. Once protection
+is enabled, repeat the negative check and inspect merge blocking before closing
+the PR 0C gate. No failing check was waived.
+
+Local verification passed actionlint 1.7.12 and every workflow shell command in a
+clean local clone with a new CPU environment. The lockfile hash stayed unchanged.
+Hosted runs additionally verify checkout, Python/uv setup actions, and the complete
+CPU job on Ubuntu 24.04.
 
 ## Workflow contract
 
@@ -48,11 +64,14 @@ comment, rerun workflow lint and local checks, then require hosted CI. Keep full
 SHAs; do not replace them with moving tags. Python and uv versions come from the
 existing `.python-version` and `pyproject.toml` settings.
 
-## Configure main protection after connecting GitHub
+## Configure main protection
 
-First select the intended repository and inspect its current contents/settings.
-Publish the local history without overwriting unrelated work. Ensure the workflow
-runs and its **CPU checks** check is registered before choosing the required check.
+The **CPU checks** job is now registered. In
+[branch settings](https://github.com/izar-hasson/monocular-collision-warning/settings/branches),
+create protection for `main`: require a PR, require **CPU checks** with branches
+up to date, and enforce the rules for administrators. Keep force pushes and
+deletion disabled. External approvals may remain optional for this solo project.
+Inspect existing settings first and preserve any stronger rules.
 
 [main-protection.json](../.github/main-protection.json) requests an up-to-date
 required check, PR-based changes, zero mandatory external approvals for the solo

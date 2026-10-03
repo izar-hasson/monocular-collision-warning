@@ -54,9 +54,9 @@ check lock consistency, lint, formatting, and package types. Python hooks see
 Git-tracked files, so stage new files before checking them; `make check` covers
 the working tree directly. Hooks do not auto-fix files. Apply an intentional
 formatting edit with `uv run --locked ruff format .`, then rerun checks.
-The PR 0C workflow is checked in, but hosted execution and protection are pending
-repository access. See [GitHub governance](github-governance.md) and
-[CONTRIBUTING.md](../CONTRIBUTING.md); passing local hooks is not hosted-CI evidence.
+The PR 0C workflow passed on GitHub, including a controlled failure/recovery
+check. Branch protection and required-check merge enforcement remain pending.
+See [GitHub governance](github-governance.md) and [CONTRIBUTING.md](../CONTRIBUTING.md); passing local hooks is not hosted-CI evidence.
 
 ## Existing CUDA environment
 

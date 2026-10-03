@@ -15,11 +15,12 @@ substitute for driver attention, or a system permitted to control a vehicle.
 
 ## Current state
 
-Phase 0, through PR 0B, with PR 0C prepared locally: installable package,
-help/version CLI, locked CPU developer environment, smoke tests, lint/type checks,
-and a CPU GitHub Actions workflow. Hosted CI and branch protection are still
-pending repository access. Video detection, tracking, TTC, geometry,
-and warnings are not implemented. No performance or predictive-accuracy results
+Phase 0, through PR 0B, with [PR 0C](https://github.com/izar-hasson/monocular-collision-warning/pull/1)
+open: installable package, help/version CLI, locked CPU developer environment,
+smoke tests, lint/type checks, and a CPU GitHub Actions workflow. Hosted CPU CI
+passed, and a controlled test PR verified failure and recovery. Branch protection
+and required-check merge enforcement remain pending. Video detection, tracking,
+TTC, geometry, and warnings are not implemented. No performance or predictive-accuracy results
 are claimed.
 
 Python 3.12 is the initial development target. The owner's earlier RTX 5070 Ti
@@ -65,8 +66,8 @@ See [architecture and scientific contracts](docs/architecture.md),
 | 7 | Held-out evaluation, stage timing, and measured optimization |
 
 Each step must pass its acceptance gate before the next begins. The next task is
-finishing PR 0C's hosted CI and branch-protection checks. GPU dependencies arrive
-with Phase 1.
+finishing PR 0C's branch protection and required-check merge enforcement. GPU
+dependencies arrive with Phase 1.
 
 ## Licensing
 

@@ -1,7 +1,7 @@
 # ADR-0001: Repository foundation
 
 - Date: 2026-10-04
-- Status: accepted; PR 0A/0B implemented and PR 0C prepared locally; hosted CI/governance pending
+- Status: accepted; PR 0A/0B implemented; PR 0C hosted CI verified, protection/enforcement pending
 
 ## Context
 
@@ -29,8 +29,10 @@ script from a temporary working directory, using pytest importlib mode. Keep
 the foundation free of runtime ML dependencies.
 
 PR 0C defines deterministic CPU CI with the required check name `CPU checks`,
-full verified action SHA pins, and a build/isolated wheel smoke. Hosted validation
-and branch-protection enforcement remain pending repository access. Later GPU/model/video/benchmark tests will be
+full verified action SHA pins, and a build/isolated wheel smoke. Hosted passing,
+intentional failing, and recovered passing runs are recorded in
+[GitHub governance](../github-governance.md). Branch protection and required-check
+merge enforcement remain pending. Later GPU/model/video/benchmark tests will be
 explicitly opt-in, and CUDA dependencies will be introduced as optional extras
 only when Phase 1 needs them. The historical GPU baseline is not assumed to have
 been recreated here.
@@ -52,8 +54,8 @@ locked tools instead of resolving a second independent set of hook dependencies.
 
 Consumers must install the package before using it. CPU developer dependencies
 are locked; this does not guarantee bitwise GPU reproducibility across hardware
-or drivers. The repository does not yet claim passing hosted CI or a validated
-video pipeline.
+or drivers. Passing hosted CI verifies the package/tooling foundation; video
+processing and warning performance remain unimplemented and unvalidated.
 Only Python 3.12 is initially verified; the lower-bound metadata is not evidence
 that every later Python version was tested.
 
