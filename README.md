@@ -15,9 +15,10 @@ substitute for driver attention, or a system permitted to control a vehicle.
 
 ## Current state
 
-Phase 0, through PR 0B: installable package, help/version CLI, locked CPU developer
-environment, smoke tests, lint/type checks, and initial documentation. Hosted CI
-and branch protection are still pending. Video detection, tracking, TTC, geometry,
+Phase 0, through PR 0B, with PR 0C prepared locally: installable package,
+help/version CLI, locked CPU developer environment, smoke tests, lint/type checks,
+and a CPU GitHub Actions workflow. Hosted CI and branch protection are still
+pending repository access. Video detection, tracking, TTC, geometry,
 and warnings are not implemented. No performance or predictive-accuracy results
 are claimed.
 
@@ -46,6 +47,8 @@ review intentional dependency updates together with their lockfile changes.
 The base package has no runtime dependencies or model downloads. It does not
 recreate CUDA; preserve the separate working GPU environment. Its verified versions
 and migration rules are recorded in the [environment baseline](docs/environment-baseline.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for PR conventions and
+[GitHub governance](docs/github-governance.md) for the required `CPU checks` gate.
 
 ## Architecture and roadmap
 
@@ -61,8 +64,9 @@ See [architecture and scientific contracts](docs/architecture.md),
 | 5–6 | Relative motion/path overlap, then uncertainty-aware warning policy |
 | 7 | Held-out evaluation, stage timing, and measured optimization |
 
-Each step must pass its acceptance gate before the next begins. PR 0C is the next
-bounded task; GPU dependencies arrive with Phase 1.
+Each step must pass its acceptance gate before the next begins. The next task is
+finishing PR 0C's hosted CI and branch-protection checks. GPU dependencies arrive
+with Phase 1.
 
 ## Licensing
 

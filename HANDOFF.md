@@ -1,6 +1,6 @@
 # Monocular Collision Warning — Engineering Handoff & Repository Blueprint
 
-> **Status:** Phase 0 / PR 0A and PR 0B completed locally on 2026-10-04; PR 0C is the next bounded task. Phase 0 as a whole remains incomplete.
+> **Status:** Phase 0 / PR 0A and PR 0B completed; PR 0C prepared and verified locally on 2026-10-04, with hosted CI/governance pending GitHub repository access. Phase 0 remains incomplete.
 >
 > **Prepared:** 2026-10-03; resource-library integration added 2026-10-03  
 > **Audience:** Project owner, future collaborators, and AI coding agents.  
@@ -13,9 +13,19 @@ The project is an **offline/research prototype** of a real-time, monocular RGB d
 
 **Confirmed so far by the owner:** Windows 11; WSL2/Ubuntu; RTX 5070 Ti; PyTorch `2.14.1+cu130`; CUDA reported as `13.0`; `torch.cuda.is_available() == True`; compute capability `(12, 0)`; a CUDA tensor multiplication succeeded; an Ultralytics YOLO bus/person image prediction produced annotated detections. These checks establish a working development baseline, **not** successful video tracking, distance estimation, TTC estimation, or validated warning performance. Record Python, Ubuntu, driver, `uv`, Ultralytics, OpenCV, and actual package versions during bootstrap; they have not all been verified.
 
-**Decision already made:** use the hybrid modular architecture in §2, and build feature-by-feature using the gated roadmap in §4. **Immediate focus:** §5 Phase 0, the professional repository foundation. PR 0A's installation gate and PR 0B's repeatability gate have passed locally. PR 0C is next. Do **not** skip to another YOLO demo or add multiple feature implementations before the foundation passes its acceptance checks.
+**Decision already made:** use the hybrid modular architecture in §2, and build feature-by-feature using the gated roadmap in §4. **Immediate focus:** §5 Phase 0, the professional repository foundation. PR 0A's installation gate and PR 0B's repeatability gate have passed locally. Finish PR 0C's hosted CI and branch-protection evidence before advancing. Do **not** skip to another YOLO demo or add multiple feature implementations before the foundation passes its acceptance checks.
 
-### PR 0B implementation record — 2026-10-04
+### PR 0C preparation record — 2026-10-04 (hosted gate pending)
+
+- The owner authorized continuing with PR 0C. The checkout has no remote. The connected GitHub profile is accessible, but the connector lists no accessible repositories; `gh`, local CLI authentication, and exposed branch-protection mutation tools are unavailable. The repository destination was requested while local work continued. Do not assume a repository exists or publish to an unrelated destination.
+- Added `.github/workflows/ci.yml`, the PR template, `.github/main-protection.json`, `CONTRIBUTING.md`, and `docs/github-governance.md`. Updated README, developer guide, ADR-0001, and this handoff. The required job name is `CPU checks`; token permissions are only `contents: read`, checkout credentials are not persisted, and the workflow uses ordinary push/PR events with no model/GPU requirements.
+- Verified full action pins against official releases and action definitions: checkout v7.0.1, setup-python v7.0.0, and setup-uv v10.2.0. Recorded the SHA links and update policy in the governance document. Existing Python and uv version settings remain the source of truth.
+- Downloaded actionlint 1.7.12 to a temporary tool directory, verified its official archive SHA-256, and successfully linted the workflow. Configuration checks confirmed workflow events, read-only permissions, full pins, and the matching protection check name.
+- Executed every workflow shell step locally, then in a clean local clone of PR 0B commit `0bfb402` with a new CPU environment. Locked sync, lint, formatting, mypy, all five tests, and sdist/wheel build plus isolated import/CLI smoke passed. A deliberate test failure only in that clone made the workflow pytest command exit 1; restoring it returned five passing tests. The lockfile hash was unchanged. This is local evidence and does not validate the setup actions on hosted runners or prove GitHub merge blocking.
+- The protection JSON is a reviewable proposed configuration, not applied policy. Hosted passing/failing PR runs and inspection of enforced `main` protection remain required. Repository creation/admin settings are not provided by the currently exposed connector capabilities; actual settings require appropriate repository access. Do not mark the PR 0C gate complete or advance to PR 0D on this local evidence alone.
+- Local validation records are under gitignored `local-baselines/`; no media/model artifacts, public license, or CUDA migration were added. Next smallest task: identify/connect the intended repository, publish the reviewed foundation, verify hosted CI, apply/inspect protection, and exercise the failing/passing test PR.
+
+### PR 0B implementation record — 2026-10-04 (historical)
 
 - The owner authorized PR 0B and supplied a Git author identity, configured only in this repository. PR 0A was recorded as local commit `9c5abfd`; PR 0B has its own commit. No remote, hosted PR, CI, or branch rules have been configured.
 - Added generated `uv.lock`, Python 3.12 selection, Ruff/pytest/mypy configuration, local pre-commit hooks, editor/line-ending settings, expanded asset/cache ignore rules, and thin Makefile targets. Added `docs/development.md` and `docs/environment-baseline.md`; updated README, ADR-0001, and the license ledger. No video/perception features were added.
@@ -320,7 +330,7 @@ Use marker names `gpu`, `integration`, `slow`, `benchmark` where appropriate; de
 
 ### 5.7 Phase 0 definition of done (checkboxes are intentionally not pre-checked)
 
-- [ ] Package can be installed from clean clone without setting `PYTHONPATH` manually.
+- [x] Package can be installed from clean clone without setting `PYTHONPATH` manually.
 - [x] One locked, documented CPU environment installs; no accidental `uv.lock` rewrite.
 - [x] `collision-warning --help` and a meaningful smoke test run.
 - [x] Ruff lint and format, targeted type check, and pytest all pass locally.
@@ -416,7 +426,7 @@ The research library's physics/AR/server tutorials do not remove our scientific 
 
 ## 9. Instructions for the next contributor / coding agent
 
-**Current next task:** PR 0A and PR 0B from §5.3 have passed their local gates; see the implementation records in §0. Continue with **only PR 0C** after the owner agrees. Before writing code, inspect repository contents and `git status`; verify tool availability, preserve the owner's working CUDA environment, and show exact planned changes. Run and report checks actually executed, state blockers, and do not present a future phase as completed. The remaining Phase 0 acceptance boxes are not proof of current functionality.
+**Current next task:** PR 0A and PR 0B from §5.3 have passed their local gates; PR 0C's local implementation is prepared. Finish **only PR 0C's hosted gate** once the intended GitHub repository and administration access are available. Before any remote write, inspect its contents/settings and preserve unrelated work and stronger protection. Verify actual hosted passing/failing jobs and merge enforcement. PR 0D remains a later task. Run and report checks actually executed, state blockers, and do not present a future phase as completed. The remaining Phase 0 acceptance boxes are not proof of current functionality.
 
 **When resuming later, report in this order:** phase/state; changed files; commands and actual results; outputs/artifacts (with location and licensing); decisions/ADRs; next smallest task; unresolved risks. Update the top **Status** and checkboxes in this handoff whenever a phase closes.
 

@@ -1,7 +1,7 @@
 # ADR-0001: Repository foundation
 
 - Date: 2026-10-04
-- Status: accepted; PR 0A and PR 0B implemented locally, CI implementation pending
+- Status: accepted; PR 0A/0B implemented and PR 0C prepared locally; hosted CI/governance pending
 
 ## Context
 
@@ -28,7 +28,9 @@ Test installed imports with an isolated Python process and the actual console
 script from a temporary working directory, using pytest importlib mode. Keep
 the foundation free of runtime ML dependencies.
 
-Use deterministic CPU CI in PR 0C. Later GPU/model/video/benchmark tests will be
+PR 0C defines deterministic CPU CI with the required check name `CPU checks`,
+full verified action SHA pins, and a build/isolated wheel smoke. Hosted validation
+and branch-protection enforcement remain pending repository access. Later GPU/model/video/benchmark tests will be
 explicitly opt-in, and CUDA dependencies will be introduced as optional extras
 only when Phase 1 needs them. The historical GPU baseline is not assumed to have
 been recreated here.
