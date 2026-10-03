@@ -1,0 +1,29 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lock-check
+        name: Check dependency lock
+        entry: uv lock --check
+        language: system
+        pass_filenames: false
+        always_run: true
+        require_serial: true
+      - id: ruff-check
+        name: Ruff lint
+        entry: uv run --locked ruff check
+        language: system
+        types: [python]
+        require_serial: true
+      - id: ruff-format
+        name: Ruff format check
+        entry: uv run --locked ruff format --check
+        language: system
+        types: [python]
+        require_serial: true
+      - id: mypy
+        name: Type-check package
+        entry: uv run --locked mypy
+        language: system
+        files: ^src/collision_warning/.*\.py$
+        pass_filenames: false
+        require_serial: true

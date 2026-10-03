@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "monocular-collision-warning"
+version = "0.1.0.dev0"
+description = "Offline monocular RGB collision-warning research prototype"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3",
+    "Private :: Do Not Upload",
+]
+
+[project.scripts]
+collision-warning = "collision_warning.cli:main"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4,<3",
+    "pre-commit>=4,<5",
+    "pytest>=8,<10",
+    "ruff>=0.16,<0.17",
+]
+
+[tool.uv]
+required-version = "==0.12.23"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib --strict-config --strict-markers -m 'not gpu and not slow and not benchmark'"
+markers = [
+    "gpu: opt-in tests requiring CUDA and pinned model assets",
+    "integration: lightweight CPU tests spanning component boundaries",
+    "slow: opt-in recorded-video or other long-running tests",
+    "benchmark: opt-in measurements on declared hardware",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+extend-exclude = ["build", "dist", "local-baselines"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/collision_warning"]
+strict = true
+show_error_codes = true
