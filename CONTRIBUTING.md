@@ -5,6 +5,11 @@ purpose, explicit scope, and a meaningful acceptance check. Introduce contracts
 and interfaces with real consumers; keep numerical estimation/risk logic separate
 from video, model, visualization, and GPU adapters.
 
+The owner currently authorizes repository setup only. Feature issues are plans,
+not permission to start implementation. Check the
+[setup status](docs/repository-setup.md) and obtain a new owner instruction before
+feature work.
+
 ## Setup and checks
 
 Use Python 3.12 and uv 0.12.23. Follow [development.md](docs/development.md) and
@@ -28,6 +33,8 @@ Create a branch from current `main`, using `chore/`, `feat/`, `fix/`, or `docs/`
 plus a short purpose, such as `chore/cpu-ci`. Keep each PR focused on one roadmap
 task. Use the PR template to describe the problem, final behavior, commands and
 results, documentation, reproducibility, failure modes, and licensing changes.
+Issue forms capture bug reproductions and bounded roadmap tasks. CODEOWNERS
+routes ownership to the solo maintainer; it does not itself require approvals.
 
 The required GitHub status check is **CPU checks** from the **CPU CI** workflow.
 Require it to pass before merging, with the branch up to date. Use a PR for

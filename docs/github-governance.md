@@ -12,6 +12,16 @@ merge enforcement are verified. The connector can publish repository changes but
 cannot change repository administration settings; no local CLI credentials are
 configured.
 
+The owner expanded the scope to all repository setup on 2026-10-04 while excluding
+feature implementation. The PR also prepares provenance/evaluation documentation
+and templates. The remaining gate is tracked in
+[issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3).
+GitHub's rulesets endpoint returned HTTP 403 requiring GitHub Pro or a public
+repository. Its branch-protection endpoint separately returned HTTP 403 because
+the integration lacks administration access. The repository remains private;
+these are external setup blockers, not evidence of enforced protection.
+See [repository-setup.md](repository-setup.md) for the complete checklist.
+
 ## Hosted evidence — 2026-10-04
 
 | Check | Commit | Hosted run / result |

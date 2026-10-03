@@ -1,0 +1,480 @@
+{
+  "inventory_version": 1,
+  "review_date": "2026-10-04",
+  "lockfile_sha256": "f4612fefee89bf8e23d632b73ede5d92c34b1a07d43489e9b3702f628ac6c3c0",
+  "basis": "Version-specific PyPI metadata plus installed distribution license/notice files where present; not a redistribution clearance.",
+  "packages": [
+    {
+      "name": "ast-serialize",
+      "version": "0.12.1",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/ast-serialize/0.12.1/json",
+      "project_urls": {
+        "Homepage": "https://github.com/mypyc/ast_serialize",
+        "Issues": "https://github.com/mypyc/ast_serialize/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "ast_serialize-0.12.1.dist-info/licenses/LICENSE",
+          "sha256": "db90b8fd0ae1748117ab467680a5193bfd057a3119846cb53ee3b64f16577b3b"
+        },
+        {
+          "path": "ast_serialize-0.12.1.dist-info/licenses/crates/LICENSE",
+          "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "cfgv",
+      "version": "3.5.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/cfgv/3.5.0/json",
+      "project_urls": {
+        "Homepage": "https://github.com/asottile/cfgv"
+      },
+      "installed_license_files": [
+        {
+          "path": "cfgv-3.5.0.dist-info/LICENSE",
+          "sha256": "01fc3f8031a672b3f5d7d8ac262e432f3ea812809f5697d6bc5b270bf6446561"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "declared_license": "BSD-3-Clause",
+      "version_metadata_url": "https://pypi.org/pypi/colorama/0.4.6/json",
+      "project_urls": {
+        "Homepage": "https://github.com/tartley/colorama"
+      },
+      "installed_license_files": [],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "distlib",
+      "version": "0.4.3",
+      "declared_license": "PSF-2.0",
+      "version_metadata_url": "https://pypi.org/pypi/distlib/0.4.3/json",
+      "project_urls": {
+        "Documentation": "https://distlib.readthedocs.io/",
+        "Homepage": "https://github.com/pypa/distlib",
+        "Source": "https://github.com/pypa/distlib",
+        "Tracker": "https://github.com/pypa/distlib/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "distlib-0.4.3.dist-info/licenses/LICENSE.txt",
+          "sha256": "808e10c8a6ab8deb149ff9b3fb19f447a808094606d712a9ca57fead3552599d"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "filelock",
+      "version": "4.0.9",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/filelock/4.0.9/json",
+      "project_urls": {
+        "Documentation": "https://py-filelock.readthedocs.io",
+        "Homepage": "https://github.com/tox-dev/py-filelock",
+        "Source": "https://github.com/tox-dev/py-filelock",
+        "Tracker": "https://github.com/tox-dev/py-filelock/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "filelock-4.0.9.dist-info/licenses/LICENSE",
+          "sha256": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "identify",
+      "version": "2.6.20",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/identify/2.6.20/json",
+      "project_urls": {
+        "Homepage": "https://github.com/pre-commit/identify"
+      },
+      "installed_license_files": [
+        {
+          "path": "identify-2.6.20.dist-info/licenses/LICENSE",
+          "sha256": "edbc2ad3b7084fac873e1b1b450fd370d914eb97f7f31263b4ff65f47dc10c43"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/iniconfig/2.3.0/json",
+      "project_urls": {
+        "Homepage": "https://github.com/pytest-dev/iniconfig"
+      },
+      "installed_license_files": [
+        {
+          "path": "iniconfig-2.3.0.dist-info/licenses/LICENSE",
+          "sha256": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "librt",
+      "version": "0.16.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/librt/0.16.0/json",
+      "project_urls": {
+        "Homepage": "https://github.com/mypyc/librt",
+        "Issues": "https://github.com/mypyc/mypyc/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "librt-0.16.0.dist-info/licenses/LICENSE",
+          "sha256": "88f9e379c684580053c58e75e296ca2eb243b6edcc6e5357f247310e96eeef8a"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "mypy",
+      "version": "2.4.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/mypy/2.4.0/json",
+      "project_urls": {
+        "Changelog": "https://github.com/python/mypy/blob/master/CHANGELOG.md",
+        "Documentation": "https://mypy.readthedocs.io/en/stable/index.html",
+        "Homepage": "https://www.mypy-lang.org/",
+        "Issues": "https://github.com/python/mypy/issues",
+        "Repository": "https://github.com/python/mypy"
+      },
+      "installed_license_files": [
+        {
+          "path": "mypy-2.4.0.dist-info/licenses/LICENSE",
+          "sha256": "fdf1cd17f50e1305ed8cfd37467312d27a984648dba622cef70573b5512e4e1b"
+        },
+        {
+          "path": "mypy-2.4.0.dist-info/licenses/mypy/typeshed/LICENSE",
+          "sha256": "295f8538c94ae5c3043301cf7cff1c852dab6a786a8ddee471e061b40d5ecabe"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "mypy-extensions",
+      "version": "1.1.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/mypy-extensions/1.1.0/json",
+      "project_urls": {
+        "Homepage": "https://github.com/python/mypy_extensions"
+      },
+      "installed_license_files": [
+        {
+          "path": "mypy_extensions-1.1.0.dist-info/licenses/LICENSE",
+          "sha256": "a50450da1d53cd777b80ced77c58ff96abe0ccd879706bd142c3ec20e245f0b4"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "nodeenv",
+      "version": "1.11.0",
+      "declared_license": "BSD-3-Clause",
+      "version_metadata_url": "https://pypi.org/pypi/nodeenv/1.11.0/json",
+      "project_urls": {
+        "Homepage": "https://github.com/ekalinin/nodeenv"
+      },
+      "installed_license_files": [
+        {
+          "path": "nodeenv-1.11.0.dist-info/licenses/AUTHORS",
+          "sha256": "54508e549c358a34887637eb8e09a868cb92e3faacc11afc242055b96f473fe0"
+        },
+        {
+          "path": "nodeenv-1.11.0.dist-info/licenses/LICENSE",
+          "sha256": "606faf42d48b54d539dae99db6fecd48544535587e27275b319a3f36113cb6fa"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "declared_license": "Apache-2.0 OR BSD-2-Clause",
+      "version_metadata_url": "https://pypi.org/pypi/packaging/26.3/json",
+      "project_urls": {
+        "Documentation": "https://packaging.pypa.io/",
+        "Source": "https://github.com/pypa/packaging"
+      },
+      "installed_license_files": [
+        {
+          "path": "packaging-26.3.dist-info/licenses/LICENSE",
+          "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+        },
+        {
+          "path": "packaging-26.3.dist-info/licenses/LICENSE.APACHE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "packaging-26.3.dist-info/licenses/LICENSE.BSD",
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "pathspec",
+      "version": "1.1.1",
+      "declared_license": "MPL-2.0",
+      "version_metadata_url": "https://pypi.org/pypi/pathspec/1.1.1/json",
+      "project_urls": {
+        "Change Log": "https://python-path-specification.readthedocs.io/en/latest/changes.html",
+        "Documentation": "https://python-path-specification.readthedocs.io/en/latest/index.html",
+        "Issue Tracker": "https://github.com/cpburnz/python-pathspec/issues",
+        "Source Code": "https://github.com/cpburnz/python-pathspec"
+      },
+      "installed_license_files": [
+        {
+          "path": "pathspec-1.1.1.dist-info/licenses/LICENSE",
+          "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.12.2",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/platformdirs/4.12.2/json",
+      "project_urls": {
+        "Changelog": "https://platformdirs.readthedocs.io/en/latest/changelog.html",
+        "Documentation": "https://platformdirs.readthedocs.io",
+        "Homepage": "https://github.com/tox-dev/platformdirs",
+        "Source": "https://github.com/tox-dev/platformdirs",
+        "Tracker": "https://github.com/tox-dev/platformdirs/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "platformdirs-4.12.2.dist-info/licenses/LICENSE",
+          "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.6.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/pluggy/1.6.0/json",
+      "project_urls": null,
+      "installed_license_files": [
+        {
+          "path": "pluggy-1.6.0.dist-info/licenses/LICENSE",
+          "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "pre-commit",
+      "version": "4.6.2",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/pre-commit/4.6.2/json",
+      "project_urls": {
+        "Homepage": "https://github.com/pre-commit/pre-commit"
+      },
+      "installed_license_files": [
+        {
+          "path": "pre_commit-4.6.2.dist-info/LICENSE",
+          "sha256": "ea2ca27cba7cc35822d95a46d59bcd3cc88e196592e6390d1949a359ffc990e8"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0",
+      "declared_license": "BSD-2-Clause",
+      "version_metadata_url": "https://pypi.org/pypi/pygments/2.21.0/json",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/pygments/pygments/issues",
+        "Changelog": "https://github.com/pygments/pygments/blob/master/CHANGES",
+        "Documentation": "https://pygments.org/docs",
+        "Homepage": "https://pygments.org",
+        "Source": "https://github.com/pygments/pygments"
+      },
+      "installed_license_files": [
+        {
+          "path": "pygments-2.21.0.dist-info/licenses/AUTHORS",
+          "sha256": "71a83872ad82f57be692cf827e048e2cd51d45169cfa1ea3f28706d97a872c0f"
+        },
+        {
+          "path": "pygments-2.21.0.dist-info/licenses/LICENSE",
+          "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/pytest/9.1.1/json",
+      "project_urls": {
+        "Changelog": "https://docs.pytest.org/en/stable/changelog.html",
+        "Contact": "https://docs.pytest.org/en/stable/contact.html",
+        "Funding": "https://docs.pytest.org/en/stable/sponsor.html",
+        "Homepage": "https://docs.pytest.org/en/latest/",
+        "Source": "https://github.com/pytest-dev/pytest",
+        "Tracker": "https://github.com/pytest-dev/pytest/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "pytest-9.1.1.dist-info/licenses/LICENSE",
+          "sha256": "ca836a5f9ecca3b2f350230faa20a48fb8b145653b5568d784862df864706b9b"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "python-discovery",
+      "version": "1.6.1",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/python-discovery/1.6.1/json",
+      "project_urls": {
+        "Changelog": "https://github.com/tox-dev/python-discovery/releases",
+        "Documentation": "https://python-discovery.readthedocs.io",
+        "Homepage": "https://github.com/tox-dev/python-discovery",
+        "Source": "https://github.com/tox-dev/python-discovery",
+        "Tracker": "https://github.com/tox-dev/python-discovery/issues"
+      },
+      "installed_license_files": [
+        {
+          "path": "python_discovery-1.6.1.dist-info/licenses/LICENSE",
+          "sha256": "90e25e1faf2a4aaea8d95ee8e7f5738b052a1acc0c9c58068101f931a86bd588"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/pyyaml/6.0.3/json",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/yaml/pyyaml/issues",
+        "CI": "https://github.com/yaml/pyyaml/actions",
+        "Documentation": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+        "Download": "https://pypi.org/project/PyYAML/",
+        "Homepage": "https://pyyaml.org/",
+        "Mailing lists": "http://lists.sourceforge.net/lists/listinfo/yaml-core",
+        "Source Code": "https://github.com/yaml/pyyaml"
+      },
+      "installed_license_files": [
+        {
+          "path": "pyyaml-6.0.3.dist-info/licenses/LICENSE",
+          "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "ruff",
+      "version": "0.16.10",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/ruff/0.16.10/json",
+      "project_urls": {
+        "Changelog": "https://github.com/astral-sh/ruff/blob/main/CHANGELOG.md",
+        "Documentation": "https://docs.astral.sh/ruff/",
+        "Homepage": "https://docs.astral.sh/ruff",
+        "Repository": "https://github.com/astral-sh/ruff"
+      },
+      "installed_license_files": [
+        {
+          "path": "ruff-0.16.10.dist-info/licenses/LICENSE",
+          "sha256": "2597d854122b77ddc71971564ca2350a37608575ce324adc5650a2b2051c8f18"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "declared_license": "PSF-2.0",
+      "version_metadata_url": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+      "project_urls": {
+        "Bug Tracker": "https://github.com/python/typing_extensions/issues",
+        "Changes": "https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+        "Documentation": "https://typing-extensions.readthedocs.io/",
+        "Home": "https://github.com/python/typing_extensions",
+        "Q & A": "https://github.com/python/typing/discussions",
+        "Repository": "https://github.com/python/typing_extensions"
+      },
+      "installed_license_files": [
+        {
+          "path": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+          "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "virtualenv",
+      "version": "21.14.5",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/virtualenv/21.14.5/json",
+      "project_urls": {
+        "Changelog": "https://virtualenv.pypa.io/en/latest/changelog.html",
+        "Documentation": "https://virtualenv.pypa.io",
+        "Funding": "https://github.com/sponsors/gaborbernat",
+        "Homepage": "https://github.com/pypa/virtualenv",
+        "Source": "https://github.com/pypa/virtualenv",
+        "Tidelift": "https://tidelift.com/funding/github/pypi/virtualenv",
+        "Tracker": "https://github.com/pypa/virtualenv/issues",
+        "thanks.dev": "https://thanks.dev/u/gh/gaborbernat"
+      },
+      "installed_license_files": [
+        {
+          "path": "virtualenv-21.14.5.dist-info/licenses/LICENSE",
+          "sha256": "38ef740a641ff08df082680e98ab30d09badccee9e5fb686bce21212f3a663f0"
+        },
+        {
+          "path": "virtualenv-21.14.5.dist-info/licenses/THIRD-PARTY-NOTICES.md",
+          "sha256": "0e51b915e26da42c998b274c1a81804c5f9eea5ca49d69da2f96418872590825"
+        }
+      ],
+      "scope": "locked developer dependency"
+    },
+    {
+      "name": "setuptools",
+      "version": "84.0.0",
+      "declared_license": "MIT",
+      "version_metadata_url": "https://pypi.org/pypi/setuptools/84.0.0/json",
+      "project_urls": {
+        "Changelog": "https://setuptools.pypa.io/en/stable/history.html",
+        "Documentation": "https://setuptools.pypa.io/",
+        "Source": "https://github.com/pypa/setuptools"
+      },
+      "installed_license_files": [],
+      "scope": "isolated build backend"
+    },
+    {
+      "name": "uv",
+      "version": "0.12.23",
+      "declared_license": "MIT OR Apache-2.0",
+      "version_metadata_url": "https://pypi.org/pypi/uv/0.12.23/json",
+      "project_urls": {
+        "Changelog": "https://github.com/astral-sh/uv/blob/main/CHANGELOG.md",
+        "Discord": "https://discord.gg/astral-sh",
+        "Documentation": "https://docs.astral.sh/uv",
+        "Homepage": "https://pypi.org/project/uv/",
+        "Releases": "https://github.com/astral-sh/uv/releases",
+        "Repository": "https://github.com/astral-sh/uv"
+      },
+      "installed_license_files": [],
+      "scope": "tool outside project lock"
+    }
+  ]
+}

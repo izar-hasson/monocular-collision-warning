@@ -1,7 +1,7 @@
 # ADR-0001: Repository foundation
 
 - Date: 2026-10-04
-- Status: accepted; PR 0A/0B implemented; PR 0C hosted CI verified, protection/enforcement pending
+- Status: accepted; foundation setup prepared and CPU CI verified; protection/enforcement pending
 
 ## Context
 
@@ -36,6 +36,13 @@ merge enforcement remain pending. Later GPU/model/video/benchmark tests will be
 explicitly opt-in, and CUDA dependencies will be introduced as optional extras
 only when Phase 1 needs them. The historical GPU baseline is not assumed to have
 been recreated here.
+
+The owner requested all remaining repository setup and excluded feature work on
+2026-10-04. Prepare data/model conventions, evaluation/manifest templates,
+research and license ledgers, and issue/ownership templates together with the
+bootstrap audit. This adds documentation/configuration, not video/model/domain
+implementation. GitHub plan and integration-administration limits keep the
+protection gate open; do not bypass it or publish the private repository.
 
 ## Alternatives and trade-offs
 

@@ -58,6 +58,13 @@ The PR 0C workflow passed on GitHub, including a controlled failure/recovery
 check. Branch protection and required-check merge enforcement remain pending.
 See [GitHub governance](github-governance.md) and [CONTRIBUTING.md](../CONTRIBUTING.md); passing local hooks is not hosted-CI evidence.
 
+## Foundation setup status
+
+The [setup checklist](repository-setup.md) tracks external GitHub requirements.
+The owner currently requests foundation setup only. The
+[evaluation plan](evaluation-plan.md) and manifest templates document future
+evidence; they do not implement or run video/model features.
+
 ## Existing CUDA environment
 
 Follow [the baseline and migration rules](environment-baseline.md). The sibling
