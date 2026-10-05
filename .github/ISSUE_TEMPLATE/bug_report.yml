@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible defect in an existing capability.
+title: "bug: "
+body:
+  - type: markdown
+    attributes:
+      value: Include reproducible evidence. Remove secrets, private paths and unauthorized media.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+      description: Identify the capability and the concrete failure.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Exact command, minimal permitted input, commit and configuration.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and evidence
+      description: OS, Python/uv/package versions, CPU or opt-in GPU setup, logs and input/model hashes when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Impact and known limitations
+      description: Affected cases and checks already run; do not infer warning accuracy from a demo.

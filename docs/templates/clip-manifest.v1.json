@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "status": "template",
+  "dataset_id": null,
+  "dataset_version": null,
+  "clips": [
+    {
+      "clip_id": null,
+      "source_sequence_id": null,
+      "source_url": null,
+      "acquired_at_utc": null,
+      "local_relative_path": null,
+      "sha256": null,
+      "rights": {
+        "license_url": null,
+        "terms_version": null,
+        "access_basis": null,
+        "permitted_use": null,
+        "redistribution_allowed": null,
+        "attribution": null,
+        "reviewed_at_utc": null
+      },
+      "split": null,
+      "scenario_ids": [],
+      "duplicate_sequence_review": null,
+      "video": {
+        "width_px": null,
+        "height_px": null,
+        "color_space": null,
+        "duration_s": null,
+        "source_timestamp_convention": null,
+        "missing_or_nonuniform_timestamps": null
+      },
+      "reference": {
+        "label_types": [],
+        "source": null,
+        "version": null,
+        "sha256": null,
+        "units_and_coordinate_frames": null,
+        "timestamp_alignment": null,
+        "uncertainty": null
+      },
+      "calibration": null,
+      "privacy_review": null,
+      "derived_assets": [],
+      "limitations": []
+    }
+  ]
+}

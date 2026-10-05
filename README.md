@@ -15,11 +15,18 @@ substitute for driver attention, or a system permitted to control a vehicle.
 
 ## Current state
 
-Phase 0, through PR 0B: installable package, help/version CLI, locked CPU developer
-environment, smoke tests, lint/type checks, and initial documentation. Hosted CI
-and branch protection are still pending. Video detection, tracking, TTC, geometry,
-and warnings are not implemented. No performance or predictive-accuracy results
-are claimed.
+Phase 0 repository setup is prepared in
+[PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1): installable
+package, help/version CLI, locked CPU checks, hosted CI, contribution/issue
+templates, data/model conventions, license inventory, and evaluation plan.
+Hosted CPU CI passed; a controlled PR verified failure and recovery. The remaining
+gate is branch protection and required-check merge enforcement, blocked by this
+private repository's current GitHub plan. Owner administration login is now verified.
+See the [setup checklist](docs/repository-setup.md).
+
+Feature implementation is paused at the owner's request. Video detection,
+tracking, TTC, geometry, and warnings are unimplemented. No performance or
+predictive-accuracy results are claimed.
 
 Python 3.12 is the initial development target. The owner's earlier RTX 5070 Ti
 YOLO/CUDA checks are recorded in [HANDOFF.md](HANDOFF.md); they are historical
@@ -28,7 +35,17 @@ development evidence, not results from this package.
 ## Quickstart (Ubuntu / WSL)
 
 Install `uv` **0.12.23** using the [official instructions](https://docs.astral.sh/uv/getting-started/installation/).
-From this repository's root, with Python 3.12 installed:
+With access to this private repository, clone using your usual GitHub
+authentication. While the setup PR is open, select its branch:
+
+```bash
+git clone https://github.com/izar-hasson/monocular-collision-warning.git
+cd monocular-collision-warning
+git switch chore/cpu-ci
+```
+
+After the setup PR is merged, use `main`. From the repository root with Python
+3.12 installed:
 
 ```bash
 uv sync --locked
@@ -46,12 +63,16 @@ review intentional dependency updates together with their lockfile changes.
 The base package has no runtime dependencies or model downloads. It does not
 recreate CUDA; preserve the separate working GPU environment. Its verified versions
 and migration rules are recorded in the [environment baseline](docs/environment-baseline.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for PR conventions and
+[GitHub governance](docs/github-governance.md) for the required `CPU checks` gate.
 
 ## Architecture and roadmap
 
 See [architecture and scientific contracts](docs/architecture.md),
 [ADR-0001](docs/adr/0001-repository-foundation.md), and the detailed
-[handoff](HANDOFF.md).
+[handoff](HANDOFF.md). The [evaluation plan](docs/evaluation-plan.md),
+[data conventions](data/README.md), [model conventions](models/README.md), and
+[resource ledger](docs/resources.md) define evidence required before adoption.
 
 | Phase | Deliverable |
 | --- | --- |
@@ -61,8 +82,10 @@ See [architecture and scientific contracts](docs/architecture.md),
 | 5–6 | Relative motion/path overlap, then uncertainty-aware warning policy |
 | 7 | Held-out evaluation, stage timing, and measured optimization |
 
-Each step must pass its acceptance gate before the next begins. PR 0C is the next
-bounded task; GPU dependencies arrive with Phase 1.
+Each step must pass its acceptance gate before the next begins. Finish repository
+protection and merge enforcement first; feature work needs a new owner request.
+The [Phase 1 issue](https://github.com/izar-hasson/monocular-collision-warning/issues/4)
+is planning only. GPU dependencies arrive with Phase 1.
 
 ## Licensing
 

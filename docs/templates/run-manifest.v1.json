@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "status": "template",
+  "run_id": null,
+  "started_at_utc": null,
+  "code": {
+    "commit": null,
+    "dirty": null
+  },
+  "input": {
+    "clip_id": null,
+    "sha256": null,
+    "clip_manifest_version": null,
+    "split": null
+  },
+  "configuration": {
+    "relative_path": null,
+    "sha256": null
+  },
+  "model": null,
+  "environment": {
+    "python": null,
+    "lockfile_sha256": null,
+    "package_versions": {},
+    "os": null,
+    "hardware": null,
+    "driver": null,
+    "device": null,
+    "precision": null
+  },
+  "protocol": {
+    "resolution_px": null,
+    "batch_size": null,
+    "warmup_frames": null,
+    "repeat_count": null,
+    "timing_method": null,
+    "included_stages": [],
+    "event_matching_definition": null
+  },
+  "metrics": null,
+  "artifacts": [],
+  "limitations": [],
+  "failure": null
+}

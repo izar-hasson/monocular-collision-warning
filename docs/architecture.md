@@ -66,3 +66,8 @@ and limitations. Thresholds and latency targets remain unvalidated until measure
 
 See [HANDOFF.md](../HANDOFF.md) for the gated roadmap and evaluation plan, and
 [ADR-0001](adr/0001-repository-foundation.md) for foundation choices.
+
+The standalone [evaluation plan](evaluation-plan.md),
+[data conventions](../data/README.md), and [model conventions](../models/README.md)
+define the proposed evidence and provenance requirements. Feature implementation
+awaits a new owner request after repository setup.

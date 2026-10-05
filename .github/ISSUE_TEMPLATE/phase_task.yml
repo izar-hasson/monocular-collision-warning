@@ -1,0 +1,32 @@
+name: Bounded roadmap task
+description: Define one roadmap change and its acceptance gate before implementation.
+title: "task: "
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Phase, problem and scope
+      description: Link the handoff gate, describe the intended behavior and list deferred work.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Inputs, outputs and assumptions
+      description: State units, timestamps, coordinate frames, validity and dependency boundaries.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance checks and demo command
+      description: Known-answer cases, a plausible failure, reproducible commands and expected results. Mark planned commands as unimplemented.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Documentation, provenance and limitations
+      description: Required docs/ADR updates, exact upstream licenses and asset checksums, measured metrics or unavailable evidence.
+    validations:
+      required: true
