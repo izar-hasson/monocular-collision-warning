@@ -1,6 +1,6 @@
 # Monocular Collision Warning — Engineering Handoff & Repository Blueprint
 
-> **Status:** Phase 0 / PR 0A and PR 0B completed; remaining repository setup documented and audited on 2026-10-04; hosted CPU CI failure/recovery verified. Owner CLI administration is verified on 2026-10-05; main protection/merge enforcement remain blocked by the private-repository GitHub plan. Phase 0 remains open; feature implementation is not authorized.
+> **Status:** Phase 0 / PR 0A–0D complete on 2026-10-05. Repository public; main protection and required-check blocking/recovery verified; setup PR #1 merged and main CPU CI passed. Feature implementation is not authorized; await a new owner instruction.
 >
 > **Prepared:** 2026-10-03; resource-library integration added 2026-10-03  
 > **Audience:** Project owner, future collaborators, and AI coding agents.  
@@ -13,16 +13,26 @@ The project is an **offline/research prototype** of a real-time, monocular RGB d
 
 **Confirmed so far by the owner:** Windows 11; WSL2/Ubuntu; RTX 5070 Ti; PyTorch `2.14.1+cu130`; CUDA reported as `13.0`; `torch.cuda.is_available() == True`; compute capability `(12, 0)`; a CUDA tensor multiplication succeeded; an Ultralytics YOLO bus/person image prediction produced annotated detections. These checks establish a working development baseline, **not** successful video tracking, distance estimation, TTC estimation, or validated warning performance. Record Python, Ubuntu, driver, `uv`, Ultralytics, OpenCV, and actual package versions during bootstrap; they have not all been verified.
 
-**Decision already made:** use the hybrid modular architecture in §2, and build feature-by-feature using the gated roadmap in §4. **Immediate focus:** §5 Phase 0, the professional repository foundation. PR 0A's installation gate and PR 0B's repeatability gate have passed locally. The owner requested all repository setup on 2026-10-04 and explicitly excluded feature implementation. Complete setup documentation/audits while protection is blocked; require the protection/merge gate before finishing Phase 0, and a new owner request before any feature work. Do **not** skip to another YOLO demo or add multiple feature implementations before the foundation passes its acceptance checks.
+**Decision already made:** use the hybrid modular architecture in §2 and the gated roadmap in §4. **Current state:** §5 Phase 0 is complete. The owner requested all repository setup and explicitly excluded feature implementation. Stop after setup; require a new owner request before implementing Phase 1 or any other feature.
 
-### Owner administration update — 2026-10-05
+### Phase 0 completion — 2026-10-05 (current)
+
+- The owner made [izar-hasson/monocular-collision-warning](https://github.com/izar-hasson/monocular-collision-warning) public. Verified public visibility, owner administration, research description/topics, default `main`, and automatic deletion of merged PR branches. Earlier private-plan and connector-administration limits below are historical, resolved for setup through the owner CLI.
+- Inspected main as unprotected with no existing rulesets. Applied `.github/main-protection.json` and read back required PRs, required up-to-date **CPU checks** from GitHub Actions, administrator enforcement, zero mandatory external approvals for the solo owner, and disabled force pushes/deletion.
+- Disposable [PR #5](https://github.com/izar-hasson/monocular-collision-warning/pull/5) at `0b51ee93fd1e6cff39171f1bcbbdd6bf6ee75891` deliberately broke the real CLI help assertion. [Run 37316840616](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37316840616) passed lint/format/types, then failed pytest with two failed, three passed and exit 1. Required **CPU checks** failed and raw `mergeable_state` was `blocked`.
+- Restored exact setup tree `555ccc27483bc5f5a3f2441307908dc41c552008` in new commit `6edbbb9f0283d81c7476a7af2435c5b1486d3d96`. [Run 37317057978](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37317057978) passed every CPU step, five tests and isolated wheel import/help/version. Raw `mergeable_state` was `clean`; PR #5 was closed without merging.
+- Creating the validation branch initially cancelled a same-setup-SHA push run. Reran [that push](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37316798114) and [the setup PR check](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37313712030) successfully. Verified PR #1 `clean`, then merged through the protected PR path with expected head `bf09e3138f6d8ab5ea8c52114434e63947306950`. Merge commit: `4580e6ad6b275298e481570c1bbc42a5d92548c2`. [Main push run 37318348053](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37318348053) passed all CPU steps. No failed check or protection rule was bypassed.
+- Data/model conventions, evaluation/templates, exact tool-license inventory, contribution/issue/ownership/ADR conventions, and local clean-clone/content audits are recorded below and in [repository-setup.md](docs/repository-setup.md). Completion documentation follows through its own protected PR; [issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3) holds the final verification record.
+- No feature code, runtime dependency, model/data acquisition, CUDA migration or source license selection was added. The repository is public with no project source license selected. [Issue #4](https://github.com/izar-hasson/monocular-collision-warning/issues/4) remains planning only. Await a new owner request before feature work.
+
+### Owner administration update — 2026-10-05 (historical, before public visibility)
 
 - The owner completed a renewed GitHub CLI device login as `izar-hasson`; repository metadata confirms administration access. This resolves the owner-access blocker. The separate connector remains without administration permission, but settings can now be managed through the owner CLI session. No credential value or file is tracked.
 - Applied and read back the research repository description and topics (`collision-warning`, `computer-vision`, `monocular-vision`, `python`, `research`). Enabled automatic cleanup of merged PR branches. Default branch remains `main`; the repository is still private. No source, tests, dependencies or feature behavior changed.
 - Owner-authenticated main metadata remains unprotected. Protection GET, rulesets GET and an actual PUT of `.github/main-protection.json` all returned HTTP 403: `Upgrade to GitHub Pro or make this repository public to enable this feature.` The plan restriction is the remaining setup blocker; no settings were weakened or required checks waived.
 - Asked the owner to choose private with an eligible plan or explicitly authorize public visibility. Device-login completion does not answer that privacy/payment question. Once resolved, apply/inspect protection, run the protected negative-check blocking/recovery, then merge the passing setup PR. Keep implementation out of scope.
 
-### PR 0C implementation record — 2026-10-04 (protection gate pending)
+### PR 0C implementation record — 2026-10-04 (historical, before protection)
 
 - Connected the intended private repository [izar-hasson/monocular-collision-warning](https://github.com/izar-hasson/monocular-collision-warning) after the owner granted access. Inspected it as empty before publication. Published the reviewed PR 0A/0B foundation to `main` (`aa68e1f8408e6fbeb03a768bce01f7b349fdd1a3`), then opened [PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1) from `chore/cpu-ci`. No unrelated repository was changed. Local `origin` is configured; local branches match the published commits, with original local histories preserved in `archive/local-pr0b` and `archive/local-pr0c`. Foundation and initial CI trees were verified identical to the reviewed local snapshots.
 - Added `.github/workflows/ci.yml`, the PR template, `.github/main-protection.json`, `CONTRIBUTING.md`, and `docs/github-governance.md`. Updated README, developer guide, ADR-0001, and this handoff. The required job name is `CPU checks`; token permissions are only `contents: read`, checkout credentials are not persisted, and the workflow uses ordinary push/PR events with no model/GPU requirements.
@@ -33,7 +43,7 @@ The project is an **offline/research prototype** of a real-time, monocular RGB d
 - Inspection reported `main` as unprotected, with required-check enforcement off and no contexts. The test PR's merge state was `unstable` while failed, then `clean` after recovery. This is CI evidence, not required-check merge-blocking evidence. The checked-in protection JSON remains a proposal. Connector administration mutation and local CLI credentials are unavailable; the owner was asked to apply the documented settings. A subsequent rulesets GET returned HTTP 403: `Upgrade to GitHub Pro or make this repository public to enable this feature.` A separate branch-protection GET returned HTTP 403: `Resource not accessible by integration`. The repository remains private; these blockers are tracked in [issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3).
 - Local validation records remain gitignored under `local-baselines/`; no media/model artifacts, public license, or CUDA migration were added. Next smallest task: apply/inspect `main` protection, repeat the intentional failure under enforced rules, verify blocking/recovery, and finish PR #1. Do not merge the setup PR until that gate passes. The owner subsequently authorized preparing all remaining setup, including PR 0D documentation/audit, while excluding features.
 
-### Remaining repository setup record — 2026-10-04 (owner-authorized; features excluded)
+### Remaining repository setup record — 2026-10-04 (historical preparation; features excluded)
 
 - The owner asked to finish all repository setup and explicitly requested no implementation yet. Prepared PR 0D's documentation/audit alongside the existing setup PR while the external protection gate remains open. No feature package, numerical contract, video/model adapter, dependency change, or GPU migration was introduced.
 - Added `data/README.md` and `models/README.md` with source, exact version/checksum, separate rights, sequence split, timestamp/reference/calibration and privacy requirements. No asset was selected or acquired. Added `docs/evaluation-plan.md`, versioned blank clip/run manifest templates, and `docs/resources.md`; the companion source file is absent from this checkout, so the research ledger identifies the handoff as its seed and does not invent an independent directory audit.
@@ -170,7 +180,7 @@ This document draws on **public engineering documentation and open-source projec
 
 **Synthesis, not an appeal to authority:** “Gold standard” means **small coherent design + automated proof + reproducible measurement + truthful limitations**, not copying a gigantic enterprise monorepo. For a single-developer portfolio project, overengineered platforms would violate the simplicity objective.
 
-### Toolchain decisions (proposed, to be recorded as ADR-0001)
+### Toolchain decisions (CPU foundation recorded in ADR-0001; ML integrations deferred)
 
 - **Dev host:** Windows 11 → WSL2 Ubuntu; keep project under the Ubuntu filesystem (`~/projects/...`), VS Code WSL extension.
 - **Python:** target Python 3.12 initially, subject to verifying the working environment and dependencies.
@@ -192,7 +202,7 @@ Each phase requires an issue/short proposal, the smallest coherent implementatio
 
 | Gate | Deliverable | Evidence before advancing |
 |---|---|---|
-| **Phase 0 — NOW: repository foundation** | installable package, conventions, environment lock, checks, minimal CLI, typed seed contract, CI, docs | fresh-clone CPU workflow passes; existing GPU baseline documented/rechecked after any migration; branch checks configured |
+| **Phase 0 — COMPLETE: repository foundation** | installable package, conventions, environment lock, checks, minimal CLI, typed seed contract, CI, docs | fresh-clone CPU workflow passes; existing GPU baseline documented/rechecked after any migration; branch checks configured |
 | **Phase 1: video + detection** | choose authorized sample clips and document scenario/metric plan; frame reader, timestamp preservation, detector adapter and recorded-video CLI, optional CUDA extra | local dashcam demo, detection smoke, sample artifact + model provenance, baseline latency/FPS with methodology |
 | **Phase 2: tracking** | ByteTrack adapter, IDs, history, track quality, dropout/reset logic | synthetic unit tests + recorded-video ID/continuity examples; measured tracking impact on throughput |
 | **Phase 3: image looming/TTC** | box-scale history, smoothing, derivative/validity gating, `TTC ~= s/ds_dt` when assumptions hold | synthetic known-scale cases and counterexamples (rotation, occlusion, no expansion); unavailable status tested |
@@ -303,7 +313,7 @@ monocular-collision-warning/
 - Review docs links and clean-clone setup; tag `v0.1.0-foundation` **only after** successful gates if a baseline tag is useful.
 - **Gate:** repo contains no large binaries/secrets; docs can take a stranger from clone to passing checks; no fake performance/distance claims.
 
-### 5.4 Canonical developer experience (specification, not proof of current implementation)
+### 5.4 Canonical CPU developer experience (implemented and verified)
 
 After PR 0B, the README should allow the following **from an Ubuntu/WSL terminal in the repository root**:
 
@@ -313,7 +323,7 @@ uv sync --locked                    # install locked base + default dev group
 uv run --locked collision-warning --help
 uv run --locked ruff check .
 uv run --locked ruff format --check .
-uv run --locked mypy src/collision_warning/domain  # adapt to actual populated modules
+uv run --locked mypy                # configured for actual src/collision_warning
 uv run --locked pytest -q
 ```
 
@@ -346,14 +356,15 @@ Use marker names `gpu`, `integration`, `slow`, `benchmark` where appropriate; de
 9. Keep `README.md` fast for newcomers; detailed contracts/decisions belong under `docs/`. Update HANDOFF state at each phase boundary.
 10. Code agents may propose and execute **one bounded phase task at a time**. They must run/report available tests, describe unexecuted GPU checks, and must not invent completed outcomes.
 
-### 5.7 Phase 0 definition of done (checkboxes are intentionally not pre-checked)
+### 5.7 Phase 0 definition of done (verified; see current completion record)
 
 - [x] Package can be installed from clean clone without setting `PYTHONPATH` manually.
 - [x] One locked, documented CPU environment installs; no accidental `uv.lock` rewrite.
 - [x] `collision-warning --help` and a meaningful smoke test run.
 - [x] Ruff lint and format, targeted type check, and pytest all pass locally.
 - [x] GitHub Actions CPU CI passes; an intentional broken check demonstrably fails the job.
-- [ ] `main` is protected by applicable PR/status-check rules.
+- [x] `main` is protected by PR/status-check rules, including administrator enforcement; required-check failure blocks merging and restoration clears it.
+- [x] Setup PR merged through protection, and hosted CPU CI on the merged main commit passed.
 - [x] No datasets, model weights, generated outputs, secret files, or private media are accidentally tracked (content/history audit; known-secret check is heuristic).
 - [x] This handoff, README, architecture, contributing guidance, evaluation plan, resource/adoption ledger, and initial ADR agree.
 - [x] Existing RTX 5070 Ti/CUDA success is recorded; if migration has happened, its GPU smoke is re-run, not assumed.
@@ -444,7 +455,7 @@ The research library's physics/AR/server tutorials do not remove our scientific 
 
 ## 9. Instructions for the next contributor / coding agent
 
-**Current next task:** resolve repository setup's external gate only. The owner authorized all remaining setup on 2026-10-04 and excluded feature implementation. PR #1 holds the foundation; hosted CPU failure/recovery and the setup documentation/content/fresh-clone audits are verified. Resolve [issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3): owner decision resolving the plan/private-visibility restriction, applied/inspected protection, and protected negative-check blocking/recovery. Owner administration access was verified on 2026-10-05. Merge only after the gate and latest checks pass; record final `main` verification. Preserve stronger protection and unrelated work. Feature issue #4 is planning only; do not implement it without a new owner request. No future phase or required-check enforcement may be described as complete without evidence.
+**Current next task:** await a new owner instruction. Phase 0 repository setup is complete with protected failure/recovery and merged-main CI evidence above. The owner explicitly excluded feature implementation. Issue #4 describes the smallest future Phase 1 task but is planning only; do not implement it without authorization. Preserve stronger protection and unrelated work. No future phase may be described as complete without evidence.
 
 **When resuming later, report in this order:** phase/state; changed files; commands and actual results; outputs/artifacts (with location and licensing); decisions/ADRs; next smallest task; unresolved risks. Update the top **Status** and checkboxes in this handoff whenever a phase closes.
 

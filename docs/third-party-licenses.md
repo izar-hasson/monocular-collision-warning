@@ -1,9 +1,10 @@
 # Third-party license audit notes
 
-Date: 2026-10-04. The foundation has no runtime dependencies, selected model
-weights, or dataset/media assets. The exact locked developer packages and
-separately pinned tools have been inventoried. A public project source license
-remains unselected; the repository remains private.
+Inventory date: 2026-10-04; visibility update: 2026-10-05. The foundation has no
+runtime dependencies, selected model weights, or dataset/media assets. The exact
+locked developer packages and separately pinned tools have been inventoried.
+The owner made the repository public. A project source license remains unselected;
+public visibility does not select a license.
 
 ## Foundation tool inventory
 

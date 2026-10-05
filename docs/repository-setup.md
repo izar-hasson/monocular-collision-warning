@@ -3,14 +3,16 @@
 Scope: all foundation setup steps, with feature implementation excluded by the
 owner on 2026-10-04. Work is published through
 [setup PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1).
-Phase 0 remains open because protection enforcement has not passed its gate.
+Phase 0 is complete as of 2026-10-05. PR #1 merged at `4580e6ad6b275298e481570c1bbc42a5d92548c2`;
+[CI on merged main](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37318348053) passed all steps. Feature work needs a new
+owner instruction.
 
-## Prepared and verified
+## Completed and verified
 
 - Installable `src/` package and help/version CLI; five real CPU smoke cases.
 - Python 3.12, uv 0.12.23 and committed lock; Ruff, mypy, pytest, pre-commit,
   editor settings, asset/cache ignore rules and documented Makefile commands.
-- Private GitHub repository, `main`, review branch, local remote/tracking refs and
+- Public GitHub repository, default `main`, PR workflow, local remote/tracking refs and
   preserved original local history.
 - Hosted CPU CI with full verified action pins, read-only token permissions and
   isolated wheel verification. Controlled hosted failure and recovery recorded in
@@ -30,48 +32,30 @@ Relative file links and JSON/YAML configurations were checked. Tracked files and
 historical blobs contained no large binaries or known secret-pattern matches
 (a heuristic check). Evidence is recorded in the handoff and local audit records.
 
-## External setup blocker
+## Protection and final merge gate
 
-[Issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3)
-tracks the remaining protection work. Owner login verified on 2026-10-05:
+The owner completed CLI authentication and made the repository public on
+2026-10-05. This resolved the earlier owner-access and private-plan blockers.
+The repository description and research topics were applied and read back;
+automatic deletion of merged PR branches is enabled.
 
-- Branch metadata: `main` is unprotected; status-check enforcement is off and
-  required contexts are empty.
-- The rulesets API returned HTTP 403 with the message
-  `Upgrade to GitHub Pro or make this repository public to enable this feature.`
-- Owner GitHub CLI authentication as `izar-hasson` is complete and the repository
-  reports administration access. The connector's separate permission limit is
-  unchanged, but it no longer prevents owner CLI administration.
-- An owner-authenticated protection GET and an attempt to apply the reviewed
-  protection payload by PUT both returned HTTP 403 with the Pro/public-repository
-  requirement. No protection setting was applied or weakened.
-- The research description and repository topics were applied and read back.
-  Automatic deletion of merged PR branches is enabled. Default branch remains
-  `main`; the repository remains private.
+- [x] Inspected the previously unprotected main and empty rulesets, then applied
+  [main-protection.json](../.github/main-protection.json) and read back the result.
+- [x] Require PRs and up-to-date **CPU checks**; enforce administrators; disallow
+  force pushes and deletion. External approvals are optional for the solo owner.
+- [x] [Validation PR #5](https://github.com/izar-hasson/monocular-collision-warning/pull/5): real CLI assertion failed with two failed,
+  three passed and exit 1; required check failed and merge state was `blocked`.
+- [x] Restored the exact setup tree in a new commit; all CPU steps, five tests
+  and wheel smoke passed; merge state became `clean`. Closed PR #5 without merging.
+- [x] All setup-head check runs passed, including a rerun of the cancelled
+  validation-branch push. Setup PR #1 was `clean` and merged with its expected
+  head SHA, without bypassing protection.
+- [x] Main push at `4580e6ad6b275298e481570c1bbc42a5d92548c2` passed [run 37318348053](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37318348053).
 
-The [GitHub protected-branch documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches)
-states that private-repository protection requires an eligible paid plan.
-Owner administration access is ready. Keep this repository private until the
-owner explicitly approves publication, or enable an eligible plan for private
-protection. The owner was asked to choose; login completion alone is not approval
-to change privacy or purchase a subscription.
-
-Once those prerequisites are available:
-
-1. Inspect existing settings and preserve stronger rules. Apply the reviewed
-   [main protection payload](../.github/main-protection.json), or equivalent
-   settings: PR required, **CPU checks** required, branches up to date,
-   administrator enforcement, force pushes/deletion disabled. External approvals
-   may remain optional for a solo maintainer.
-2. Repeat the deliberate failure/restoration PR under enforced protection and
-   record that the required check blocks merging while failed and clears when
-   passing. Close that validation PR without merging.
-3. Require the setup PR's latest hosted check to pass, merge through the PR, and
-   record the final `main` commit/checks. A foundation tag is optional and must
-   wait until all gates pass.
-
-No gate is waived by publishing this checklist. The actual commands and validation
-procedure are in [github-governance.md](github-governance.md).
+Exact failing/recovered SHAs and run URLs are in
+[github-governance.md](github-governance.md). [Issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3) records
+the final setup and documentation verification. The optional foundation tag
+is not required for these gates; no release has been published.
 
 ## Decisions kept explicit
 
