@@ -1,7 +1,7 @@
 # ADR-0001: Repository foundation
 
 - Date: 2026-10-04
-- Status: accepted; foundation setup prepared and CPU CI verified; protection/enforcement pending
+- Status: accepted; foundation setup complete, protection/enforcement and merged-main CI verified on 2026-10-05
 
 ## Context
 
@@ -31,8 +31,9 @@ the foundation free of runtime ML dependencies.
 PR 0C defines deterministic CPU CI with the required check name `CPU checks`,
 full verified action SHA pins, and a build/isolated wheel smoke. Hosted passing,
 intentional failing, and recovered passing runs are recorded in
-[GitHub governance](../github-governance.md). Branch protection and required-check
-merge enforcement remain pending. Later GPU/model/video/benchmark tests will be
+[GitHub governance](../github-governance.md). Main protection and required-check
+merge blocking/recovery are verified, and setup merged with passing main CI.
+Later GPU/model/video/benchmark tests will be
 explicitly opt-in, and CUDA dependencies will be introduced as optional extras
 only when Phase 1 needs them. The historical GPU baseline is not assumed to have
 been recreated here.
@@ -42,8 +43,10 @@ The owner requested all remaining repository setup and excluded feature work on
 research and license ledgers, and issue/ownership templates together with the
 bootstrap audit. This adds documentation/configuration, not video/model/domain
 implementation. Owner CLI administration was verified on 2026-10-05, resolving
-that access blocker. GitHub's private-repository plan restriction keeps the
-protection gate open; do not bypass it or publish without explicit owner approval.
+that access blocker. The owner made the repository public the same day,
+resolving the private-plan restriction. Applied main protection and verified a
+failed CPU check blocks merging, exact restoration clears the block, and the
+protected setup merge passes main CI. Feature implementation remains excluded.
 
 ## Alternatives and trade-offs
 

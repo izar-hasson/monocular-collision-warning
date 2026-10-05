@@ -1,30 +1,42 @@
 # CPU CI and GitHub governance
 
-## Current state
+## Current state — 2026-10-05
 
-The private repository is
-[izar-hasson/monocular-collision-warning](https://github.com/izar-hasson/monocular-collision-warning).
-[PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1) contains
-PR 0C's workflow, PR template, contribution guide, and proposed protection payload.
-Hosted CI is verified. Owner-authenticated inspection on 2026-10-05 reported
-`main` as unprotected with no required contexts. PR 0C remains open until protection
-and required-check merge enforcement are verified. Owner GitHub CLI login is now
-confirmed with administration access; the connector itself still lacks that
-permission. The current blocker is the private repository's GitHub plan.
+The owner made [izar-hasson/monocular-collision-warning](https://github.com/izar-hasson/monocular-collision-warning) public, resolving
+the earlier private-repository plan restriction. Owner CLI administration applied
+the reviewed [main protection payload](../.github/main-protection.json), then
+read back the settings. No existing protection or ruleset was overwritten.
 
-The owner expanded the scope to all repository setup on 2026-10-04 while excluding
-feature implementation. The PR also prepares provenance/evaluation documentation
-and templates. The remaining gate is tracked in
-[issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3).
-GitHub's rulesets endpoint returned HTTP 403 requiring GitHub Pro or a public
-repository. Its branch-protection endpoint separately returned HTTP 403 because
-the integration lacks administration access. On 2026-10-05, owner CLI login
-resolved the administration-access blocker, but both protection GET and the
-reviewed protection PUT still returned HTTP 403 requiring GitHub Pro or a public
-repository. The repository remains private; no protection gate was waived.
-See [repository-setup.md](repository-setup.md) for the complete checklist.
+- Pull requests are required for `main`.
+- **CPU checks** from GitHub Actions is required, with branches up to date.
+- Rules apply to administrators; force pushes and branch deletion are disabled.
+- Zero external approvals are mandatory for the solo maintainer. CODEOWNERS
+  identifies ownership without requiring another reviewer.
 
-## Hosted evidence — 2026-10-04
+[Setup PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1) merged at `4580e6ad6b275298e481570c1bbc42a5d92548c2` through the protected PR path.
+[Its main push run](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37318348053) passed every CPU step, including five tests,
+distribution builds and isolated wheel import/help/version. Description, research
+topics, default `main`, and automatic deletion of merged PR branches are verified.
+[Issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3) holds the final setup verification record.
+See [repository-setup.md](repository-setup.md) for all gates.
+
+## Protected failure and recovery — 2026-10-05
+
+Disposable [PR #5](https://github.com/izar-hasson/monocular-collision-warning/pull/5) was non-draft and based on the setup head.
+
+| Check | Commit | Hosted run / merge state |
+| --- | --- | --- |
+| Deliberately incorrect real CLI help assertion | `0b51ee93fd1e6cff39171f1bcbbdd6bf6ee75891` | [37316840616](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37316840616): lint/format/types passed; two tests failed, three passed, pytest exit 1; `CPU checks` failed and raw PR `mergeable_state` was `blocked` |
+| Exact original setup tree restored in a new commit | `6edbbb9f0283d81c7476a7af2435c5b1486d3d96` | [37317057978](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37317057978): all CPU steps and wheel smoke passed; raw PR `mergeable_state` was `clean` |
+
+The restored tree is `555ccc27483bc5f5a3f2441307908dc41c552008`, identical to the
+setup head. PR #5 was closed without merging; no check was waived and no broken
+test reached `main`. Creating its branch initially started and cancelled a push
+run on the setup SHA. Both that [push run](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37316798114)
+and the [setup PR run](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37313712030) were rerun successfully
+before merging; the setup PR's raw merge state was verified `clean`.
+
+## Earlier hosted evidence — 2026-10-04 (before protection)
 
 | Check | Commit | Hosted run / result |
 | --- | --- | --- |
@@ -35,9 +47,8 @@ See [repository-setup.md](repository-setup.md) for the complete checklist.
 The disposable [PR #2](https://github.com/izar-hasson/monocular-collision-warning/pull/2)
 was closed without merging. While `main` was unprotected, its merge state was
 `unstable` on the failed commit and `clean` after recovery. This proves hosted
-failure/recovery, but does not prove required-check enforcement. Once protection
-is enabled, repeat the negative check and inspect merge blocking before closing
-the PR 0C gate. No failing check was waived.
+failure/recovery, but did not prove required-check enforcement. PR #5 above
+supplies that proof under the applied rules. No failing check was waived.
 
 Local verification passed actionlint 1.7.12 and every workflow shell command in a
 clean local clone with a new CPU environment. The lockfile hash stayed unchanged.
@@ -76,14 +87,13 @@ comment, rerun workflow lint and local checks, then require hosted CI. Keep full
 SHAs; do not replace them with moving tags. Python and uv versions come from the
 existing `.python-version` and `pyproject.toml` settings.
 
-## Configure main protection
+## Maintaining main protection
 
-The **CPU checks** job is now registered. In
-[branch settings](https://github.com/izar-hasson/monocular-collision-warning/settings/branches),
-create protection for `main`: require a PR, require **CPU checks** with branches
-up to date, and enforce the rules for administrators. Keep force pushes and
-deletion disabled. External approvals may remain optional for this solo project.
-Inspect existing settings first and preserve any stronger rules.
+Protection is already applied. Inspect it in
+[branch settings](https://github.com/izar-hasson/monocular-collision-warning/settings/branches).
+Preserve PRs, required up-to-date **CPU checks**, administrator enforcement,
+and blocked force pushes/deletion. External approvals may remain optional for
+this solo project. Preserve any stronger rules added later.
 
 [main-protection.json](../.github/main-protection.json) requests an up-to-date
 required check, PR-based changes, zero mandatory external approvals for the solo

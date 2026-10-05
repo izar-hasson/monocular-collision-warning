@@ -15,14 +15,14 @@ substitute for driver attention, or a system permitted to control a vehicle.
 
 ## Current state
 
-Phase 0 repository setup is prepared in
-[PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1): installable
+Phase 0 repository setup is complete. [PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1) merged the installable
 package, help/version CLI, locked CPU checks, hosted CI, contribution/issue
 templates, data/model conventions, license inventory, and evaluation plan.
-Hosted CPU CI passed; a controlled PR verified failure and recovery. The remaining
-gate is branch protection and required-check merge enforcement, blocked by this
-private repository's current GitHub plan. Owner administration login is now verified.
-See the [setup checklist](docs/repository-setup.md).
+The repository is public. `main` requires pull requests and passing, up-to-date
+**CPU checks**, including for administrators; force pushes and deletion are blocked.
+A disposable PR proved failed checks block merging and passing checks clear the
+block. [CI on merged main](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37318348053) passed all steps.
+See the [setup record](docs/repository-setup.md).
 
 Feature implementation is paused at the owner's request. Video detection,
 tracking, TTC, geometry, and warnings are unimplemented. No performance or
@@ -35,17 +35,14 @@ development evidence, not results from this package.
 ## Quickstart (Ubuntu / WSL)
 
 Install `uv` **0.12.23** using the [official instructions](https://docs.astral.sh/uv/getting-started/installation/).
-With access to this private repository, clone using your usual GitHub
-authentication. While the setup PR is open, select its branch:
+Clone the public repository; the default branch is `main`:
 
 ```bash
 git clone https://github.com/izar-hasson/monocular-collision-warning.git
 cd monocular-collision-warning
-git switch chore/cpu-ci
 ```
 
-After the setup PR is merged, use `main`. From the repository root with Python
-3.12 installed:
+From the repository root with Python 3.12 installed:
 
 ```bash
 uv sync --locked
@@ -82,8 +79,8 @@ See [architecture and scientific contracts](docs/architecture.md),
 | 5–6 | Relative motion/path overlap, then uncertainty-aware warning policy |
 | 7 | Held-out evaluation, stage timing, and measured optimization |
 
-Each step must pass its acceptance gate before the next begins. Finish repository
-protection and merge enforcement first; feature work needs a new owner request.
+Each step must pass its acceptance gate before the next begins. Repository setup
+has passed its gates; feature work needs a new owner request.
 The [Phase 1 issue](https://github.com/izar-hasson/monocular-collision-warning/issues/4)
 is planning only. GPU dependencies arrive with Phase 1.
 
