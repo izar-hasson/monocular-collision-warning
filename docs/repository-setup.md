@@ -33,21 +33,28 @@ historical blobs contained no large binaries or known secret-pattern matches
 ## External setup blocker
 
 [Issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3)
-tracks the remaining protection work. Observed through GitHub on 2026-10-04:
+tracks the remaining protection work. Owner login verified on 2026-10-05:
 
 - Branch metadata: `main` is unprotected; status-check enforcement is off and
   required contexts are empty.
 - The rulesets API returned HTTP 403 with the message
   `Upgrade to GitHub Pro or make this repository public to enable this feature.`
-- The branch-protection API returned HTTP 403, `Resource not accessible by integration`.
-  The installed connector has no Administration permission. The owner's admin
-  role does not add that permission to the connector. Local `gh` authentication
-  is also unavailable.
+- Owner GitHub CLI authentication as `izar-hasson` is complete and the repository
+  reports administration access. The connector's separate permission limit is
+  unchanged, but it no longer prevents owner CLI administration.
+- An owner-authenticated protection GET and an attempt to apply the reviewed
+  protection payload by PUT both returned HTTP 403 with the Pro/public-repository
+  requirement. No protection setting was applied or weakened.
+- The research description and repository topics were applied and read back.
+  Automatic deletion of merged PR branches is enabled. Default branch remains
+  `main`; the repository remains private.
 
 The [GitHub protected-branch documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches)
 states that private-repository protection requires an eligible paid plan.
-Keep this repository private. A paid plan and owner administration access are
-external prerequisites; setup work does not authorize a purchase or publication.
+Owner administration access is ready. Keep this repository private until the
+owner explicitly approves publication, or enable an eligible plan for private
+protection. The owner was asked to choose; login completion alone is not approval
+to change privacy or purchase a subscription.
 
 Once those prerequisites are available:
 

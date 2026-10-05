@@ -41,8 +41,9 @@ The owner requested all remaining repository setup and excluded feature work on
 2026-10-04. Prepare data/model conventions, evaluation/manifest templates,
 research and license ledgers, and issue/ownership templates together with the
 bootstrap audit. This adds documentation/configuration, not video/model/domain
-implementation. GitHub plan and integration-administration limits keep the
-protection gate open; do not bypass it or publish the private repository.
+implementation. Owner CLI administration was verified on 2026-10-05, resolving
+that access blocker. GitHub's private-repository plan restriction keeps the
+protection gate open; do not bypass it or publish without explicit owner approval.
 
 ## Alternatives and trade-offs
 

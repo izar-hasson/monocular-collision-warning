@@ -1,6 +1,6 @@
 # Monocular Collision Warning — Engineering Handoff & Repository Blueprint
 
-> **Status:** Phase 0 / PR 0A and PR 0B completed; remaining repository setup documented and audited on 2026-10-04; hosted CPU CI failure/recovery verified. Main protection/merge enforcement are blocked by GitHub plan and connector administration limits. Phase 0 remains open; feature implementation is not authorized.
+> **Status:** Phase 0 / PR 0A and PR 0B completed; remaining repository setup documented and audited on 2026-10-04; hosted CPU CI failure/recovery verified. Owner CLI administration is verified on 2026-10-05; main protection/merge enforcement remain blocked by the private-repository GitHub plan. Phase 0 remains open; feature implementation is not authorized.
 >
 > **Prepared:** 2026-10-03; resource-library integration added 2026-10-03  
 > **Audience:** Project owner, future collaborators, and AI coding agents.  
@@ -14,6 +14,13 @@ The project is an **offline/research prototype** of a real-time, monocular RGB d
 **Confirmed so far by the owner:** Windows 11; WSL2/Ubuntu; RTX 5070 Ti; PyTorch `2.14.1+cu130`; CUDA reported as `13.0`; `torch.cuda.is_available() == True`; compute capability `(12, 0)`; a CUDA tensor multiplication succeeded; an Ultralytics YOLO bus/person image prediction produced annotated detections. These checks establish a working development baseline, **not** successful video tracking, distance estimation, TTC estimation, or validated warning performance. Record Python, Ubuntu, driver, `uv`, Ultralytics, OpenCV, and actual package versions during bootstrap; they have not all been verified.
 
 **Decision already made:** use the hybrid modular architecture in §2, and build feature-by-feature using the gated roadmap in §4. **Immediate focus:** §5 Phase 0, the professional repository foundation. PR 0A's installation gate and PR 0B's repeatability gate have passed locally. The owner requested all repository setup on 2026-10-04 and explicitly excluded feature implementation. Complete setup documentation/audits while protection is blocked; require the protection/merge gate before finishing Phase 0, and a new owner request before any feature work. Do **not** skip to another YOLO demo or add multiple feature implementations before the foundation passes its acceptance checks.
+
+### Owner administration update — 2026-10-05
+
+- The owner completed a renewed GitHub CLI device login as `izar-hasson`; repository metadata confirms administration access. This resolves the owner-access blocker. The separate connector remains without administration permission, but settings can now be managed through the owner CLI session. No credential value or file is tracked.
+- Applied and read back the research repository description and topics (`collision-warning`, `computer-vision`, `monocular-vision`, `python`, `research`). Enabled automatic cleanup of merged PR branches. Default branch remains `main`; the repository is still private. No source, tests, dependencies or feature behavior changed.
+- Owner-authenticated main metadata remains unprotected. Protection GET, rulesets GET and an actual PUT of `.github/main-protection.json` all returned HTTP 403: `Upgrade to GitHub Pro or make this repository public to enable this feature.` The plan restriction is the remaining setup blocker; no settings were weakened or required checks waived.
+- Asked the owner to choose private with an eligible plan or explicitly authorize public visibility. Device-login completion does not answer that privacy/payment question. Once resolved, apply/inspect protection, run the protected negative-check blocking/recovery, then merge the passing setup PR. Keep implementation out of scope.
 
 ### PR 0C implementation record — 2026-10-04 (protection gate pending)
 
@@ -437,7 +444,7 @@ The research library's physics/AR/server tutorials do not remove our scientific 
 
 ## 9. Instructions for the next contributor / coding agent
 
-**Current next task:** resolve repository setup's external gate only. The owner authorized all remaining setup on 2026-10-04 and excluded feature implementation. PR #1 holds the foundation; hosted CPU failure/recovery and the setup documentation/content/fresh-clone audits are verified. Resolve [issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3): eligible plan and administration access, applied/inspected protection, and protected negative-check blocking/recovery. Merge only after the gate and latest checks pass; record final `main` verification. Preserve stronger protection and unrelated work. Feature issue #4 is planning only; do not implement it without a new owner request. No future phase or required-check enforcement may be described as complete without evidence.
+**Current next task:** resolve repository setup's external gate only. The owner authorized all remaining setup on 2026-10-04 and excluded feature implementation. PR #1 holds the foundation; hosted CPU failure/recovery and the setup documentation/content/fresh-clone audits are verified. Resolve [issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3): owner decision resolving the plan/private-visibility restriction, applied/inspected protection, and protected negative-check blocking/recovery. Owner administration access was verified on 2026-10-05. Merge only after the gate and latest checks pass; record final `main` verification. Preserve stronger protection and unrelated work. Feature issue #4 is planning only; do not implement it without a new owner request. No future phase or required-check enforcement may be described as complete without evidence.
 
 **When resuming later, report in this order:** phase/state; changed files; commands and actual results; outputs/artifacts (with location and licensing); decisions/ADRs; next smallest task; unresolved risks. Update the top **Status** and checkboxes in this handoff whenever a phase closes.
 

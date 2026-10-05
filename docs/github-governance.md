@@ -6,11 +6,11 @@ The private repository is
 [izar-hasson/monocular-collision-warning](https://github.com/izar-hasson/monocular-collision-warning).
 [PR #1](https://github.com/izar-hasson/monocular-collision-warning/pull/1) contains
 PR 0C's workflow, PR template, contribution guide, and proposed protection payload.
-Hosted CI is verified. Inspection on 2026-10-04 reported `main` as unprotected
-with no required contexts. PR 0C remains open until protection and required-check
-merge enforcement are verified. The connector can publish repository changes but
-cannot change repository administration settings; no local CLI credentials are
-configured.
+Hosted CI is verified. Owner-authenticated inspection on 2026-10-05 reported
+`main` as unprotected with no required contexts. PR 0C remains open until protection
+and required-check merge enforcement are verified. Owner GitHub CLI login is now
+confirmed with administration access; the connector itself still lacks that
+permission. The current blocker is the private repository's GitHub plan.
 
 The owner expanded the scope to all repository setup on 2026-10-04 while excluding
 feature implementation. The PR also prepares provenance/evaluation documentation
@@ -18,8 +18,10 @@ and templates. The remaining gate is tracked in
 [issue #3](https://github.com/izar-hasson/monocular-collision-warning/issues/3).
 GitHub's rulesets endpoint returned HTTP 403 requiring GitHub Pro or a public
 repository. Its branch-protection endpoint separately returned HTTP 403 because
-the integration lacks administration access. The repository remains private;
-these are external setup blockers, not evidence of enforced protection.
+the integration lacks administration access. On 2026-10-05, owner CLI login
+resolved the administration-access blocker, but both protection GET and the
+reviewed protection PUT still returned HTTP 403 requiring GitHub Pro or a public
+repository. The repository remains private; no protection gate was waived.
 See [repository-setup.md](repository-setup.md) for the complete checklist.
 
 ## Hosted evidence — 2026-10-04

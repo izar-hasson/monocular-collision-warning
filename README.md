@@ -21,7 +21,7 @@ package, help/version CLI, locked CPU checks, hosted CI, contribution/issue
 templates, data/model conventions, license inventory, and evaluation plan.
 Hosted CPU CI passed; a controlled PR verified failure and recovery. The remaining
 gate is branch protection and required-check merge enforcement, blocked by this
-private repository's current GitHub plan and connector administration permissions.
+private repository's current GitHub plan. Owner administration login is now verified.
 See the [setup checklist](docs/repository-setup.md).
 
 Feature implementation is paused at the owner's request. Video detection,
