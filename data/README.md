@@ -1,7 +1,11 @@
 # Data conventions
 
-No dataset, clip, annotation, or calibration has been acquired for this package.
-The files here document future acquisition; they are not evidence of evaluation.
+A small KITTI raw development excerpt was acquired on 2026-10-05 and tested on
+2026-10-06: 12 consecutive RGB `image_02` frames from `2011_09_26_drive_0005`,
+with original timestamps. Its verified local acquisition record is
+`data/external/kitti-0005/acquisition.json`. Terms and attribution are recorded
+there; no raw/annotated media is published. No reference labels or calibration
+were acquired, so this is smoke input rather than accuracy-evaluation evidence.
 
 Keep media outside Git. When the corresponding stages exist, use local
 `data/external/` for acquired assets, `data/raw/` for immutable original inputs,

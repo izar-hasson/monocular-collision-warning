@@ -1,10 +1,10 @@
 # Evaluation plan
 
-Status: planning only, 2026-10-04. No video pipeline, detector integration,
-tracking, TTC, geometric distance, warning policy, or evaluation harness exists
-in this package. No datasets have been acquired and no predictive accuracy or
-performance result is claimed. Current evidence is limited to package/tooling
-checks. This plan specifies evidence to collect as each roadmap component lands.
+Status: detection/tracking implementation authorized 2026-10-05. Phase 1 adds
+video/detection contracts and run measurements; acceptance remains evidence-gated.
+Tracking, TTC, geometry and warnings follow their respective roadmap gates. No
+predictive-accuracy result is claimed. This plan specifies evidence to collect
+as each roadmap component lands.
 
 ## Inputs and splits
 
@@ -76,8 +76,8 @@ field meaning. DVC/MLflow and an automated harness remain deferred until needed.
 
 ## Before feature work
 
-Finish repository governance and Phase 0's setup gate. The future
+Repository governance and Phase 0's setup gate are complete. The original
 [Phase 1 issue](https://github.com/izar-hasson/monocular-collision-warning/issues/4)
 defines the first bounded implementation proposal and a planned demo command;
-it is not authorization to implement features now. Numerical and warning work
+the owner's new request authorizes detection and tracking. Numerical and warning work
 remain later gates in [HANDOFF.md](../HANDOFF.md).

@@ -1,8 +1,9 @@
 # Architecture and scientific contracts
 
 The target is one offline process with small replaceable adapters and independent
-numerical logic. This diagram describes the planned pipeline; only the package
-and help/version CLI exist in PR 0A.
+numerical logic. Phase 1 introduces timestamped video, a detector adapter,
+immutable observations and streamed run output. Tracking and later numerical
+components remain gated by the [implementation plan](detection-tracking-plan.md).
 
 ```mermaid
 flowchart TD
@@ -69,5 +70,6 @@ See [HANDOFF.md](../HANDOFF.md) for the gated roadmap and evaluation plan, and
 
 The standalone [evaluation plan](evaluation-plan.md),
 [data conventions](../data/README.md), and [model conventions](../models/README.md)
-define the proposed evidence and provenance requirements. Feature implementation
-awaits a new owner request after repository setup.
+define the evidence and provenance requirements. The owner authorized detection
+and tracking on 2026-10-05. [ADR-0002](adr/0002-video-detection.md) records the first
+feature boundaries and timestamp policy.

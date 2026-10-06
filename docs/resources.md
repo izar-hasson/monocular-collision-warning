@@ -1,6 +1,6 @@
 # Research and adoption ledger
 
-Status: foundation documentation, 2026-10-04. This is a small decision ledger,
+Status: updated for local detection trials, 2026-10-06. This is a small decision ledger,
 not an integration backlog. Entries below come from [HANDOFF.md section 8](../HANDOFF.md#8-research-library--explicit-adoption-decisions).
 The companion `Useful-tools-updated.md` is not present in this checkout; its full
 contents have not been independently audited here.
@@ -17,6 +17,8 @@ neither suitability nor permission to use associated assets.
 | [Roboflow Universe](https://universe.roboflow.com/) | API Vault; possible discovery of future footage/annotations. Exact dataset, sequence quality, license, calibration and reference labels have not been checked | NEXT / deferred; no dataset selected or acquired |
 | [Google Rules of ML](https://developers.google.com/machine-learning/guides/rules-of-ml) | Applied ML / handoff; baseline and experiment-traceability guidance already informs the foundation | NOW / adopted as engineering guidance in the handoff; not a runtime dependency or validation result |
 | Build Your Own X collections | Optional learning examples only when a concrete need appears | LEARNING / deferred; no tutorial or code selected |
+| [KITTI raw](https://www.cvlibs.net/datasets/kitti/raw_data.php) / [official AWS mirror](https://registry.opendata.aws/kitti/) | Independent research; original RGB sequences and timestamps for local detection/continuity examples. Terms: CC-BY-NC-SA-3.0, attribution and noncommercial restrictions | NOW / adopted for acceptance: 100 verified consecutive development frames from `2011_09_26_drive_0005`, camera `image_02`. Acquisition/checksums/terms are local in `data/external/kitti-0005/acquisition.json`. No media published or reference labels acquired |
+| [Ultralytics YOLO](https://docs.ultralytics.com/modes/predict/) / [terms](https://www.ultralytics.com/license) | Existing local YOLO11n weights and Ultralytics 8.4.172; local visual detector smoke. Library/model AGPL/enterprise terms remain separate from source license selection | NOW / tried locally with recorded checksum and CPU output; no public release or source license selected |
 
 Before trying or adopting a specific item, replace catalog evidence with direct
 upstream documentation and complete this record:

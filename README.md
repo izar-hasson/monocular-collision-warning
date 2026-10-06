@@ -24,9 +24,19 @@ A disposable PR proved failed checks block merging and passing checks clear the
 block. [CI on merged main](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37318348053) passed all steps.
 See the [setup record](docs/repository-setup.md).
 
-Feature implementation is paused at the owner's request. Video detection,
-tracking, TTC, geometry, and warnings are unimplemented. No performance or
-predictive-accuracy results are claimed.
+The owner authorized detection and tracking on 2026-10-05. Phase 1 now implements
+timestamp-preserving local video decoding, a detector adapter, the `detect` CLI,
+and JSONL observations/run metadata. See the
+[implementation plan](docs/detection-tracking-plan.md) and
+[detection guide](docs/detection.md) for inputs, commands and acceptance gates.
+Tracking follows the detection gate; TTC, geometry and warnings remain later work.
+No predictive-accuracy result is claimed.
+
+To test detections now, use [scripts/test_detection.py](scripts/test_detection.py)
+with the existing YOLO environment. It accepts an image, video or acquired KITTI
+image sequence and saves annotated frames. Commands are in the
+[detection guide](docs/detection.md). Full video-reader and GPU-migration acceptance
+remain pending; the script is a verified visual smoke test.
 
 Python 3.12 is the initial development target. The owner's earlier RTX 5070 Ti
 YOLO/CUDA checks are recorded in [HANDOFF.md](HANDOFF.md); they are historical
@@ -57,8 +67,11 @@ The commands and optional pre-commit setup are documented in
 `uv.lock` records their resolution. Use locked commands for routine work and
 review intentional dependency updates together with their lockfile changes.
 
-The base package has no runtime dependencies or model downloads. It does not
-recreate CUDA; preserve the separate working GPU environment. Its verified versions
+The base package has no runtime dependencies or model downloads. The optional
+`video` extra supplies PyAV/NumPy (`uv sync --locked --extra video`); the existing
+YOLO environment supplies inference for the visual test script. GPU extras remain
+deferred.
+Preserve the separate working GPU environment until migration is verified. Its versions
 and migration rules are recorded in the [environment baseline](docs/environment-baseline.md).
 See [CONTRIBUTING.md](CONTRIBUTING.md) for PR conventions and
 [GitHub governance](docs/github-governance.md) for the required `CPU checks` gate.
@@ -80,9 +93,10 @@ See [architecture and scientific contracts](docs/architecture.md),
 | 7 | Held-out evaluation, stage timing, and measured optimization |
 
 Each step must pass its acceptance gate before the next begins. Repository setup
-has passed its gates; feature work needs a new owner request.
+has passed its gates; the owner has now authorized detection and tracking.
 The [Phase 1 issue](https://github.com/izar-hasson/monocular-collision-warning/issues/4)
-is planning only. GPU dependencies arrive with Phase 1.
+is the original proposal. Current scope and evidence are tracked in the
+[implementation plan](docs/detection-tracking-plan.md).
 
 ## Licensing
 

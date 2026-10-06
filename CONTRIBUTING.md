@@ -5,10 +5,10 @@ purpose, explicit scope, and a meaningful acceptance check. Introduce contracts
 and interfaces with real consumers; keep numerical estimation/risk logic separate
 from video, model, visualization, and GPU adapters.
 
-The owner currently authorizes repository setup only. Feature issues are plans,
-not permission to start implementation. Check the
-[setup status](docs/repository-setup.md) and obtain a new owner instruction before
-feature work.
+The owner authorized detection and tracking on 2026-10-05 after Phase 0 completed.
+Follow the [implementation plan](docs/detection-tracking-plan.md): Phase 1 must
+pass its evidence gate before Phase 2; numerical estimation and warning behavior
+remain later phases. Preserve the required PR/check workflow.
 
 ## Setup and checks
 
