@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "commands": [
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "data/external/kitti-0005-acceptance.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/gpu-1"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "data/external/kitti-0005-acceptance.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/gpu-2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "data/external/kitti-0005-acceptance.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/gpu-3"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "data/external/kitti-0005-acceptance.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/gpu-1"
+      ],
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "data/external/kitti-0005-acceptance.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "outputs/phase1-acceptance/bad-model.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/checksum-mismatch"
+      ],
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "outputs/phase1-acceptance/missing.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/missing-source"
+      ],
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "data/external/kitti-0005-acceptance.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "data/external/kitti-0005-acceptance.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:999",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/invalid-device"
+      ],
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        ".venv-gpu/bin/collision-warning",
+        "detect",
+        "--source",
+        "outputs/phase1-acceptance/corrupt.mkv",
+        "--weights",
+        "models/yolo11n.pt",
+        "--clip-manifest",
+        "outputs/phase1-acceptance/corrupt.json",
+        "--model-manifest",
+        "models/yolo11n.json",
+        "--device",
+        "cuda:0",
+        "--imgsz",
+        "640",
+        "--conf",
+        "0.1",
+        "--classes",
+        "0",
+        "1",
+        "2",
+        "3",
+        "5",
+        "7",
+        "--warmup-frames",
+        "10",
+        "--max-frames",
+        "100",
+        "--save-frames",
+        "--save-video",
+        "--output",
+        "outputs/phase1-acceptance/corrupt-video"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "repetitions": [
+    {
+      "run": "gpu-1",
+      "metrics": {
+        "frames_processed": 100,
+        "class_counts": {
+          "person": 243,
+          "bicycle": 342,
+          "car": 752,
+          "bus": 65,
+          "motorcycle": 22,
+          "truck": 67
+        },
+        "frames_dropped": 0,
+        "source_first_timestamp_s": 5.0,
+        "source_last_timestamp_s": 15.227,
+        "source_observed_rate_hz": 9.680258140217072,
+        "elapsed_s": 6.725522409004043,
+        "processed_fps_including_warmup": 14.868733448292625,
+        "warmed_processed_fps": 38.94595844526344,
+        "cold_first_frame_s": 4.168855275995156,
+        "warmup_frames_actual": 10,
+        "latency": {
+          "decode": {
+            "count": 90,
+            "p50_s": 0.004500174494751263,
+            "p95_s": 0.004899594000380603,
+            "mean_s": 0.00451320946635355
+          },
+          "detect": {
+            "count": 90,
+            "p50_s": 0.01934036649981863,
+            "p95_s": 0.020717525050713448,
+            "mean_s": 0.016005023432727385
+          },
+          "output": {
+            "count": 90,
+            "p50_s": 0.005121900499943877,
+            "p95_s": 0.005548243498560623,
+            "mean_s": 0.005136330400192592
+          },
+          "total": {
+            "count": 90,
+            "p50_s": 0.028983694999624277,
+            "p95_s": 0.030581278647878206,
+            "mean_s": 0.025675430999641927
+          }
+        }
+      },
+      "jsonl_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+      "manifest_sha256": "3e3c97689fe0fd6129e4df34a665a1ddb5406674bd54be0178e6591f1d489a68",
+      "preview_sha256": "77d75f45887adfc3513a4722491da32c47f92c9ddf9e9f09c62f34ed11eed330",
+      "verified": "All PTS, indices, dimensions, boxes, scores, warmth, counts, JPEGs and preview frames"
+    },
+    {
+      "run": "gpu-2",
+      "metrics": {
+        "frames_processed": 100,
+        "class_counts": {
+          "person": 243,
+          "bicycle": 342,
+          "car": 752,
+          "bus": 65,
+          "motorcycle": 22,
+          "truck": 67
+        },
+        "frames_dropped": 0,
+        "source_first_timestamp_s": 5.0,
+        "source_last_timestamp_s": 15.227,
+        "source_observed_rate_hz": 9.680258140217072,
+        "elapsed_s": 3.5487052259995835,
+        "processed_fps_including_warmup": 28.17929177868879,
+        "warmed_processed_fps": 48.86655720048186,
+        "cold_first_frame_s": 1.448925924996729,
+        "warmup_frames_actual": 10,
+        "latency": {
+          "decode": {
+            "count": 90,
+            "p50_s": 0.004478553499211557,
+            "p95_s": 0.004803748500489746,
+            "mean_s": 0.004459862444168215
+          },
+          "detect": {
+            "count": 90,
+            "p50_s": 0.006625040496146539,
+            "p95_s": 0.02800062965034158,
+            "mean_s": 0.010873447477368042
+          },
+          "output": {
+            "count": 90,
+            "p50_s": 0.005087659497803543,
+            "p95_s": 0.005559028502102592,
+            "mean_s": 0.005109295033616945
+          },
+          "total": {
+            "count": 90,
+            "p50_s": 0.016190281996387057,
+            "p95_s": 0.037728202798825806,
+            "mean_s": 0.020462884366457323
+          }
+        }
+      },
+      "jsonl_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+      "manifest_sha256": "893095ee7288eb217641c2f8760f9d464bb3376f04f2dc542d50d20f7d2c3ae1",
+      "preview_sha256": "77d75f45887adfc3513a4722491da32c47f92c9ddf9e9f09c62f34ed11eed330",
+      "verified": "All PTS, indices, dimensions, boxes, scores, warmth, counts, JPEGs and preview frames"
+    },
+    {
+      "run": "gpu-3",
+      "metrics": {
+        "frames_processed": 100,
+        "class_counts": {
+          "person": 243,
+          "bicycle": 342,
+          "car": 752,
+          "bus": 65,
+          "motorcycle": 22,
+          "truck": 67
+        },
+        "frames_dropped": 0,
+        "source_first_timestamp_s": 5.0,
+        "source_last_timestamp_s": 15.227,
+        "source_observed_rate_hz": 9.680258140217072,
+        "elapsed_s": 3.444344061994343,
+        "processed_fps_including_warmup": 29.033104184748034,
+        "warmed_processed_fps": 50.793020996024886,
+        "cold_first_frame_s": 1.4628312089989777,
+        "warmup_frames_actual": 10,
+        "latency": {
+          "decode": {
+            "count": 90,
+            "p50_s": 0.004424920003657462,
+            "p95_s": 0.004756490049840067,
+            "mean_s": 0.004430213566795121
+          },
+          "detect": {
+            "count": 90,
+            "p50_s": 0.0066528509996715,
+            "p95_s": 0.019999085049130373,
+            "mean_s": 0.01012878000005407
+          },
+          "output": {
+            "count": 90,
+            "p50_s": 0.005126035499415593,
+            "p95_s": 0.0054935135496634755,
+            "mean_s": 0.005107802800032207
+          },
+          "total": {
+            "count": 90,
+            "p50_s": 0.0162309235020075,
+            "p95_s": 0.029809676401055186,
+            "mean_s": 0.01968664555606665
+          }
+        }
+      },
+      "jsonl_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+      "manifest_sha256": "625113331a7458fc1e67abba00a8c8cdd8c5e31bc62fcd0a94c5dc278211463f",
+      "preview_sha256": "77d75f45887adfc3513a4722491da32c47f92c9ddf9e9f09c62f34ed11eed330",
+      "verified": "All PTS, indices, dimensions, boxes, scores, warmth, counts, JPEGs and preview frames"
+    }
+  ],
+  "failure_checks": [
+    "Existing output rejected without modification",
+    "Model checksum mismatch rejected before output",
+    "Missing source rejected before output",
+    "Invalid CUDA device leaves failed manifest",
+    "Invalid video leaves failed manifest"
+  ],
+  "identical_jsonl_across_repeats": true,
+  "visual_review": {
+    "reviewer": "Codex visual inspection",
+    "frames": [
+      0,
+      25,
+      50,
+      75,
+      99
+    ],
+    "findings": [
+      "Principal cyclists, pedestrian and vehicles have boxes in source coordinates",
+      "Low-confidence overlapping bicycle boxes and car/truck/bus class ambiguity are visible",
+      "Labels overlap in crowded regions; preview is inspectable but visually cluttered",
+      "This is qualitative artifact review, not reference-box accuracy evaluation"
+    ]
+  },
+  "input": {
+    "id": "kitti-0005-image02-first-100-ffv1",
+    "sha256": "ecf0183b84df7362764e028706926cb351bbf7987d020f5e908f669c03dde1fd",
+    "source_url": "https://avg-kitti.s3.eu-central-1.amazonaws.com/raw_data/2011_09_26_drive_0005/2011_09_26_drive_0005_sync.zip",
+    "sequence": "2011_09_26_drive_0005",
+    "camera": "image_02",
+    "split": "development",
+    "license": "CC-BY-NC-SA-3.0",
+    "source_timestamp_first": "2011-09-26 13:04:32.345808896",
+    "source_timestamp_last": "2011-09-26 13:04:42.573216512",
+    "video": {
+      "width_px": 1242,
+      "height_px": 375,
+      "frame_count": 100,
+      "codec": "FFV1",
+      "container": "Matroska",
+      "pixel_format": "bgr0; decoded bgr24",
+      "nominal_fps": 10,
+      "time_base": "1/1000",
+      "timestamp_transform": "relative KITTI image_02 acquisition times + 5 seconds, rounded to nearest millisecond",
+      "maximum_timestamp_rounding_error_s": 0.0004970880000012556,
+      "pixel_verification": "Every decoded BGR frame equals its source PNG exactly",
+      "encoding_changes": "PNG sequence to lossless FFV1; no resize, crop, dropped or duplicated frames; nominal 10 FPS metadata, irregular source intervals preserved to milliseconds"
+    },
+    "acquisition_manifest_sha256": "efaecb1ccfefe22d99d20641bde49cb736f75f0abe6b9e34bf1fa5488bcc0bd5",
+    "timestamps_sha256": "8eaabc126357728a515716198399297454a77cca2f038cd2b20b1b05b85da8cf"
+  },
+  "model": {
+    "id": "ultralytics-yolo11n-coco-baseline",
+    "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+    "source_url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo11n.pt",
+    "license": "Ultralytics AGPL-3.0 / alternative Enterprise terms",
+    "source_process": "Owner-acquired YOLO11n weights from the preserved working Ultralytics environment; copied byte-for-byte locally. Official re-download attempted but timed out; hash identity is local baseline identity, not independently verified upstream authenticity."
+  },
+  "environment": {
+    "python": "3.12.3",
+    "packages": {
+      "torch": "2.14.1+cu130",
+      "torchvision": "0.29.1+cu130",
+      "ultralytics": "8.4.172",
+      "av": "19.0.1",
+      "numpy": "2.5.2",
+      "opencv-python": "5.0.0.93"
+    },
+    "cuda_build": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "capability": [
+      12,
+      0
+    ],
+    "tensor_product": [
+      [
+        2.0,
+        2.0
+      ],
+      [
+        2.0,
+        2.0
+      ]
+    ],
+    "installation": "Hash-verified upstream cached wheels; CUDA native files copied after validating baseline RECORD hashes, then uv sync --locked --extra gpu --no-dev"
+  },
+  "driver": "616.64",
+  "code": {
+    "commit": "7debcf1996b98a373fb40155f0623ee81ef3abbe",
+    "dirty": false,
+    "lockfile_sha256": "5b1f561bf0836c208f61c67751a7f857aebe3499d7639f0a7adb1a94421c717a"
+  },
+  "started_at_utc": "2026-10-06T21:19:08.608274+00:00",
+  "local_date": "2026-10-07",
+  "baseline_package_versions_unchanged": true,
+  "checks": {
+    "default_cpu_tests": 41,
+    "generated_video_tests": 3,
+    "ruff": "passed",
+    "format": "passed",
+    "mypy": "passed",
+    "pre_commit": "passed",
+    "wheel_import_help_version": "passed",
+    "hosted_cpu_ci": "pending"
+  },
+  "limitations": [
+    "CUDA files were seeded from checksum-validated baseline distributions; cold upstream-wheel reconstruction did not finish because of network timeouts/DNS failures",
+    "One short development sequence encoded to video; no native-camera-video, audio, live-stream or generalization validation",
+    "No reference-box accuracy evaluation; counts are observations, not distinct objects",
+    "GPU clocks/power and system load were not controlled; latency varies across runs",
+    "No tracking, TTC, metric range or warning behavior",
+    "Hosted CI and owner review required before phase closure and merge"
+  ]
+}
