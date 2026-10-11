@@ -18,6 +18,20 @@ classifiers = [
 [project.scripts]
 collision-warning = "collision_warning.cli:main"
 
+[project.optional-dependencies]
+video = [
+    "av>=19.0.1",
+    "numpy>=2.5,<3",
+]
+gpu = [
+    "av==19.0.1",
+    "numpy==2.5.2",
+    "opencv-python==5.0.0.93",
+    "ultralytics==8.4.172",
+    "torch==2.14.1+cu130; sys_platform == 'linux' and platform_machine == 'x86_64'",
+    "torchvision==0.29.1+cu130; sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
 [dependency-groups]
 dev = [
     "mypy>=2.4,<3",
@@ -28,6 +42,29 @@ dev = [
 
 [tool.uv]
 required-version = "==0.12.23"
+# Keep the inference closure on the working baseline, including CUDA support
+# libraries and Polars, rather than migrating transitive packages during acceptance.
+constraint-dependencies = [
+    "cuda-bindings==13.3.1",
+    "cuda-pathfinder==1.6.0",
+    "filelock==3.32.3",
+    "fsspec==2026.7.0",
+    "MarkupSafe==3.0.3",
+    "networkx==3.6.1",
+    "nvidia-nvjitlink==13.3.33",
+    "polars==1.44.2",
+    "polars-runtime-32==1.44.2",
+    "ultralytics-platform==0.1.78",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130" }]
+torchvision = [{ index = "pytorch-cu130" }]
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -53,6 +90,10 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.mypy]
 python_version = "3.12"
-files = ["src/collision_warning"]
+files = ["src/collision_warning", "scripts/test_detection.py"]
 strict = true
 show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["av", "torch", "ultralytics", "cv2"]
+ignore_missing_imports = true

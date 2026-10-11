@@ -46,6 +46,10 @@ jobs:
         run: uv run --locked mypy
       - name: Run CPU tests
         run: uv run --locked pytest -q
+      - name: Verify generated video on CPU
+        run: |
+          uv sync --locked --extra video
+          uv run --locked --extra video pytest -q -m slow tests/integration/test_generated_video.py
       - name: Build distributions and verify installed wheel
         run: |
           uv build --out-dir dist

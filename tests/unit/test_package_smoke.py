@@ -41,7 +41,7 @@ def test_installed_console_script_help(tmp_path: Path, arguments: list[str]) -> 
     assert result.returncode == 0, result.stderr
     assert "usage: collision-warning" in result.stdout
     assert "--version" in result.stdout
-    assert "package foundation only" in result.stdout
+    assert "Phase 1 video detection" in result.stdout
     assert result.stderr == ""
 
 

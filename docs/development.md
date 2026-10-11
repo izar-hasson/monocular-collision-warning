@@ -36,12 +36,22 @@ reviewed tooling update.
 
 Default pytest uses importlib mode, strict configuration/markers, and excludes
 `gpu`, `slow`, and `benchmark`. Small CPU `integration` tests remain eligible.
-The current suite contains five packaging/CLI smoke cases; no GPU, video, or
-benchmark tests have been implemented. Do not add passing placeholder tests.
+The suite includes installed-package/CLI checks and deterministic video/detector
+contract and pipeline tests. Generated PyAV integration cases are opt-in (`slow`)
+and use the locked `video` extra:
+
+```bash
+uv sync --locked --extra video
+uv run --locked --extra video pytest -q -m slow tests/integration/test_generated_video.py
+```
+
+The base package remains dependency-free. The extra installs PyAV/NumPy without
+model or GPU packages.
+Do not add passing placeholder tests.
 
 When real tests exist, opt in with `uv run --locked pytest -m gpu`, `-m slow`, or
 `-m benchmark`. These explicit selectors replace the default marker selection.
-GPU tests will require the future GPU extra and locally verified weights;
+GPU acceptance uses the locked `gpu` extra and locally verified weights;
 the current CPU environment cannot satisfy them.
 
 ```bash
@@ -62,16 +72,18 @@ See [GitHub governance](github-governance.md) and [CONTRIBUTING.md](../CONTRIBUT
 ## Foundation setup status
 
 The [setup checklist](repository-setup.md) tracks external GitHub requirements.
-The owner currently requests foundation setup only. The
+Phase 0 is complete; the owner authorized detection and tracking on 2026-10-05. The
 [evaluation plan](evaluation-plan.md) and manifest templates document future
-evidence; they do not implement or run video/model features.
+evidence. Follow the [feature plan](detection-tracking-plan.md) and
+[detection guide](detection.md) for the first feature and its acceptance gate.
 
 ## Existing CUDA environment
 
 Follow [the baseline and migration rules](environment-baseline.md). The sibling
 demo environment is separate from this project's `.venv`. Do not run `uv sync`
-against it or overwrite it while testing CPU setup. Phase 1 must document and
-verify an optional CUDA installation before any migration.
+against it or overwrite it while testing CPU setup. The optional `gpu` extra installs a separate `.venv-gpu` with
+`UV_PROJECT_ENVIRONMENT=.venv-gpu uv sync --locked --extra gpu --no-dev`.
+See [detection.md](detection.md) for the fixed acceptance protocol.
 
 Private environment captures belong in gitignored `local-baselines/`. Raw media,
 weights, outputs, caches, and environment files are ignored. Later synthetic

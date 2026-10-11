@@ -1,8 +1,14 @@
 # Model conventions
 
-No detector weights or tracker implementation have been selected for this
-package. The earlier workstation YOLO experiment is a separate historical
-baseline, not a model release or permission to redistribute its assets.
+Phase 1 uses local YOLO11n COCO detection weights with Ultralytics 8.4.172. Their
+SHA-256 is `0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1`;
+`models/yolo11n.json` records acquisition, library/model terms, class mapping and
+permitted local experimentation. The initial weights were copied from the
+owner's preserved baseline. On 2026-10-11, an independent re-download from the
+recorded official Ultralytics asset URL matched that SHA-256 exactly.
+Weights remain ignored, and no model release or media redistribution is part of
+Phase 1. No tracker has been selected or implemented yet. See the
+[acceptance evidence](../docs/evidence/phase1-detection.json).
 
 Store approved weights locally under `models/` or an external asset directory;
 weights are ignored by Git. Before adoption, record:
@@ -27,6 +33,7 @@ infer that a project source license covers upstream weights. Preserve the
 [known GPU environment](../docs/environment-baseline.md) until an optional CUDA
 installation has been separately verified.
 
-The [run manifest template](../docs/templates/run-manifest.v1.json) records model
-identity/checksum when future runs exist. No inference feature is implemented by
-this document.
+The full CLI requires a completed local model card, verifies the weight hash
+before loading, and includes that identity and installed versions in each run
+manifest. The [run manifest template](../docs/templates/run-manifest.v1.json)
+describes additional evidence for later evaluation stages.

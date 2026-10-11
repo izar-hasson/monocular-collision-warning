@@ -55,7 +55,23 @@ checksums, and package compatibility also matter.
    replacing any baseline. Record new versions, model checksum/license, outputs,
    and failures. Do not mix unmanaged pip modifications with locked uv setup.
 
-The current `uv sync --locked` creates only this repository's CPU developer
-environment. It does not recreate the preserved CUDA stack. Consult the
-[official uv/PyTorch guide](https://docs.astral.sh/uv/guides/integration/pytorch/)
-when implementing Phase 1; this is a deferred migration plan.
+The default `uv sync --locked` creates this repository's CPU developer
+environment. The optional `gpu` extra now pins the baseline inference versions
+and explicitly maps torch/torchvision to the official cu130 index:
+
+```bash
+UV_PROJECT_ENVIRONMENT=.venv-gpu uv sync --locked --extra gpu --no-dev
+```
+
+The separate project GPU environment passed CUDA tensor and three 100-frame
+YOLO acceptance runs; baseline package versions stayed unchanged. See the
+[evidence](evidence/phase1-detection.json). Its initial installation used
+checksum-validated baseline files because upstream downloads failed; that proves
+working isolation, not cold upstream reconstruction. Fresh reconstruction then
+passed in an empty environment from complete verified upstream wheels and final
+locked sync. The index-advertised download-r2 endpoint timed out, so the explicit
+[official-CDN/cached-wheel fallback](detection.md#command) was used. All installed
+versions matched the unchanged lock, CUDA checks passed, and three full-CLI
+repetitions matched the original observations/previews. See the
+[closure evidence](evidence/phase1-closure.json). The baseline seed script remains
+historical recovery tooling and was not used for this fresh reconstruction.
