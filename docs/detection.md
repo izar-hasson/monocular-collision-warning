@@ -78,8 +78,9 @@ decodable MP4 under `outputs/pyav-video-detection-smoke/`. Reproduce this locall
   --device cpu --max-frames 12 --save-video
 ```
 
-This exercises real video decoding and inference on a generated input. The full
-CLI's recorded-video acceptance and locked GPU migration remain separate gates.
+This exercises real video decoding and inference on a generated input. The later
+100-frame installed-CLI CUDA acceptance is recorded below; these October 6 smoke
+artifacts remain historical evidence.
 
 After consolidating the runner, CPU verification repeated the bus, KITTI and
 video runs with the same counts. Current artifacts are under
@@ -241,4 +242,43 @@ require a new output directory. Preview MP4 uses nominal 10 FPS and pads the odd
 375-pixel height to 376; JSONL retains the original 1242×375 coordinate system and
 source PTS. Frame latency includes drawing, JPEG/MP4 writes and JSONL flushing,
 but excludes model loading, provenance hashing, preview finalization and final
-manifest writing. Visual review and hosted CPU CI remain explicit closure gates.
+manifest writing.
+
+## Recorded acceptance results
+
+The [October 7 evidence](evidence/phase1-detection.json) records successful runs
+of the installed CLI in the separate GPU environment. All three repetitions use
+the same 100-frame clip: they measure repeatability and runtime variation, not
+coverage of three different scenes. Each run processed all frames without drops,
+produced 1,491 detection observations, and had identical JSONL and preview hashes.
+The verifier checked all timestamps, indices, dimensions, boxes, confidence
+scores, counts, warm-up markers, JPEGs and decoded preview frames. Rejection tests
+for existing output, incorrect model hash, missing source, invalid CUDA device
+and corrupt video passed.
+
+| Repetition | Warmed processed FPS | Total p50 (ms) | Total p95 (ms) | Cold first frame (s) |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 38.95 | 28.98 | 30.58 | 4.17 |
+| 2 | 48.87 | 16.19 | 37.73 | 1.45 |
+| 3 | 50.79 | 16.23 | 29.81 | 1.46 |
+
+Conditions: RTX 5070 Ti, driver 616.64, YOLO11n, FP32, batch one, square 640
+letterboxing, confidence 0.1, COCO classes 0/1/2/3/5/7 and ten warm-up frames.
+The source observed rate was 9.68 Hz; processing FPS is a different measurement.
+System load and GPU clocks/power were not controlled. Frame latency includes
+decode, synchronized detection and JPEG/MP4/JSONL writes, with the exclusions
+described above.
+
+Qualitative inspection of frames 0/25/50/75/99 found the principal cyclists,
+pedestrian and vehicles boxed, overlapping bicycle detections, car/truck/bus
+class ambiguity and cluttered labels. No reference boxes were acquired, so this
+does not measure accuracy. Annotated videos are
+`outputs/phase1-acceptance/gpu-1/detections.mp4`, `gpu-2/detections.mp4` and
+`gpu-3/detections.mp4` under the same parent directory. Raw/derived KITTI media
+stays ignored under CC-BY-NC-SA-3.0, and the entire sequence is development-only.
+
+The original GPU setup reconciled checksum-validated baseline files with the
+lock. `scripts/seed_gpu_environment.py` is recovery tooling for unavailable
+downloads, not evidence of cold upstream installation. Phase 1 closure is
+verifying a fresh canonical locked GPU install without copying baseline files.
+Final hosted CPU checks and protected PR review/merge remain required.

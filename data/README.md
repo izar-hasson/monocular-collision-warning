@@ -1,11 +1,16 @@
 # Data conventions
 
-A small KITTI raw development excerpt was acquired on 2026-10-05 and tested on
-2026-10-06: 12 consecutive RGB `image_02` frames from `2011_09_26_drive_0005`,
-with original timestamps. Its verified local acquisition record is
+A KITTI raw development excerpt was acquired on 2026-10-05, first tested as 12
+frames, then expanded to 100 consecutive RGB `image_02` frames from
+`2011_09_26_drive_0005` for Phase 1 CUDA acceptance. Original timestamps were
+retained. Its verified local acquisition record is
 `data/external/kitti-0005/acquisition.json`. Terms and attribution are recorded
 there; no raw/annotated media is published. No reference labels or calibration
-were acquired, so this is smoke input rather than accuracy-evaluation evidence.
+were acquired, so this is pipeline acceptance input rather than
+accuracy-evaluation evidence. `data/external/kitti-0005-acceptance.mkv` is a
+lossless video encoded from these images; its adjacent JSON card records hashes,
+pixel equality, timestamp rounding and development split. See the
+[acceptance evidence](../docs/evidence/phase1-detection.json).
 
 Keep media outside Git. When the corresponding stages exist, use local
 `data/external/` for acquired assets, `data/raw/` for immutable original inputs,

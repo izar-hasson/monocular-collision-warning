@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "local_date": "2026-10-11",
+  "status": "closure_in_progress",
+  "original_acceptance": "docs/evidence/phase1-detection.json",
+  "source_commit": "b4fca8ca6cb5daaf897eb0f64664c505939a558c",
+  "lockfile_sha256": "5b1f561bf0836c208f61c67751a7f857aebe3499d7639f0a7adb1a94421c717a",
+  "fresh_cpu_installation": {
+    "command": "UV_PROJECT_ENVIRONMENT=.cache/phase1-clean-cpu uv sync --locked",
+    "status": "passed",
+    "baseline_seeding": false,
+    "checks": {
+      "make_check": "passed",
+      "default_cpu_tests": 41,
+      "generated_video_tests": 3,
+      "generated_video_command": "UV_PROJECT_ENVIRONMENT=.cache/phase1-clean-cpu uv run --locked --extra video pytest -q -m slow tests/integration/test_generated_video.py",
+      "pre_commit": "passed",
+      "sdist_and_wheel_build": "passed",
+      "isolated_wheel_import_help_version": "passed",
+      "lockfile_unchanged": true
+    }
+  },
+  "fresh_gpu_installation": {
+    "command": "UV_PROJECT_ENVIRONMENT=.cache/phase1-clean-gpu uv sync --locked --extra gpu --no-dev",
+    "status": "in_progress",
+    "baseline_seeding": false,
+    "first_attempt": "Official PyTorch torchvision download timed out; retrying with longer HTTP timeouts and four concurrent downloads"
+  },
+  "model_upstream_verification": {
+    "status": "passed",
+    "source_url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo11n.pt",
+    "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+    "matches_tested_weights": true,
+    "redistribution": "No weights or media published"
+  },
+  "hosted_cpu_ci": {
+    "prior_branch_commit": "b4fca8ca6cb5daaf897eb0f64664c505939a558c",
+    "prior_run_url": "https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37691141301",
+    "prior_result": "success",
+    "final_pull_request_checks": "pending"
+  },
+  "phase_2": "not_started",
+  "limitations": [
+    "One 100-frame KITTI development sequence encoded losslessly to video; three repetitions do not add scene coverage",
+    "No reference-box accuracy, tracking, TTC, range or warning evaluation",
+    "Initial acceptance used a seeded GPU environment; fresh upstream installation must pass separately",
+    "System load and GPU clocks were not controlled during the original timing runs",
+    "Source license selection and binary/model/media release review remain separate decisions"
+  ]
+}

@@ -32,11 +32,18 @@ and JSONL observations/run metadata. See the
 Tracking follows the detection gate; TTC, geometry and warnings remain later work.
 No predictive-accuracy result is claimed.
 
-To test detections now, use [scripts/test_detection.py](scripts/test_detection.py)
-with the existing YOLO environment. It accepts an image, video or acquired KITTI
-image sequence and saves annotated frames. Commands are in the
-[detection guide](docs/detection.md). Full video-reader and GPU-migration acceptance
-remain pending; the script is a verified visual smoke test.
+Local Phase 1 acceptance passed on one 100-frame KITTI driving sequence, repeated
+three times on the RTX 5070 Ti. Each run preserved source times and produced
+identical observations and annotated previews with no dropped frames. Warmed
+processing throughput was 38.95–50.79 FPS, including preview writes; this short
+development demo is not a detection-accuracy or generalization evaluation.
+See the [acceptance evidence](docs/evidence/phase1-detection.json) and
+[detection guide](docs/detection.md) for the exact protocol and limitations.
+Fresh GPU reconstruction and final hosted CI/review remain closure gates.
+
+To test detections now, use [scripts/test_detection.py](scripts/test_detection.py).
+It accepts an image, video or acquired KITTI image sequence and saves annotated
+frames through the same pipeline as the installed CLI.
 
 Python 3.12 is the initial development target. The owner's earlier RTX 5070 Ti
 YOLO/CUDA checks are recorded in [HANDOFF.md](HANDOFF.md); they are historical
@@ -68,9 +75,16 @@ The commands and optional pre-commit setup are documented in
 review intentional dependency updates together with their lockfile changes.
 
 The base package has no runtime dependencies or model downloads. The optional
-`video` extra supplies PyAV/NumPy (`uv sync --locked --extra video`); the existing
-YOLO environment supplies inference for the visual test script. GPU extras remain
-deferred.
+`video` extra supplies PyAV/NumPy (`uv sync --locked --extra video`). The locked
+`gpu` extra supplies the pinned YOLO/cu130 inference environment separately:
+
+```bash
+UV_PROJECT_ENVIRONMENT=.venv-gpu uv sync --locked --extra gpu --no-dev
+.venv-gpu/bin/collision-warning --help
+```
+
+Use the GPU environment's executable explicitly for inference. Models and media
+are local inputs with separate provenance manifests; the CLI never acquires them.
 Preserve the separate working GPU environment until migration is verified. Its versions
 and migration rules are recorded in the [environment baseline](docs/environment-baseline.md).
 See [CONTRIBUTING.md](CONTRIBUTING.md) for PR conventions and

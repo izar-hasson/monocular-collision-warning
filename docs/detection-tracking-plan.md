@@ -4,14 +4,13 @@ Owner authorization: 2026-10-05. Phase 0 is complete. This request starts
 Phase 1 (video/detection), followed by Phase 2 (tracking); phases 3–7 remain
 outside this change. No phase is complete merely because its code exists.
 
-Update 2026-10-06: the owner requested a runnable detection test script. The
-existing-environment script passed real-model CPU image/12-frame KITTI smoke
-checks and saves annotated frames. The owner subsequently authorized PyAV
-installation and shared video-reader integration. The locked `video` extra,
-generated-video timestamp tests and a real-model CPU run on a lossless video
-encoded from those 12 KITTI frames passed. A locked GPU environment and full
-recorded-video CLI acceptance remain pending; Phase 1 stays open and Phase 2 has
-not started. See [detection.md](detection.md).
+Update 2026-10-11: the [committed acceptance evidence](evidence/phase1-detection.json)
+records three installed-CLI CUDA runs on one 100-frame KITTI development sequence,
+verified timestamps/artifacts, failure handling, visual review and measured
+latency/FPS. These extend the October 6 CPU image/12-frame/video smoke checks.
+The separate GPU environment works; its original seeded reconstruction is not a
+cold-install proof. Fresh locked GPU reconstruction, final hosted CPU CI and
+protected review/merge remain the closure work. Phase 2 has not started.
 
 ## Phase 1
 

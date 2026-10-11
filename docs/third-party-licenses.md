@@ -1,14 +1,18 @@
 # Third-party license audit notes
 
-Inventory date: 2026-10-04; visibility update: 2026-10-05. The foundation has no
-runtime dependencies, selected model weights, or dataset/media assets. The exact
-locked developer packages and separately pinned tools have been inventoried.
+Foundation inventory date: 2026-10-04; Phase 1 status update: 2026-10-11. The base
+package has no runtime dependencies. Phase 1 adds optional video/GPU dependencies,
+local YOLO11n weights and KITTI development media; their records are in the
+[detection guide](detection.md) and [acceptance evidence](evidence/phase1-detection.json).
+The inventory below records the original foundation developer packages/tools;
+it is not a complete inventory of the expanded GPU lock or release clearance.
 The owner made the repository public. A project source license remains unselected;
 public visibility does not select a license.
 
-## Foundation tool inventory
+## Foundation tool inventory (historical)
 
-Checked version-specific PyPI metadata for every non-project entry in `uv.lock`,
+At the foundation revision, checked version-specific PyPI metadata for every
+non-project entry in `uv.lock`,
 setuptools 84.0.0, and uv 0.12.23. Inspected available installed license/notice
 files and recorded their hashes in
 [third-party-license-inventory.json](third-party-license-inventory.json).
@@ -74,6 +78,16 @@ AGPL-3.0 and Enterprise options for its code/models. Record the exact proposed
 library/weight terms and intended use before integrating it; do not treat the
 earlier separate workstation demo as this package’s license clearance.
 No Ultralytics package or weights were added during foundation setup.
+
+Phase 1 pins Ultralytics 8.4.172 and uses local YOLO11n weights with recorded
+AGPL-3.0 / alternative Enterprise terms. KITTI raw media is kept local under
+CC-BY-NC-SA-3.0 with attribution/provenance in its acquisition card. PyAV 19.0.1
+bundles FFmpeg components; installed notices and actual release contents require
+their own review before any binary/environment redistribution. The GPU lock also
+changes filelock from the foundation's 4.0.9 to 3.32.3, so the historical inventory
+must not be presented as an exact description of the current installation.
+This change publishes source and metadata only, with no weights, media or bundled
+third-party binaries.
 
 Data/model conventions are in [data/README.md](../data/README.md) and
 [models/README.md](../models/README.md). Unclear rights/provenance leave a
