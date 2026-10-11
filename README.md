@@ -39,7 +39,12 @@ processing throughput was 38.95–50.79 FPS, including preview writes; this shor
 development demo is not a detection-accuracy or generalization evaluation.
 See the [acceptance evidence](docs/evidence/phase1-detection.json) and
 [detection guide](docs/detection.md) for the exact protocol and limitations.
-Fresh GPU reconstruction and final hosted CI/review remain closure gates.
+Fresh GPU reconstruction also passed using complete verified upstream wheels;
+its three repetitions measured 34.66–43.12 warmed FPS and produced identical
+observations/previews to the original runs. See the
+[closure evidence](docs/evidence/phase1-closure.json). Integration is reviewed in
+[PR #7](https://github.com/izar-hasson/monocular-collision-warning/pull/7) under the
+required CPU checks. Phase 2 tracking follows that merge.
 
 To test detections now, use [scripts/test_detection.py](scripts/test_detection.py).
 It accepts an image, video or acquired KITTI image sequence and saves annotated

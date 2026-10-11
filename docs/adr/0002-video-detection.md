@@ -33,8 +33,14 @@ verification required in a separate `.venv-gpu`. Generated-PyAV tests are opt-in
 reuses the existing YOLO environment for inference and OpenCV for visualization,
 while video input uses `video.read_video` and its presentation-timestamp contract.
 Its KITTI sequence reader preserves the supplied timestamps.
-The GPU lock uses explicit cu130 torch and torchvision mappings and baseline
-transitive constraints. The sibling working environment remains preserved.
+The GPU lock uses explicit cu130 torch/torchvision index mappings and baseline
+transitive constraints. Direct wheel references in project metadata caused CPU
+tooling to retrieve GPU metadata too, so the lock retains its original sources.
+For timeouts at the index-advertised `download-r2.pytorch.org` endpoint, an
+explicit GPU-only helper downloads equivalent official CDN wheels and verifies
+their hashes against the lock before installation. This fallback uses complete
+upstream wheels rather than installed baseline files. The sibling working
+environment remains preserved.
 
 Default road-user classes are COCO IDs 0, 1, 2, 3, 5, 7; this mapping applies to
 the candidate COCO model and must be changed for a model with different classes.

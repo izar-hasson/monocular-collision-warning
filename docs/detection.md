@@ -149,6 +149,30 @@ UV_PROJECT_ENVIRONMENT=.venv-gpu uv sync --locked --extra gpu --no-dev
 .venv-gpu/bin/collision-warning --help
 ```
 
+If the index-advertised `download-r2.pytorch.org` host times out, use the explicit
+fallback below in a new environment. The helper chooses the locked Linux
+x86_64 / Python 3.12 torch/torchvision wheels, downloads them from the equivalent
+official `download.pytorch.org` CDN and verifies each complete wheel against
+`uv.lock` before making it installable. It reuses verified wheel files and keeps
+incomplete/corrupt downloads as `.part` files. No baseline files are copied.
+
+```bash
+python3.12 scripts/download_pytorch_wheels.py --destination .cache/pytorch-wheels
+uv venv .cache/gpu-recovery --python 3.12
+uv pip install --python .cache/gpu-recovery/bin/python --no-index --no-deps \
+  --find-links .cache/pytorch-wheels \
+  'torch==2.14.1+cu130' 'torchvision==0.29.1+cu130'
+UV_PROJECT_ENVIRONMENT=.cache/gpu-recovery uv sync --locked --extra gpu --no-dev
+.cache/gpu-recovery/bin/collision-warning --help
+```
+
+Create `.cache/gpu-recovery` only when it does not already exist; use another new
+path for a repeat. The final locked sync installs the complete dependency closure.
+The fallback is explicit GPU setup tooling and is never invoked by CPU CI or at
+package import. Direct wheel URLs in project metadata were tested and rejected
+because they made CPU tooling retrieve GPU metadata; the index mappings and
+package versions remain unchanged.
+
 The default `uv sync --locked` remains a CPU developer installation without CUDA
 or model packages. Once the GPU environment exists, invoke its executable
 explicitly; a default `uv run` would select the CPU environment instead.
@@ -278,7 +302,23 @@ does not measure accuracy. Annotated videos are
 stays ignored under CC-BY-NC-SA-3.0, and the entire sequence is development-only.
 
 The original GPU setup reconciled checksum-validated baseline files with the
-lock. `scripts/seed_gpu_environment.py` is recovery tooling for unavailable
-downloads, not evidence of cold upstream installation. Phase 1 closure is
-verifying a fresh canonical locked GPU install without copying baseline files.
-Final hosted CPU checks and protected PR review/merge remain required.
+lock. `scripts/seed_gpu_environment.py` is historical recovery tooling, not proof
+of upstream installation. On 2026-10-12, fresh reconstruction passed with the
+complete-wheel fallback above and final locked sync, without copying installed
+baseline files. Every installed version matched the unchanged lock and CUDA
+capability/tensor checks passed. Three installed-CLI repetitions repeated all
+artifact/timestamp/failure checks; their JSONL and previews match the original
+acceptance exactly, including the five byte-identical reviewed JPEGs.
+
+| Fresh repetition | Warmed processed FPS | Total p50 (ms) | Total p95 (ms) |
+| --- | ---: | ---: | ---: |
+| 1 | 38.83 | 17.49 | 39.34 |
+| 2 | 34.66 | 29.61 | 39.53 |
+| 3 | 43.12 | 16.87 | 39.19 |
+
+The protocol and uncontrolled-clock/load limitations are the same. These runs
+verify reconstruction and repeatability, not additional scene coverage or a
+controlled performance comparison. Current evidence is
+[phase1-closure.json](evidence/phase1-closure.json), with local artifacts under
+`outputs/phase1-clean-gpu-acceptance/`. Final required hosted checks and protected
+integration use PR #7 before advancing to tracking.

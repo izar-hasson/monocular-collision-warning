@@ -4,13 +4,17 @@ Owner authorization: 2026-10-05. Phase 0 is complete. This request starts
 Phase 1 (video/detection), followed by Phase 2 (tracking); phases 3–7 remain
 outside this change. No phase is complete merely because its code exists.
 
-Update 2026-10-11: the [committed acceptance evidence](evidence/phase1-detection.json)
+Update 2026-10-12: the [original acceptance evidence](evidence/phase1-detection.json)
 records three installed-CLI CUDA runs on one 100-frame KITTI development sequence,
 verified timestamps/artifacts, failure handling, visual review and measured
 latency/FPS. These extend the October 6 CPU image/12-frame/video smoke checks.
-The separate GPU environment works; its original seeded reconstruction is not a
-cold-install proof. Fresh locked GPU reconstruction, final hosted CPU CI and
-protected review/merge remain the closure work. Phase 2 has not started.
+The [closure evidence](evidence/phase1-closure.json) records fresh GPU reconstruction
+from complete verified upstream wheels, final locked sync and three additional
+passing CUDA repetitions with identical observations/previews. The documented
+GPU-only CDN/cache fallback resolves this workstation's index-host timeout
+without copying installed baseline files or changing the lock. Phase 1 acceptance
+is complete; merge PR #7 with final required CPU checks before Phase 2, which has
+not started.
 
 ## Phase 1
 

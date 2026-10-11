@@ -67,6 +67,11 @@ The separate project GPU environment passed CUDA tensor and three 100-frame
 YOLO acceptance runs; baseline package versions stayed unchanged. See the
 [evidence](evidence/phase1-detection.json). Its initial installation used
 checksum-validated baseline files because upstream downloads failed; that proves
-working isolation, not cold upstream reconstruction. Phase 1 closure is verifying
-the canonical command in another empty environment without using the seed script.
-The script remains an explicitly documented recovery helper only.
+working isolation, not cold upstream reconstruction. Fresh reconstruction then
+passed in an empty environment from complete verified upstream wheels and final
+locked sync. The index-advertised download-r2 endpoint timed out, so the explicit
+[official-CDN/cached-wheel fallback](detection.md#command) was used. All installed
+versions matched the unchanged lock, CUDA checks passed, and three full-CLI
+repetitions matched the original observations/previews. See the
+[closure evidence](evidence/phase1-closure.json). The baseline seed script remains
+historical recovery tooling and was not used for this fresh reconstruction.

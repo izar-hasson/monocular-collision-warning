@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "local_date": "2026-10-11",
-  "status": "closure_in_progress",
+  "local_date": "2026-10-12",
+  "status": "local_acceptance_complete",
   "original_acceptance": "docs/evidence/phase1-detection.json",
   "source_commit": "b4fca8ca6cb5daaf897eb0f64664c505939a558c",
   "lockfile_sha256": "5b1f561bf0836c208f61c67751a7f857aebe3499d7639f0a7adb1a94421c717a",
@@ -11,7 +11,7 @@
     "baseline_seeding": false,
     "checks": {
       "make_check": "passed",
-      "default_cpu_tests": 41,
+      "default_cpu_tests": 45,
       "generated_video_tests": 3,
       "generated_video_command": "UV_PROJECT_ENVIRONMENT=.cache/phase1-clean-cpu uv run --locked --extra video pytest -q -m slow tests/integration/test_generated_video.py",
       "pre_commit": "passed",
@@ -21,10 +21,291 @@
     }
   },
   "fresh_gpu_installation": {
-    "command": "UV_PROJECT_ENVIRONMENT=.cache/phase1-clean-gpu uv sync --locked --extra gpu --no-dev",
-    "status": "in_progress",
+    "status": "passed",
+    "environment": ".cache/phase1-gpu-recovery",
     "baseline_seeding": false,
-    "first_attempt": "Official PyTorch torchvision download timed out; retrying with longer HTTP timeouts and four concurrent downloads"
+    "whole_upstream_wheel_cache_reused": true,
+    "steps": [
+      "Official CDN torch/torchvision downloads matched the previously locked wheel SHA-256 values",
+      "download_pytorch_wheels.py verified complete cached upstream wheels against uv.lock",
+      "uv venv created a new empty environment",
+      "uv pip install --no-index --no-deps --find-links installed the two verified cu130 wheels by pinned package requirement",
+      "UV_PROJECT_ENVIRONMENT=.cache/phase1-gpu-recovery uv sync --locked --extra gpu --no-dev --offline installed the remaining upstream-wheel closure",
+      "All installed versions matched the unchanged lock; CUDA capability and tensor multiplication passed",
+      "Installed full CLI passed three 100-frame CUDA repetitions and all five failure checks"
+    ],
+    "direct_index_only_installation": "The index-advertised download-r2 endpoint timed out on this workstation; use the documented GPU-only CDN fallback",
+    "package_versions_unchanged": true,
+    "original_lockfile_unchanged": true,
+    "environment_snapshot": {
+      "python": "3.12.3",
+      "packages": {
+        "anyio": "4.15.1",
+        "av": "19.0.1",
+        "certifi": "2026.7.22",
+        "charset-normalizer": "3.5.2",
+        "contourpy": "1.4.0",
+        "cuda-bindings": "13.3.1",
+        "cuda-pathfinder": "1.6.0",
+        "cuda-toolkit": "13.0.3.0",
+        "cycler": "0.12.1",
+        "filelock": "3.32.3",
+        "fonttools": "4.66.1",
+        "fsspec": "2026.7.0",
+        "h11": "0.16.0",
+        "httpcore": "1.0.9",
+        "httpx": "0.28.1",
+        "idna": "3.20",
+        "jinja2": "3.1.6",
+        "kiwisolver": "1.5.1",
+        "markupsafe": "3.0.3",
+        "matplotlib": "3.11.2",
+        "monocular-collision-warning": "0.1.0.dev0",
+        "mpmath": "1.3.0",
+        "networkx": "3.6.1",
+        "numpy": "2.5.2",
+        "nvidia-cublas": "13.1.1.3",
+        "nvidia-cuda-cupti": "13.0.85",
+        "nvidia-cuda-nvrtc": "13.0.88",
+        "nvidia-cuda-runtime": "13.0.96",
+        "nvidia-cudnn-cu13": "9.24.0.43",
+        "nvidia-cufft": "12.0.0.61",
+        "nvidia-cufile": "1.15.1.6",
+        "nvidia-curand": "10.4.0.35",
+        "nvidia-cusolver": "12.0.4.66",
+        "nvidia-cusparse": "12.6.3.3",
+        "nvidia-cusparselt-cu13": "0.8.1",
+        "nvidia-ml-py": "13.615.71",
+        "nvidia-nccl-cu13": "2.30.7",
+        "nvidia-nvjitlink": "13.3.33",
+        "nvidia-nvshmem-cu13": "3.4.5",
+        "nvidia-nvtx": "13.0.85",
+        "opencv-python": "5.0.0.93",
+        "packaging": "26.3",
+        "pillow": "12.3.0",
+        "polars": "1.44.2",
+        "polars-runtime-32": "1.44.2",
+        "psutil": "7.2.2",
+        "pyparsing": "3.3.3",
+        "python-dateutil": "2.9.0.post0",
+        "pyyaml": "6.0.3",
+        "requests": "2.34.2",
+        "setuptools": "84.0.0",
+        "six": "1.17.0",
+        "sympy": "1.14.0",
+        "torch": "2.14.1+cu130",
+        "torchvision": "0.29.1+cu130",
+        "triton": "3.8.0",
+        "typing-extensions": "4.16.0",
+        "ultralytics": "8.4.172",
+        "ultralytics-platform": "0.1.78",
+        "ultralytics-thop": "2.2.2",
+        "urllib3": "2.8.0"
+      },
+      "cuda_build": "13.0",
+      "gpu": "NVIDIA GeForce RTX 5070 Ti",
+      "capability": [
+        12,
+        0
+      ],
+      "tensor_product": [
+        [
+          2.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0
+        ]
+      ],
+      "driver": "616.64",
+      "installation": "Fresh environment from complete lock-hash-verified upstream wheels using the explicit CDN/cached-wheel fallback and final uv sync --locked --extra gpu --no-dev; no installed baseline files copied",
+      "all_installed_versions_match_lock": true
+    },
+    "artifacts": "outputs/phase1-clean-gpu-acceptance/",
+    "identical_jsonl_across_repeats": true,
+    "identical_observations_and_previews_to_original_acceptance": true,
+    "visual_review": {
+      "method": "Byte-identical JPEGs to the five previously reviewed frames; identical full preview hash",
+      "original_review": {
+        "reviewer": "Codex visual inspection",
+        "frames": [
+          0,
+          25,
+          50,
+          75,
+          99
+        ],
+        "findings": [
+          "Principal cyclists, pedestrian and vehicles have boxes in source coordinates",
+          "Low-confidence overlapping bicycle boxes and car/truck/bus class ambiguity are visible",
+          "Labels overlap in crowded regions; preview is inspectable but visually cluttered",
+          "This is qualitative artifact review, not reference-box accuracy evaluation"
+        ]
+      }
+    },
+    "failure_checks": [
+      "Existing output rejected without modification",
+      "Model checksum mismatch rejected before output",
+      "Missing source rejected before output",
+      "Invalid CUDA device leaves failed manifest",
+      "Invalid video leaves failed manifest"
+    ],
+    "repetitions": [
+      {
+        "run": "gpu-1",
+        "metrics": {
+          "frames_processed": 100,
+          "class_counts": {
+            "person": 243,
+            "bicycle": 342,
+            "car": 752,
+            "bus": 65,
+            "motorcycle": 22,
+            "truck": 67
+          },
+          "frames_dropped": 0,
+          "source_first_timestamp_s": 5.0,
+          "source_last_timestamp_s": 15.227,
+          "source_observed_rate_hz": 9.680258140217072,
+          "elapsed_s": 6.094376804000149,
+          "processed_fps_including_warmup": 16.408568622531394,
+          "warmed_processed_fps": 38.83335842564898,
+          "cold_first_frame_s": 3.5165873679998185,
+          "warmup_frames_actual": 10,
+          "latency": {
+            "decode": {
+              "count": 90,
+              "p50_s": 0.004512745499823723,
+              "p95_s": 0.004971040549662575,
+              "mean_s": 0.004527445455535902
+            },
+            "detect": {
+              "count": 90,
+              "p50_s": 0.007239784499915913,
+              "p95_s": 0.02944728985014535,
+              "mean_s": 0.015937207855571008
+            },
+            "output": {
+              "count": 90,
+              "p50_s": 0.005258346000118763,
+              "p95_s": 0.005697173749854301,
+              "mean_s": 0.005264334455563989
+            },
+            "total": {
+              "count": 90,
+              "p50_s": 0.017488969500163876,
+              "p95_s": 0.03934158264983125,
+              "mean_s": 0.025749751111116995
+            }
+          }
+        },
+        "jsonl_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+        "preview_sha256": "77d75f45887adfc3513a4722491da32c47f92c9ddf9e9f09c62f34ed11eed330"
+      },
+      {
+        "run": "gpu-2",
+        "metrics": {
+          "frames_processed": 100,
+          "class_counts": {
+            "person": 243,
+            "bicycle": 342,
+            "car": 752,
+            "bus": 65,
+            "motorcycle": 22,
+            "truck": 67
+          },
+          "frames_dropped": 0,
+          "source_first_timestamp_s": 5.0,
+          "source_last_timestamp_s": 15.227,
+          "source_observed_rate_hz": 9.680258140217072,
+          "elapsed_s": 4.218866372999855,
+          "processed_fps_including_warmup": 23.703049861921624,
+          "warmed_processed_fps": 34.65729161256267,
+          "cold_first_frame_s": 1.2958696650002821,
+          "warmup_frames_actual": 10,
+          "latency": {
+            "decode": {
+              "count": 90,
+              "p50_s": 0.004503375500007678,
+              "p95_s": 0.004802242150026359,
+              "mean_s": 0.00449421256665927
+            },
+            "detect": {
+              "count": 90,
+              "p50_s": 0.02009454950007239,
+              "p95_s": 0.029766522900240486,
+              "mean_s": 0.019207870200009185
+            },
+            "output": {
+              "count": 90,
+              "p50_s": 0.005146852000052604,
+              "p95_s": 0.005582370000047377,
+              "mean_s": 0.005130316711084662
+            },
+            "total": {
+              "count": 90,
+              "p50_s": 0.029605086499941535,
+              "p95_s": 0.039533605400333724,
+              "mean_s": 0.028852871588873716
+            }
+          }
+        },
+        "jsonl_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+        "preview_sha256": "77d75f45887adfc3513a4722491da32c47f92c9ddf9e9f09c62f34ed11eed330"
+      },
+      {
+        "run": "gpu-3",
+        "metrics": {
+          "frames_processed": 100,
+          "class_counts": {
+            "person": 243,
+            "bicycle": 342,
+            "car": 752,
+            "bus": 65,
+            "motorcycle": 22,
+            "truck": 67
+          },
+          "frames_dropped": 0,
+          "source_first_timestamp_s": 5.0,
+          "source_last_timestamp_s": 15.227,
+          "source_observed_rate_hz": 9.680258140217072,
+          "elapsed_s": 3.6675882310000816,
+          "processed_fps_including_warmup": 27.265874384358547,
+          "warmed_processed_fps": 43.11683574362052,
+          "cold_first_frame_s": 1.3773273200004041,
+          "warmup_frames_actual": 10,
+          "latency": {
+            "decode": {
+              "count": 90,
+              "p50_s": 0.004499331000033635,
+              "p95_s": 0.004910055200025454,
+              "mean_s": 0.004514295288906093
+            },
+            "detect": {
+              "count": 90,
+              "p50_s": 0.006883892499899957,
+              "p95_s": 0.0292484754500947,
+              "mean_s": 0.013389457588896727
+            },
+            "output": {
+              "count": 90,
+              "p50_s": 0.005275784999867028,
+              "p95_s": 0.0056783860999075845,
+              "mean_s": 0.005266687577775681
+            },
+            "total": {
+              "count": 90,
+              "p50_s": 0.01687239349985248,
+              "p95_s": 0.03919166450016291,
+              "mean_s": 0.023191683322223374
+            }
+          }
+        },
+        "jsonl_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+        "preview_sha256": "77d75f45887adfc3513a4722491da32c47f92c9ddf9e9f09c62f34ed11eed330"
+      }
+    ]
   },
   "model_upstream_verification": {
     "status": "passed",
@@ -37,14 +318,18 @@
     "prior_branch_commit": "b4fca8ca6cb5daaf897eb0f64664c505939a558c",
     "prior_run_url": "https://github.com/izar-hasson/monocular-collision-warning/actions/runs/37691141301",
     "prior_result": "success",
-    "final_pull_request_checks": "pending"
+    "final_pull_request_checks": "Required CPU checks on the final head are recorded on PR #7 and enforced by protected main before merge",
+    "first_closure_commit": "abb4669be1df8e6469768d58c3b63318cfee2412",
+    "first_closure_run_url": "https://github.com/izar-hasson/monocular-collision-warning/actions/runs/38174443565",
+    "first_closure_result": "success",
+    "pull_request_url": "https://github.com/izar-hasson/monocular-collision-warning/pull/7"
   },
   "phase_2": "not_started",
   "limitations": [
     "One 100-frame KITTI development sequence encoded losslessly to video; three repetitions do not add scene coverage",
     "No reference-box accuracy, tracking, TTC, range or warning evaluation",
-    "Initial acceptance used a seeded GPU environment; fresh upstream installation must pass separately",
     "System load and GPU clocks were not controlled during the original timing runs",
-    "Source license selection and binary/model/media release review remain separate decisions"
+    "Source license selection and binary/model/media release review remain separate decisions",
+    "Canonical index-only GPU sync timed out; the explicit complete-wheel CDN/cache fallback passed without copying installed baseline files"
   ]
 }
