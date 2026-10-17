@@ -4,13 +4,13 @@ import json
 import platform
 import subprocess
 from contextlib import ExitStack
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import UTC, datetime
 from importlib.metadata import PackageNotFoundError, version
 from math import isfinite
 from pathlib import Path
 from time import perf_counter
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from collision_warning.detection import (
     DetectorConfig,
@@ -21,7 +21,13 @@ from collision_warning.detection import (
 from collision_warning.inputs import image_frames, is_image_source
 from collision_warning.pipeline import run_detection
 from collision_warning.preview import AnnotatedPreview
+from collision_warning.tracking import ByteTrackAdapter, TrackingConfig
 from collision_warning.video import read_video, video_properties
+
+if TYPE_CHECKING:
+    from collision_warning.tracking_preview import (
+        TrackingAnnotatedPreview as TrackingPreviewType,
+    )
 
 
 def read_asset_manifest(path: Path, kind: str) -> dict[str, Any]:
@@ -47,6 +53,9 @@ def environment_metadata(device: str) -> dict[str, Any]:
         "torchvision",
         "ultralytics",
         "opencv-python",
+        "trackers",
+        "supervision",
+        "scipy",
     ):
         try:
             packages[name] = version(name)
@@ -125,6 +134,7 @@ def detect_source(
     expected_sha256: str | None = None,
     save_frames: bool = False,
     save_video: bool = False,
+    tracking_config: TrackingConfig | None = None,
 ) -> dict[str, Any]:
     """Use one pipeline; supplied provenance is verified, absent provenance recorded."""
     if not source.exists():
@@ -134,6 +144,10 @@ def detect_source(
     if warmup_frames < 0 or (max_frames is not None and max_frames <= 0):
         raise ValueError("Warm-up must be nonnegative and frame limit positive")
     is_images = is_image_source(source)
+    if tracking_config is not None and is_images:
+        raise ValueError("Live tracking requires a timestamped video input")
+    if tracking_config is not None and config.confidence > tracking_config.low_score:
+        raise ValueError("Detector confidence must be <= tracking low score")
     if save_video and is_images:
         raise ValueError(
             "Saving a preview video requires video input with a nominal FPS"
@@ -199,6 +213,7 @@ def detect_source(
         "metrics": None,
         "failure": None,
         "video": None,
+        "tracking": None,
         "artifacts": ["detections.jsonl"],
         "limitations": [
             "Development demonstration; no reference-box accuracy evaluation.",
@@ -214,22 +229,60 @@ def detect_source(
         else read_video(source, clip["id"])
     )
     preview = None
+    tracking_preview: TrackingPreviewType | None = None
+    tracker = None
     try:
         with ExitStack() as stack:
             stack.callback(frames.close)
             fps = None
-            if save_video:
+            if save_video or tracking_config is not None:
                 manifest["video"] = video_properties(source)
                 fps = manifest["video"]["nominal_fps"]
                 if not isfinite(fps) or fps <= 0:
-                    raise ValueError("Saving a preview video requires a nominal FPS")
+                    raise ValueError("Tracking or video preview requires a nominal FPS")
+            if tracking_config is not None:
+                assert fps is not None
+                tracking_config = replace(tracking_config, frame_rate=fps)
+                load_start = perf_counter()
+                tracker = ByteTrackAdapter(tracking_config)
+                manifest["tracking_load_s"] = perf_counter() - load_start
+                manifest["tracking"] = {
+                    **asdict(tracking_config),
+                    "lost_track_buffer": tracking_config.lost_track_buffer,
+                    "effective_lost_seconds": tracking_config.effective_lost_seconds,
+                    "minimum_consecutive_frames": 2,
+                    "identity_namespace": tracker.namespace,
+                    "identity_format": "namespace/epoch/class_id/backend_id",
+                    "history_policy": "Current segment; count and source-age limits",
+                }
+                manifest["artifacts"].append("tracks.jsonl")
+                manifest["protocol"]["included_stages"].append("track")
                 manifest["limitations"].append(
-                    "Preview uses nominal FPS; JSONL retains source frame times."
+                    "Tracking IDs are hypotheses; no reference identity evaluation."
+                )
+            elif save_video:
+                manifest["limitations"].append(
+                    "Detection preview uses nominal FPS; JSONL retains source times."
                 )
             if save_frames or save_video:
-                preview = AnnotatedPreview(output, save_frames=save_frames, fps=fps)
-                stack.callback(preview.close)
+                if tracker is not None:
+                    from collision_warning.tracking_preview import (
+                        TrackingAnnotatedPreview,
+                    )
+
+                    tracking_preview = TrackingAnnotatedPreview(
+                        output,
+                        save_frames=save_frames,
+                        fps=fps if save_video else None,
+                    )
+                    stack.callback(tracking_preview.close)
+                else:
+                    preview = AnnotatedPreview(
+                        output, save_frames=save_frames, fps=fps if save_video else None
+                    )
+                    stack.callback(preview.close)
                 manifest["protocol"]["output_includes_preview"] = True
+                manifest["protocol"]["included_stages"].append("preview")
                 if save_frames:
                     manifest["artifacts"].append("frame-*.jpg")
             load_start = perf_counter()
@@ -244,8 +297,20 @@ def detect_source(
                 warmup_frames=warmup_frames,
                 max_frames=max_frames,
                 preview=preview,
+                tracker=tracker,
+                tracking_output=output / "tracks.jsonl"
+                if tracker is not None
+                else None,
+                tracking_preview=tracking_preview,
             )
         manifest["status"] = "complete"
+        if tracker is not None:
+            manifest["limitations"].extend(
+                [
+                    "Tracking video keeps source intervals, starts at zero; no audio.",
+                    "Bounded histories per live track; JSONL stores compact summaries.",
+                ]
+            )
     except Exception as exc:
         manifest["status"] = "failed"
         manifest["failure"] = {"type": type(exc).__name__, "message": str(exc)}
@@ -253,6 +318,14 @@ def detect_source(
     finally:
         if preview is not None:
             manifest["artifacts"].extend(preview.artifacts)
+        if tracking_preview is not None:
+            manifest["artifacts"].extend(tracking_preview.artifacts)
+        if manifest["status"] == "complete":
+            manifest["artifact_sha256"] = {
+                path.name: sha256_file(path)
+                for path in output.iterdir()
+                if path.is_file()
+            }
         (output / "manifest.json").write_text(
             json.dumps(manifest, indent=2, allow_nan=False) + "\n", encoding="utf-8"
         )

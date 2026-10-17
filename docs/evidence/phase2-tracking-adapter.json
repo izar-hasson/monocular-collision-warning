@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "local_date": "2026-10-17",
+  "status": "milestone_2_local_complete_hosted_checks_pending",
+  "scope": "Explicitly authorized domain tracker adapter, lifecycle and bounded measurement histories; preview consumes shared adapter",
+  "base_commit": "404943268e63dc5ed499a36747ebd64a91449996",
+  "working_tree_changes": true,
+  "file_sha256": {
+    "src/collision_warning/domain.py": "f0f6f4c066e73b3cce7719541be9045882ea4ae40c49d245251d216501fa99e2",
+    "src/collision_warning/tracking.py": "f74b05b5e3b3438fd91c5dcce5303d6b82a92b41beec1a8072513690dd10ed9d",
+    "src/collision_warning/tracking_preview.py": "865b94b62b988a9045423190dee11db991db5f7499e1f26c8a42e1683e709790",
+    "src/collision_warning/cli.py": "414c7894288c00ee9a473a6a886a720d9a0a0c13eeb448ad60c9b0fba336e747",
+    "tests/unit/test_tracking_history.py": "cb665abb84b71d4c97002830ba94321ee8b14b9c82a340ed006fb88ce6bca380",
+    "tests/integration/test_tracking_adapter.py": "473ef52730ec8bad9a992d17743295681b50e94df9061c181c914120e25c004b",
+    "tests/integration/test_tracking_preview.py": "b2307a7d6f17ab6b082f7f7c4d4ceb77370ea6b0c375503a1851339c83686b88",
+    ".github/workflows/ci.yml": "ab86e202a5abf37162c8c59119b8ce83704315a516963fbcc89e19e3a08496b3",
+    "pyproject.toml": "9733ff312c00dad71e19def39060533e9c3eb1d8966f84ff9fb23266c3536ef0",
+    "uv.lock": "b1e75e9527be1f9d7b8effc4866a77c8d72b8fae9a5f704c617fa1c611653a56",
+    "docs/adr/0004-tracking-lifecycle.md": "c0a1fcded034c338fce1233db86d25c82471ba91a505d3a3296c284ff5ce2822",
+    "docs/tracking.md": "a6cc33cf094729d25a1b5370efe4afccf57c6a33948fabe89f57d7c291433b96"
+  },
+  "implementation": {
+    "domain_types": [
+      "TrackIdentity",
+      "TrackedDetection",
+      "Track",
+      "TrackEnd",
+      "TrackingResult"
+    ],
+    "protocol": "Tracker.update(FrameInfo, Sequence[Detection]) -> TrackingResult; reset() -> tuple[TrackEnd, ...]",
+    "adapter": "ByteTrackAdapter; per-class pinned CPU ByteTrack; explicit low floor; original observation-index mapping",
+    "identity_format": "namespace/epoch/class_id/backend_id; source ID in identity metadata",
+    "history": "Only confirmed measurements, bounded by count and source age; current continuity segment; no decoded images or predictions",
+    "lifecycle": "Observed/lost snapshots; source-time expiry; reset events; gap reacquisition clears history and increments segment",
+    "pre_mutation_rejection": "Invalid same-source index/time ordering, detection/frame mismatch, index/dimension/class types, mutable coordinates",
+    "backend_failure": "Raises and invalidates partial epoch; caller records failure; subsequent updates start fresh",
+    "preview_jsonl": "Each original observation once with ID/segment; per-track lifecycle and retention summaries; no repeated full-history serialization"
+  },
+  "environment": {
+    "python": "3.12.3",
+    "device": "cpu",
+    "packages": {
+      "trackers": "2.6.1",
+      "supervision": "0.30.9",
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "av": "19.0.1",
+      "opencv-python": "5.0.0.93"
+    },
+    "dependencies_changed_since_preview": false,
+    "lockfile_unchanged_since_preview": true,
+    "gpu_inference_rerun": false
+  },
+  "checks": {
+    "default_cpu": {
+      "result": "passed",
+      "cases": 62,
+      "history_cases": 17,
+      "command": "UV_PROJECT_ENVIRONMENT=.cache/phase2-clean-base uv run --locked --offline --cache-dir .cache/uv-cpu-closure make check"
+    },
+    "optional_cpu": {
+      "result": "passed",
+      "cases": 63,
+      "backend_cases": 19,
+      "adapter_cases": 25,
+      "preview_cases": 16,
+      "generated_video_cases": 3,
+      "command": ".cache/phase2-tracking-cpu/bin/pytest -q -m \"tracking or slow\" tests/integration/test_tracking_backend.py tests/integration/test_tracking_adapter.py tests/integration/test_tracking_preview.py tests/integration/test_generated_video.py"
+    },
+    "lint_format_types": "passed; strict mypy checked 12 source files",
+    "lock_check": "passed; uv lock --check --offline; 91 locked packages; unchanged from previous milestone",
+    "isolated_wheel": "Built sdist/wheel; new no-deps install imports domain/history; track-preview help lists history/gap options; actual backend construction fails explicitly without tracking extra; no mandatory runtime packages or generated assets in distributions",
+    "hosted_ci": "not run; adapter integration suite added to required CPU workflow"
+  },
+  "saved_detection_replay": {
+    "command": "UV_PROJECT_ENVIRONMENT=.cache/phase2-tracking-cpu uv run --locked --offline --extra tracking --extra video collision-warning track-preview --source data/external/kitti-0005-acceptance.mkv --detection-run outputs/phase1-clean-gpu-acceptance/gpu-1 --output outputs/phase2-history-preview",
+    "source": "data/external/kitti-0005-acceptance.mkv",
+    "source_sha256": "ecf0183b84df7362764e028706926cb351bbf7987d020f5e908f669c03dde1fd",
+    "detections_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+    "configuration": {
+      "low_score": 0.1,
+      "high_score": 0.5,
+      "activation_score": 0.6,
+      "minimum_iou": 0.3,
+      "lost_seconds": 1.0,
+      "frame_rate": 10.0,
+      "max_gap_seconds": 1.0,
+      "history_max_observations": 30,
+      "history_max_seconds": 2.0,
+      "minimum_consecutive_frames": 2,
+      "lost_track_buffer": 30,
+      "effective_lost_seconds": 1.0
+    },
+    "association_counts": {
+      "unassigned": 1101,
+      "associated": 390,
+      "low_score_associated": 85
+    },
+    "verification": {
+      "frames": 100,
+      "observations": 1491,
+      "counts": {
+        "unassigned": 1101,
+        "ended_tracks": 10,
+        "associated": 390
+      },
+      "continuity_segments": 25,
+      "peak_history_observations_per_track": 20,
+      "peak_live_tracks": 9,
+      "peak_total_retained_observations": 83,
+      "all_original_measurements_preserved": true,
+      "all_backend_ids_match_milestone_1": true,
+      "all_history_limits_and_segments_verified": true,
+      "decoded_video_frames": 100,
+      "all_source_intervals_preserved": true
+    },
+    "artifacts": {
+      "tracking.mp4": {
+        "path": "outputs/phase2-history-preview/tracking.mp4",
+        "sha256": "a66d0a50ae547016c4de047b777421d62daea02a538714ff664b02da1f065bda"
+      },
+      "tracks.jsonl": {
+        "path": "outputs/phase2-history-preview/tracks.jsonl",
+        "sha256": "ddfae19270a3e512b8d6be2def12f9e9734c5064d384cbbf18f4d0dbfb66e0a9"
+      }
+    },
+    "manifest_sha256": "6f178f745d07a257c0667948c067205015770f0b6a91519049c2186910eb1fba",
+    "verification_report_sha256": "8acad6f62722d79b57d72d40d18011a13919165e91b16d67f0d2f6f0c5bf3b2b",
+    "video_bytes_match_previous_preview": true,
+    "license": "CC-BY-NC-SA-3.0",
+    "permitted_use": "Local noncommercial research demonstration",
+    "attribution": "Andreas Geiger, Philip Lenz, Christoph Stiller, Raquel Urtasun; Vision meets Robotics: The KITTI Dataset (2013)",
+    "media_remains_ignored_local": true
+  },
+  "limitations": [
+    "No reference identity accuracy, IDF1/HOTA, unique-object counts or generalization claim.",
+    "Only confirmed observations enter history; tentative measurements are not backfilled.",
+    "IDs are hypotheses; a silent backend identity switch can remain undetected.",
+    "Retention limits apply per live domain track; clients retaining old snapshots own extra memory.",
+    "No full detection-plus-tracking orchestration or matched end-to-end throughput acceptance.",
+    "No motion, TTC, metric range or warning estimator.",
+    "Historical milestone-1/preview evidence preserves earlier code hashes and output schemas."
+  ]
+}

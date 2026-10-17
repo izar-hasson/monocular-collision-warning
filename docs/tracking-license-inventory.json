@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-16",
+  "scope": "Nine newly locked CPU tracking packages; installed wheel metadata and retained notice hashes, not release clearance",
+  "packages": [
+    {
+      "name": "defusedxml",
+      "version": "0.7.1",
+      "metadata_url": "https://pypi.org/pypi/defusedxml/0.7.1/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "PSFL",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl",
+        "hash": "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61",
+        "size": 25604,
+        "upload-time": "2021-03-08T10:59:24.45Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "defusedxml-0.7.1.dist-info/LICENSE",
+          "sha256": "b80ce9da8c42a1f91079627fbbe2bf27210ae108a0ffe5f077d5b08e076c24c8",
+          "size": 2409
+        }
+      ],
+      "reviewed_license": "PSF-2.0"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "metadata_url": "https://pypi.org/pypi/markdown-it-py/4.2.0/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/b3/81/4da04ced5a082363ecfa159c010d200ecbd959ae410c10c0264a38cac0f5/markdown_it_py-4.2.0-py3-none-any.whl",
+        "hash": "sha256:9f7ebbcd14fe59494226453aed97c1070d83f8d24b6fc3a3bcf9a38092641c4a",
+        "size": 91687,
+        "upload-time": "2026-05-07T12:08:27.182Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "markdown_it_py-4.2.0.dist-info/licenses/LICENSE",
+          "sha256": "4a2260d6e2cd0f5a151a1e86dbfe7d3ed552b1e2beabf9941c1ba5c49cbce484",
+          "size": 1078
+        },
+        {
+          "path": "markdown_it_py-4.2.0.dist-info/licenses/LICENSE.markdown-it",
+          "sha256": "792c48c5a849a15fdf9e37e8bcf9e6d1dd13b32b46c642a748a0a46a9919d473",
+          "size": 1073
+        }
+      ],
+      "reviewed_license": "MIT"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "metadata_url": "https://pypi.org/pypi/mdurl/0.1.2/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl",
+        "hash": "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8",
+        "size": 9979,
+        "upload-time": "2022-08-14T12:40:09.779Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "mdurl-0.1.2.dist-info/LICENSE",
+          "sha256": "7c605df6e28667a9603118e98274f64a49ce3eed0d26fccce9534a345e0ef955",
+          "size": 2338
+        }
+      ],
+      "reviewed_license": "MIT"
+    },
+    {
+      "name": "pydeprecate",
+      "version": "0.13.0",
+      "metadata_url": "https://pypi.org/pypi/pydeprecate/0.13.0/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "Apache-2.0",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/c6/ed/9d27d62a2d4001bff095ebf930ad3d66714419d5323d73d0f898a324c37a/pydeprecate-0.13.0-py3-none-any.whl",
+        "hash": "sha256:b9210b5e36ea38a3c89aaa9579507ef676bfd147ad89184a06e1fd252f34d36c",
+        "size": 203981,
+        "upload-time": "2026-09-21T07:24:41.759Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "pydeprecate-0.13.0.dist-info/licenses/LICENSE",
+          "sha256": "570bae217206acfa510d4c686cef2aa995f4ce29ad97c314984f5bf913ebd442",
+          "size": 11347
+        }
+      ],
+      "reviewed_license": "Apache-2.0"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "metadata_url": "https://pypi.org/pypi/rich/15.0.0/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "MIT",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/82/3b/64d4899d73f91ba49a8c18a8ff3f0ea8f1c1d75481760df8c68ef5235bf5/rich-15.0.0-py3-none-any.whl",
+        "hash": "sha256:33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb",
+        "size": 310654,
+        "upload-time": "2026-04-12T08:24:02.83Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "rich-15.0.0.dist-info/licenses/LICENSE",
+          "sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15",
+          "size": 1056
+        }
+      ],
+      "reviewed_license": "MIT"
+    },
+    {
+      "name": "scipy",
+      "version": "1.18.1",
+      "metadata_url": "https://pypi.org/pypi/scipy/1.18.1/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers.",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/df/64/ff35eb9e54894cf471ff4716abd3c81eb0a0626869217ce3e6ba4ccf17d7/scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "hash": "sha256:f55fa87b6c612ecd6b058f167c53231b1d14e412efe361d3d6e38b3631c73218",
+        "size": 35344199,
+        "upload-time": "2026-08-21T23:24:07.844Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "scipy-1.18.1.dist-info/LICENSE.txt",
+          "sha256": "17e7db9ffa4913121fa2df484633a362456a482da736c99db4711a98473770ea",
+          "size": 46845
+        },
+        {
+          "path": "scipy/_lib/_uarray/LICENSE",
+          "sha256": "c80c39b5fce06ba4897e14e0b0a88b54458334d951eb1361402ffad2cfb863b4",
+          "size": 1514
+        },
+        {
+          "path": "scipy/fft/_duccfft/LICENSE.md",
+          "sha256": "c254b2b5fd30ae3c89d36ba061730563b9760fca04f1b746a1b2c3157da2c789",
+          "size": 1498
+        },
+        {
+          "path": "scipy/integrate/LICENSE_DOP",
+          "sha256": "ed9bf58c6d74d3fad9d92d1d67d9bff8141d8ab60de784516b0711364fd43357",
+          "size": 3572
+        },
+        {
+          "path": "scipy/spatial/qhull_src/COPYING_QHULL.txt",
+          "sha256": "106d55c931fd6a84822e5345d900273d059f1c27310d02567ccb313c5d18c55d",
+          "size": 1720
+        }
+      ],
+      "reviewed_license": "BSD-3-Clause (plus bundled component notices)",
+      "bundled_notice_review": [
+        "OpenBLAS: BSD-3-Clause",
+        "LAPACK: BSD-3-Clause-Open-MPI",
+        "GCC runtime: GPL-3.0-or-later WITH GCC-exception-3.1",
+        "libquadmath: LGPL-2.1-or-later",
+        "Additional retained notices: uarray, duccfft, DOP integrators and Qhull; see file hashes"
+      ]
+    },
+    {
+      "name": "supervision",
+      "version": "0.30.9",
+      "metadata_url": "https://pypi.org/pypi/supervision/0.30.9/json",
+      "metadata_license_expression": "MIT",
+      "metadata_legacy_license_first_line": "",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/22/0d/02c6218873c8c272cd514cf3623c52273b182633689eae14dc2db2063a24/supervision-0.30.9-py3-none-any.whl",
+        "hash": "sha256:13468b993d60903cbc64ca956892fe47939bf5996f17fc052f262a023f80751a",
+        "size": 409708,
+        "upload-time": "2026-10-08T16:50:02.477Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "supervision-0.30.9.dist-info/licenses/LICENSE.md",
+          "sha256": "72bb009f9633af978da6c49f3a927a83d04ddf8ed992492f6f2a62122de95227",
+          "size": 1065
+        }
+      ],
+      "reviewed_license": "MIT"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "metadata_url": "https://pypi.org/pypi/tqdm/4.70.1/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "MPL-2.0 AND MIT",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/a7/03/921a3d3c75785aca9ebfbfcabfbc3a1be12e2ab5265deb026d55a5a3f83e/tqdm-4.70.1-py3-none-any.whl",
+        "hash": "sha256:c293e525e6fef9c20e8728fd4612df02a0aa31bb5fe91ecd93e123b1b7bffa73",
+        "size": 80199,
+        "upload-time": "2026-09-11T07:25:14.599Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "tqdm-4.70.1.dist-info/licenses/LICENCE",
+          "sha256": "fcff87c3a47ce8028a8512aa182d4fcf0ad1c90544ee75cf9b343684cac194de",
+          "size": 1985
+        }
+      ],
+      "reviewed_license": "MPL-2.0 AND MIT"
+    },
+    {
+      "name": "trackers",
+      "version": "2.6.1",
+      "metadata_url": "https://pypi.org/pypi/trackers/2.6.1/json",
+      "metadata_license_expression": null,
+      "metadata_legacy_license_first_line": "Apache License 2.0",
+      "compatible_wheel": {
+        "url": "https://files.pythonhosted.org/packages/72/16/237ec75a634fc7e58c0470bdded80846d92979939ee66af804dae2161114/trackers-2.6.1-py3-none-any.whl",
+        "hash": "sha256:b5188de630f449958be3ce787fbb0375c69cfde094b6e4b4329cd79a98108501",
+        "size": 224724,
+        "upload-time": "2026-09-25T11:00:43.688Z"
+      },
+      "installed_license_and_notice_files": [
+        {
+          "path": "trackers-2.6.1.dist-info/licenses/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size": 11357
+        }
+      ],
+      "reviewed_license": "Apache-2.0"
+    }
+  ]
+}

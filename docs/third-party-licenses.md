@@ -1,6 +1,6 @@
 # Third-party license audit notes
 
-Foundation inventory date: 2026-10-04; Phase 1 status update: 2026-10-11. The base
+Foundation inventory date: 2026-10-04; Phase 2 backend update: 2026-10-16. The base
 package has no runtime dependencies. Phase 1 adds optional video/GPU dependencies,
 local YOLO11n weights and KITTI development media; their records are in the
 [detection guide](detection.md) and [acceptance evidence](evidence/phase1-detection.json).
@@ -93,3 +93,29 @@ Data/model conventions are in [data/README.md](../data/README.md) and
 [models/README.md](../models/README.md). Unclear rights/provenance leave a
 candidate deferred. The [resource ledger](resources.md) records discovery
 separately from adoption.
+
+## Phase 2 milestone 1: optional CPU tracking
+
+The `tracking` extra selects Trackers 2.6.1 (Apache-2.0) and Supervision 0.30.9
+(MIT). Read the exact PyPI wheels' own license files and source, including the
+deprecation of Supervision's separate tracker. The selection uses Supervision's
+detection container and Trackers' association implementation; no upstream source
+is vendored here. [ADR-0003](adr/0003-tracking-backend.md) records alternatives
+and the [backend guide](tracking-backend.md) records reproduction and limitations.
+
+The regenerated lock adds nine packages: trackers, supervision, scipy,
+defusedxml, pydeprecate, tqdm, rich, markdown-it-py and mdurl. Existing package
+versions and artifact records are unchanged. NumPy, OpenCV, PyAV and plotting
+dependencies are reused from the existing lock; keeping them optional does not
+remove their binary/license obligations.
+
+The [tracking inventory](tracking-license-inventory.json) records the exact new
+versions, compatible wheel URLs/hashes, declared metadata and installed
+license/notice file hashes. SciPy's wheel includes separate bundled-library
+notices, so its top-level BSD declaration is not the whole redistribution review.
+These include OpenBLAS/LAPACK notices, the GCC runtime exception, libquadmath,
+uarray, duccfft, DOP integrators and Qhull. The markdown-it-py wheel retains an
+additional upstream markdown-it notice; tqdm declares MPL-2.0 AND MIT.
+The inventory is evidence for local backend selection, not clearance to publish
+a binary environment. Source-license, weight and KITTI media decisions are
+unchanged, and raw replay artifacts remain ignored.

@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "local_date": "2026-10-17",
+  "status": "local_complete_hosted_ci_pending",
+  "scope": "Owner-requested standalone saved-detection annotated tracking video; no domain histories or Phase 2 closure",
+  "base_commit": "404943268e63dc5ed499a36747ebd64a91449996",
+  "working_tree_changes": true,
+  "file_sha256": {
+    "src/collision_warning/tracking_preview.py": "545ee8bbbf9d090cf36f22fff627d337b95a3dd48f2a59b8a1a2af3ce5ac074b",
+    "src/collision_warning/cli.py": "f34792709f33dc3e920148fd7d4d0c29a09434620b380841039d893723ff812d",
+    "tests/integration/test_tracking_preview.py": "980f9fb940cba43681b802ef629988fa5e4a3ef90183fff70c238a54045b80cb",
+    ".github/workflows/ci.yml": "34053e1efc7c8a132149097ac9f2f4012d8f9c948d9363fe86087c4b6cdbe74e",
+    "pyproject.toml": "9733ff312c00dad71e19def39060533e9c3eb1d8966f84ff9fb23266c3536ef0",
+    "uv.lock": "b1e75e9527be1f9d7b8effc4866a77c8d72b8fae9a5f704c617fa1c611653a56"
+  },
+  "command": "UV_PROJECT_ENVIRONMENT=.cache/phase2-tracking-cpu uv run --locked --offline --extra tracking --extra video collision-warning track-preview --source data/external/kitti-0005-acceptance.mkv --detection-run outputs/phase1-clean-gpu-acceptance/gpu-1 --output outputs/phase2-tracking-preview",
+  "environment": {
+    "python": "3.12.3",
+    "device": "cpu",
+    "packages": {
+      "trackers": "2.6.1",
+      "supervision": "0.30.9",
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "av": "19.0.1",
+      "opencv-python": "5.0.0.93"
+    },
+    "gpu_inference_rerun": false,
+    "new_dependencies_since_backend_proof": false
+  },
+  "checks": {
+    "make_check": "passed: Ruff lint/format, strict mypy (11 files), 45 default tests",
+    "optional_tests": {
+      "result": "passed",
+      "cases": 38,
+      "backend_cases": 19,
+      "tracking_preview_cases": 16,
+      "generated_video_cases": 3,
+      "command": ".cache/phase2-tracking-cpu/bin/pytest -q -m \"tracking or slow\" tests/integration/test_tracking_backend.py tests/integration/test_tracking_preview.py tests/integration/test_generated_video.py"
+    },
+    "base_wheel": "Built sdist/wheel; installed wheel without dependencies in new venv; isolated import and track-preview help pass; no mandatory runtime dependencies or media/caches in distributions",
+    "hosted_ci": "not run; required CPU workflow includes generated tracking preview tests with tracking and video extras"
+  },
+  "replay": {
+    "source": "data/external/kitti-0005-acceptance.mkv",
+    "source_sha256": "ecf0183b84df7362764e028706926cb351bbf7987d020f5e908f669c03dde1fd",
+    "detections": "outputs/phase1-clean-gpu-acceptance/gpu-1/detections.jsonl",
+    "detections_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+    "configuration": {
+      "low_score": 0.1,
+      "high_score": 0.5,
+      "activation_score": 0.6,
+      "minimum_iou": 0.3,
+      "lost_seconds": 1.0,
+      "minimum_consecutive_frames": 2,
+      "frame_rate": 10.0,
+      "lost_track_buffer": 30,
+      "effective_lost_seconds": 1.0
+    },
+    "frames_processed": 100,
+    "source_observations": 1491,
+    "counts": {
+      "unassigned": 1101,
+      "associated": 390,
+      "low_score_associated": 85
+    },
+    "artifacts": {
+      "tracking.mp4": {
+        "path": "outputs/phase2-tracking-preview/tracking.mp4",
+        "sha256": "a66d0a50ae547016c4de047b777421d62daea02a538714ff664b02da1f065bda"
+      },
+      "tracks.jsonl": {
+        "path": "outputs/phase2-tracking-preview/tracks.jsonl",
+        "sha256": "ddc589e5824c602dba24da14692c48ac6103777c709ef38b80992b2faccfd7e1"
+      }
+    },
+    "manifest_sha256": "d70f5559d589a388ae421309672360cd19dbcae445789816ad530b706378feff",
+    "verification": {
+      "decoded_frames": 100,
+      "output_dimensions": [
+        1242,
+        376
+      ],
+      "source_dimensions": [
+        1242,
+        375
+      ],
+      "all_source_frame_intervals_preserved": true,
+      "timestamp_tolerance_s": 1e-06,
+      "playback_first_timestamp_s": 0,
+      "playback_last_timestamp_s": 10.227,
+      "every_original_observation_unchanged": true,
+      "every_backend_assignment_matches_milestone_1_replay": true
+    },
+    "visual_review": {
+      "extracted_frames": [
+        0,
+        25,
+        50,
+        75,
+        99
+      ],
+      "inspected_final_frames": [
+        50,
+        75
+      ],
+      "findings": [
+        "Confirmed per-class IDs and confidence labels are visible on cyclists, people and vehicles.",
+        "Unassigned observations remain gray; overlapping boxes/labels can crowd the scene.",
+        "Confirmed annotations draw after unassigned annotations."
+      ],
+      "identity_accuracy_evaluation": false
+    },
+    "license": "CC-BY-NC-SA-3.0",
+    "permitted_use": "Local noncommercial research demonstration",
+    "attribution": "Andreas Geiger, Philip Lenz, Christoph Stiller, Raquel Urtasun; Vision meets Robotics: The KITTI Dataset (2013)",
+    "media_remains_ignored_local": true
+  },
+  "limitations": [
+    "Association preview only; IDs are unverified identity hypotheses.",
+    "Per-class association can fragment IDs when the detector changes class.",
+    "Only original observed boxes are drawn; no predicted boxes or histories.",
+    "No TTC, distance or collision-risk evaluation; source audio is omitted.",
+    "Playback starts at zero; source intervals are retained to microseconds.",
+    "Odd dimensions are padded at right/bottom; coordinates are unchanged.",
+    "Input is the processed video prefix recorded by the detection run.",
+    "Detections removed during inference cannot be recovered by tracking.",
+    "No domain histories, continuity segments, IDF1/HOTA or end-to-end performance acceptance.",
+    "One short KITTI development sequence; no unique-object or generalization claim.",
+    "Historical milestone-1 evidence records file hashes before this preview extension."
+  ]
+}

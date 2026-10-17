@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from math import isfinite
+from typing import Literal
 
 
 @dataclass(frozen=True)
@@ -47,3 +48,65 @@ class Detection:
             raise ValueError("Box x coordinates must be ordered and inside the frame")
         if not (0 <= y1 < y2 <= self.frame.height):
             raise ValueError("Box y coordinates must be ordered and inside the frame")
+
+
+@dataclass(frozen=True)
+class TrackIdentity:
+    namespace: str
+    epoch: int
+    source_id: str
+    class_id: int
+    backend_id: int
+
+    @property
+    def value(self) -> str:
+        return f"{self.namespace}/{self.epoch}/{self.class_id}/{self.backend_id}"
+
+
+@dataclass(frozen=True)
+class TrackedDetection:
+    observation_index: int
+    detection: Detection
+    identity: TrackIdentity | None
+    segment_id: int | None
+    status: Literal["associated", "unassigned", "below_floor"]
+
+
+@dataclass(frozen=True)
+class Track:
+    """Immutable snapshot; history contains measurements in this segment only."""
+
+    identity: TrackIdentity
+    state: Literal["observed", "lost"]
+    segment_id: int
+    history: tuple[Detection, ...]
+    age_s: float
+    time_since_observed_s: float
+    observations_seen: int
+    consecutive_observations: int
+
+
+TrackEndReason = Literal[
+    "expired",
+    "manual_reset",
+    "source_changed",
+    "resolution_changed",
+    "frame_gap",
+    "time_gap",
+    "backend_failure",
+]
+
+
+@dataclass(frozen=True)
+class TrackEnd:
+    identity: TrackIdentity
+    reason: TrackEndReason
+
+
+@dataclass(frozen=True)
+class TrackingResult:
+    frame: FrameInfo
+    observations: tuple[TrackedDetection, ...]
+    tracks: tuple[Track, ...]
+    ended_tracks: tuple[TrackEnd, ...]
+    reset_reason: TrackEndReason | None

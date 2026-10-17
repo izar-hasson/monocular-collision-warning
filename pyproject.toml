@@ -19,6 +19,12 @@ classifiers = [
 collision-warning = "collision_warning.cli:main"
 
 [project.optional-dependencies]
+tracking = [
+    "trackers==2.6.1",
+    "supervision==0.30.9",
+    "numpy==2.5.2",
+    "opencv-python==5.0.0.93",
+]
 video = [
     "av>=19.0.1",
     "numpy>=2.5,<3",
@@ -71,8 +77,9 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--import-mode=importlib --strict-config --strict-markers -m 'not gpu and not slow and not benchmark'"
+addopts = "--import-mode=importlib --strict-config --strict-markers -m 'not gpu and not slow and not benchmark and not tracking'"
 markers = [
+    "tracking: synthetic CPU tests requiring the optional tracking extra",
     "gpu: opt-in tests requiring CUDA and pinned model assets",
     "integration: lightweight CPU tests spanning component boundaries",
     "slow: opt-in recorded-video or other long-running tests",
@@ -95,5 +102,5 @@ strict = true
 show_error_codes = true
 
 [[tool.mypy.overrides]]
-module = ["av", "torch", "ultralytics", "cv2"]
+module = ["av", "torch", "ultralytics", "cv2", "numpy", "supervision", "trackers"]
 ignore_missing_imports = true
