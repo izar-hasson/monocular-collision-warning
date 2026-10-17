@@ -1,8 +1,10 @@
 # Phase 2 acceptance: live tracking, histories and video
 
-Local acceptance passed on 2026-10-17 using the built wheel installed in a new
-combined GPU/tracking environment. Required hosted CPU checks and protected PR
-integration are separate gates recorded in [the evidence](evidence/phase2-tracking.json).
+Acceptance passed on 2026-10-17 using the built wheel installed in a new
+combined GPU/tracking environment. Hosted [CPU CI](https://github.com/izar-hasson/monocular-collision-warning/actions/runs/39018631762)
+passed on implementation commit `591c71f`; [PR #8](https://github.com/izar-hasson/monocular-collision-warning/pull/8)
+records normal protected integration and the final documentation head's required
+gate. These are recorded in [the evidence](evidence/phase2-tracking.json).
 No TTC, distance, path-overlap or collision-warning logic was introduced.
 
 ## What was verified

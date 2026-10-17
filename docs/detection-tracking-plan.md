@@ -70,9 +70,10 @@ reference boxes. Hosted CPU checks are still required before a merge.
 Deliver sequentially: (1) backend selection and real synthetic CPU proof,
 (2) domain tracking adapter/lifecycle/bounded histories, (3) application command,
 outputs and previews, and (4) recorded-video continuity/performance acceptance.
-All four milestones passed local implementation/acceptance checks, including the
-live shared pipeline and matched video/performance report. Protected integration
-still requires the hosted CPU checks; standalone replay alone was not closure.
+All four milestones passed implementation/acceptance checks, including the live
+shared pipeline and matched video/performance report. Hosted implementation CPU
+CI passed; PR #8 records normal protected integration and its final required
+documentation gate. Standalone replay alone was not closure.
 
 After the Phase 1 gate, feed detections to an independent ByteTrack adapter.
 Do not combine inference and tracking through `YOLO.track()`: a future detector

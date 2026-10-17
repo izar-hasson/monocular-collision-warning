@@ -57,8 +57,9 @@ reset-safe IDs, continuity segments and histories bounded by count and source ag
 stage timings, JSONL lifecycle output and optional annotated video. Local Phase 2
 acceptance passed on the 100-frame development clip; see the
 [acceptance report](docs/phase2-acceptance.md) and
-[evidence](docs/evidence/phase2-tracking.json). Required hosted checks and protected
-integration are recorded there. Reference identity accuracy is not evaluated.
+[evidence](docs/evidence/phase2-tracking.json). Hosted implementation CPU checks passed;
+[PR #8](https://github.com/izar-hasson/monocular-collision-warning/pull/8) records protected
+integration and its final required gate. Reference identity accuracy is not evaluated.
 
 To test detections now, use [scripts/test_detection.py](scripts/test_detection.py).
 It accepts an image, video or acquired KITTI image sequence and saves annotated

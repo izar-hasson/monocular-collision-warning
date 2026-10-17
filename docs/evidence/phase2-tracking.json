@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "local_date": "2026-10-17",
-  "status": "local_acceptance_complete_hosted_integration_pending",
+  "status": "phase2_acceptance_complete",
   "scope": "Complete Phase 2: independent tracking, measured histories, shared live CLI, replay, output and recorded-video/performance acceptance",
   "base_commit": "404943268e63dc5ed499a36747ebd64a91449996",
   "working_tree_changes": true,
@@ -193,10 +193,22 @@
     ]
   },
   "hosted_integration": {
-    "status": "pending",
+    "pull_request": "https://github.com/izar-hasson/monocular-collision-warning/pull/8",
+    "implementation_commit": "591c71f883044c751beb1bd6599b19f84c26e6b5",
+    "reviewed_source_tree": "5f5631dc5389c9c568ee58c73d53f5ce663f311b",
     "required_check": "CPU checks",
-    "protected_pr_required": true,
-    "bypass_allowed": false
+    "implementation_cpu_ci": {
+      "conclusion": "success",
+      "run_id": 39018631762,
+      "run_url": "https://github.com/izar-hasson/monocular-collision-warning/actions/runs/39018631762",
+      "job_id": 117355777207,
+      "all_steps_passed": true
+    },
+    "merge_policy": "Normal PR merge after required CPU checks pass on the current head, with expected head SHA; no force, direct main push or protection changes",
+    "final_documentation_head": "This evidence/handoff update is documentation only; its current required gate and merge result are visible on PR #8",
+    "publication": "Connected GitHub app Git-data API; remote tree hash verified against committed local tree; shell push credentials unavailable",
+    "protection_administration_changed": false,
+    "administration_read": "GitHub app lacks branch-protection administration read permission; no administration setting was changed"
   },
   "environment": {
     "path": ".cache/phase2-gpu-final",
