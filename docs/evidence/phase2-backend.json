@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "local_date": "2026-10-16",
+  "status": "milestone_1_local_complete",
+  "scope": "Phase 2 milestone 1 only: optional CPU backend selection, synthetic proof, decision/license records and association-only replay; no application adapter or histories",
+  "base_commit": "404943268e63dc5ed499a36747ebd64a91449996",
+  "working_tree_changes": true,
+  "lockfile_sha256": "b1e75e9527be1f9d7b8effc4866a77c8d72b8fae9a5f704c617fa1c611653a56",
+  "file_sha256": {
+    "pyproject.toml": "44b15f9e9a79fa6c3d50f4265237f211c41faefc6c228afd30aaaa77bc981ef6",
+    "uv.lock": "b1e75e9527be1f9d7b8effc4866a77c8d72b8fae9a5f704c617fa1c611653a56",
+    ".github/workflows/ci.yml": "a888a3f923edb8cd7607b141cc11935ebc2dae934b7ba955eb01cb36f0e34392",
+    "tests/integration/test_tracking_backend.py": "1813872d9c04d46f3852f517e9307e195db35c468a2eb0fedb33a5587fc00683",
+    "outputs/phase2-backend-proof/replay.py": "e4e68b34cba039c81486f991c3de59e1bbf2915688e15d82732e9de72760d270",
+    "docs/tracking-license-inventory.json": "9dddd5fa16962dd6571c4fc8b9e712902752cb88d6004586fab827f10d60105a"
+  },
+  "dependency_change": {
+    "added": {
+      "defusedxml": "0.7.1",
+      "markdown-it-py": "4.2.0",
+      "mdurl": "0.1.2",
+      "pydeprecate": "0.13.0",
+      "rich": "15.0.0",
+      "scipy": "1.18.1",
+      "supervision": "0.30.9",
+      "tqdm": "4.70.1",
+      "trackers": "2.6.1"
+    },
+    "changed_existing_nonproject_records": [],
+    "original_pytorch_sources_and_artifacts_unchanged": true
+  },
+  "fresh_tracking_environment": {
+    "path": ".cache/phase2-tracking-cpu",
+    "python": "3.12.3",
+    "installed_versions": {
+      "charset-normalizer": "3.5.2",
+      "urllib3": "2.8.0",
+      "defusedxml": "0.7.1",
+      "cycler": "0.12.1",
+      "trackers": "2.6.1",
+      "numpy": "2.5.2",
+      "mdurl": "0.1.2",
+      "pyyaml": "6.0.3",
+      "rich": "15.0.0",
+      "contourpy": "1.4.0",
+      "idna": "3.20",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "requests": "2.34.2",
+      "mypy": "2.4.0",
+      "pyparsing": "3.3.3",
+      "opencv-python": "5.0.0.93",
+      "librt": "0.16.0",
+      "pre-commit": "4.6.2",
+      "packaging": "26.3",
+      "ast-serialize": "0.12.1",
+      "typing-extensions": "4.16.0",
+      "pydeprecate": "0.13.0",
+      "kiwisolver": "1.5.1",
+      "identify": "2.6.20",
+      "monocular-collision-warning": "0.1.0.dev0",
+      "supervision": "0.30.9",
+      "six": "1.17.0",
+      "mypy-extensions": "1.1.0",
+      "cfgv": "3.5.0",
+      "av": "19.0.1",
+      "tqdm": "4.70.1",
+      "matplotlib": "3.11.2",
+      "markdown-it-py": "4.2.0",
+      "distlib": "0.4.3",
+      "virtualenv": "21.14.5",
+      "pluggy": "1.6.0",
+      "certifi": "2026.7.22",
+      "scipy": "1.18.1",
+      "platformdirs": "4.12.2",
+      "filelock": "3.32.3",
+      "fonttools": "4.66.1",
+      "ruff": "0.16.10",
+      "pathspec": "1.1.1",
+      "python-dateutil": "2.9.0.post0",
+      "nodeenv": "1.11.0",
+      "iniconfig": "2.3.0",
+      "pillow": "12.3.0",
+      "python-discovery": "1.6.1"
+    },
+    "all_installed_versions_match_lock": true,
+    "inference_frameworks_installed": false,
+    "copied_installed_baseline_files": false,
+    "installation": "New uv venv; locked base sync using complete upstream uv cache; full cached upstream SciPy wheel hash matched to lock, installed by pinned package requirement with no-index/no-deps/find-links; final locked tracking sync audited all 49 packages",
+    "scipy_wheel_sha256": "f55fa87b6c612ecd6b058f167c53231b1d14e412efe361d3d6e38b3631c73218",
+    "network_limitation": "Direct large PyPI wheel streams timed out. Partial downloads and mirror probes were not installed; the verified complete upstream wheel in the existing pip HTTP cache was used."
+  },
+  "checks": {
+    "default_cpu": {
+      "result": "passed",
+      "cases": 45,
+      "command": "UV_PROJECT_ENVIRONMENT=.cache/phase2-clean-base uv run --locked pytest -q"
+    },
+    "real_backend_cpu": {
+      "result": "passed",
+      "cases": 19,
+      "command": "UV_PROJECT_ENVIRONMENT=.cache/phase2-tracking-cpu uv run --locked --extra tracking pytest -q -m tracking tests/integration/test_tracking_backend.py"
+    },
+    "generated_video": {
+      "result": "passed",
+      "cases": 3,
+      "command": "UV_PROJECT_ENVIRONMENT=.cache/phase2-clean-base uv run --locked --extra video pytest -q -m slow tests/integration/test_generated_video.py"
+    },
+    "missing_extra_negative": "Explicit backend selection without trackers fails with ModuleNotFoundError and pytest exit 1; no silent skip",
+    "make_check": "passed",
+    "pre_commit": "passed; new Python test staged before final check",
+    "lock_consistency": "passed",
+    "base_wheel": "Built sdist/wheel and isolated install/import/help; no mandatory runtime packages; no cache, weights, media or bundled tracking libraries",
+    "backend_import": "Passed in isolated interpreter with socket connections blocked and no Torch/Torchvision/Ultralytics imported",
+    "hosted_ci": "not run in this task; required CPU checks step added and protected PR workflow retained",
+    "gpu_execution": "not rerun: application source, accepted inference package records and GPU environments unchanged"
+  },
+  "preserved_environments": {
+    ".cache/phase1-gpu-recovery": {
+      "packages": 61,
+      "versions_unchanged": true,
+      "modified_by_this_task": false
+    },
+    ".venv-gpu": {
+      "packages": 61,
+      "versions_unchanged": true,
+      "modified_by_this_task": false
+    },
+    "../collision-warning/.venv": {
+      "packages": 66,
+      "versions_unchanged": true,
+      "modified_by_this_task": false
+    }
+  },
+  "replay": {
+    "source": "outputs/phase1-clean-gpu-acceptance/gpu-1/detections.jsonl",
+    "source_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+    "source_frames": 100,
+    "source_observations": 1491,
+    "configuration": {
+      "frame_rate": 10.0,
+      "lost_track_buffer": 30,
+      "minimum_consecutive_frames": 2,
+      "track_activation_threshold": 0.6,
+      "high_conf_det_threshold": 0.5,
+      "minimum_iou_threshold": 0.3
+    },
+    "low_floor": 0.1,
+    "packages": {
+      "trackers": "2.6.1",
+      "supervision": "0.30.9",
+      "numpy": "2.5.2",
+      "scipy": "1.18.1"
+    },
+    "variants": {
+      "all": {
+        "counts": {
+          "input_observations": 1491,
+          "unassigned_observations": 1101,
+          "associated_observations": 390,
+          "low_score_associated_observations": 85
+        },
+        "distinct_class_backend_ids": 16,
+        "output": "outputs/phase2-backend-proof/associations-all.jsonl",
+        "sha256": "74566f623e550038f7b384096cb5bd271e03dc12f8a94b36c6fcd1fc46457ddf"
+      },
+      "high-only": {
+        "counts": {
+          "input_observations": 362,
+          "unassigned_observations": 68,
+          "associated_observations": 294
+        },
+        "distinct_class_backend_ids": 18,
+        "output": "outputs/phase2-backend-proof/associations-high-only.jsonl",
+        "sha256": "81bdb2dd66d036fdc832d5c3d9ded53a2c6439b9bdb5c9da06e63bdc145f94ec"
+      }
+    },
+    "limitations": [
+      "Backend-only association replay; no histories or video review",
+      "No reference IDs, identity accuracy, or end-to-end performance evaluation",
+      "All/high-only comparison describes assignments under fixed settings, not accuracy"
+    ],
+    "command": ".cache/phase2-tracking-cpu/bin/python outputs/phase2-backend-proof/replay.py",
+    "script_is_ignored_local_evaluation_artifact": true,
+    "checked_every_returned_observation_index_box_score": true,
+    "visual_id_accuracy_review": false,
+    "media_published": false
+  },
+  "remaining_phase_2": [
+    "Domain tracker adapter, validation, class partitions, namespaced IDs, lifecycle and bounded observation histories",
+    "Application command, outputs and annotated previews",
+    "Recorded-video continuity review and matched end-to-end performance comparison"
+  ],
+  "limitations": [
+    "Synthetic proof and backend-only replay do not establish tracking accuracy, IDF1/HOTA or unique-object counts",
+    "No histories, application tracking, TTC, range, motion or warning outputs",
+    "One KITTI development sequence, no reference identities; raw derived records remain ignored under existing data terms",
+    "Required hosted CPU checks and protected PR integration remain pending"
+  ]
+}

@@ -1,6 +1,6 @@
 # Research and adoption ledger
 
-Status: updated for Phase 1 acceptance, 2026-10-11. This is a small decision ledger,
+Status: updated for Phase 2 backend selection, 2026-10-16. This is a small decision ledger,
 not an integration backlog. Entries below come from [HANDOFF.md section 8](../HANDOFF.md#8-research-library--explicit-adoption-decisions).
 The companion `Useful-tools-updated.md` is not present in this checkout; its full
 contents have not been independently audited here.
@@ -19,6 +19,7 @@ neither suitability nor permission to use associated assets.
 | Build Your Own X collections | Optional learning examples only when a concrete need appears | LEARNING / deferred; no tutorial or code selected |
 | [KITTI raw](https://www.cvlibs.net/datasets/kitti/raw_data.php) / [official AWS mirror](https://registry.opendata.aws/kitti/) | Independent research; original RGB sequences and timestamps for local detection/continuity examples. Terms: CC-BY-NC-SA-3.0, attribution and noncommercial restrictions | NOW / adopted for acceptance: 100 verified consecutive development frames from `2011_09_26_drive_0005`, camera `image_02`. Acquisition/checksums/terms are local in `data/external/kitti-0005/acquisition.json`. No media published or reference labels acquired |
 | [Ultralytics YOLO](https://docs.ultralytics.com/modes/predict/) / [terms](https://www.ultralytics.com/license) | YOLO11n weights and Ultralytics 8.4.172 behind the detector boundary; CPU smoke and three fixed CUDA acceptance repetitions. Library/model AGPL/enterprise terms remain separate from source license selection | NOW / adopted for Phase 1 local research with recorded hash and measurements. Official asset re-download on 2026-10-11 matched the baseline SHA-256. No weights/media published or source license selected |
+| [Roboflow Trackers 2.6.1](https://pypi.org/project/trackers/2.6.1/) / [Supervision 0.30.9](https://pypi.org/project/supervision/0.30.9/) | Independent research; CPU ByteTrack association and detection container. Exact published wheels/source/licenses inspected on 2026-10-16; Apache-2.0 / MIT. Source-time support and preserved observation indices fit Phase 2 | NOW / selected for milestone 1 backend proof; application adapter/history acceptance pending. [ADR-0003](adr/0003-tracking-backend.md) records alternatives, class-agnostic matching, confidence-floor and reset obligations. Supervision's deprecated tracker is not selected |
 
 Before trying or adopting a specific item, replace catalog evidence with direct
 upstream documentation and complete this record:

@@ -1,0 +1,1158 @@
+{
+  "schema_version": 1,
+  "local_date": "2026-10-17",
+  "status": "phase2_acceptance_complete",
+  "scope": "Complete Phase 2: independent tracking, measured histories, shared live CLI, replay, output and recorded-video/performance acceptance",
+  "base_commit": "404943268e63dc5ed499a36747ebd64a91449996",
+  "working_tree_changes": true,
+  "file_sha256": {
+    "src/collision_warning/pipeline.py": "f3d663d34aeec704567d2320d583d1f97fa3af14a0a4c994d2019e87c2a5a48f",
+    "src/collision_warning/domain.py": "f0f6f4c066e73b3cce7719541be9045882ea4ae40c49d245251d216501fa99e2",
+    "src/collision_warning/cli.py": "aeaee0079b728d66ac3246ac1f8972493159bf4c9ec47002a525e78e9bada99d",
+    "src/collision_warning/detection.py": "39993efecebb4d5478ccd86cb36987ba4df54be446ba48c0c62e49731051c7b4",
+    "src/collision_warning/__init__.py": "97f06234ff42b57b08fdfd57db69484905c335aecb9197324f0622aaa968fe2d",
+    "src/collision_warning/inputs.py": "770e072449167d6ff2b7dec1640c24cca65b8b1ce1227727266fe62312e11274",
+    "src/collision_warning/tracking_output.py": "ae4de4f0e22fb746f68568f4c6c2fded5a271add77e68364ee03a3a8236e9fd4",
+    "src/collision_warning/run.py": "2a31d81f29c65a26b82ee1706465a3e79f27c21399aa940c356f2f649df6a839",
+    "src/collision_warning/video.py": "43b621e84ab7416c6bcbafa58a98a1f154d97b00bfefe69c62325c1396cbb395",
+    "src/collision_warning/preview.py": "7ab2a014522fa809935c04d3c27d88bda3aa99dbe37f7e6d34cb44761765e31e",
+    "src/collision_warning/tracking.py": "f74b05b5e3b3438fd91c5dcce5303d6b82a92b41beec1a8072513690dd10ed9d",
+    "src/collision_warning/tracking_preview.py": "18b7ebb43233036aa650595e40299f1c0e2198185417a5cf237561b93e20bdd4",
+    "scripts/accept_tracking.py": "0cc9cbc1ab942541dda07bc68682860816a96c9f7367c63ac1d150b78b7f07b3",
+    "tests/integration/test_tracking_run.py": "23fc1fbb04f093caa78efd33d5da91e46162dddcbefc8eb16f824fb84b341c7c",
+    "tests/integration/test_detection_pipeline.py": "7565ce4461ad58eed747d9ce8944fc077338a103e952daa7a7a97bc23462d92d",
+    ".github/workflows/ci.yml": "8f5b8b03b18cc14c27a88ccfb3e98ff29b88102117cf010c13aa4194a93344f3",
+    "pyproject.toml": "9733ff312c00dad71e19def39060533e9c3eb1d8966f84ff9fb23266c3536ef0",
+    "uv.lock": "b1e75e9527be1f9d7b8effc4866a77c8d72b8fae9a5f704c617fa1c611653a56"
+  },
+  "local_gates": {
+    "default_cpu_tests": {
+      "result": "passed",
+      "cases": 67
+    },
+    "optional_cpu_tests": {
+      "result": "passed",
+      "cases": 67,
+      "real_backend": 19,
+      "domain_adapter": 25,
+      "saved_preview": 16,
+      "live_run": 4,
+      "generated_video": 3
+    },
+    "lint_format_strict_types": "passed; 13 files checked by mypy",
+    "isolated_base_wheel": "passed: no mandatory dependencies, optional imports lazy, track/track-preview help works",
+    "cuda_and_tensor_smoke": "passed on new environment",
+    "recorded_live_video": "passed; three matched pairs and one preview run",
+    "failure_cases": [
+      {
+        "case": "existing_output",
+        "passed": true,
+        "exit_code": 1,
+        "state": "rejected_before_output",
+        "command": [
+          ".cache/phase2-gpu-final/bin/collision-warning",
+          "track",
+          "--source",
+          "data/external/kitti-0005-acceptance.mkv",
+          "--weights",
+          "models/yolo11n.pt",
+          "--clip-manifest",
+          "data/external/kitti-0005-acceptance.json",
+          "--model-manifest",
+          "models/yolo11n.json",
+          "--device",
+          "cuda:0",
+          "--max-frames",
+          "2",
+          "--output",
+          "outputs/phase2-acceptance/failure-checks/existing"
+        ]
+      },
+      {
+        "case": "wrong_model_hash",
+        "passed": true,
+        "exit_code": 1,
+        "state": "rejected_before_output",
+        "command": [
+          ".cache/phase2-gpu-final/bin/collision-warning",
+          "track",
+          "--source",
+          "data/external/kitti-0005-acceptance.mkv",
+          "--weights",
+          "models/yolo11n.pt",
+          "--clip-manifest",
+          "data/external/kitti-0005-acceptance.json",
+          "--model-manifest",
+          "outputs/phase2-acceptance/failure-checks/wrong-model.json",
+          "--device",
+          "cuda:0",
+          "--max-frames",
+          "2",
+          "--output",
+          "outputs/phase2-acceptance/failure-checks/wrong_model_hash"
+        ]
+      },
+      {
+        "case": "missing_source",
+        "passed": true,
+        "exit_code": 1,
+        "state": "rejected_before_output",
+        "command": [
+          ".cache/phase2-gpu-final/bin/collision-warning",
+          "track",
+          "--source",
+          "outputs/phase2-acceptance/failure-checks/absent.mkv",
+          "--weights",
+          "models/yolo11n.pt",
+          "--clip-manifest",
+          "data/external/kitti-0005-acceptance.json",
+          "--model-manifest",
+          "models/yolo11n.json",
+          "--device",
+          "cuda:0",
+          "--max-frames",
+          "2",
+          "--output",
+          "outputs/phase2-acceptance/failure-checks/missing_source"
+        ]
+      },
+      {
+        "case": "invalid_cuda",
+        "passed": true,
+        "exit_code": 1,
+        "state": "failed",
+        "command": [
+          ".cache/phase2-gpu-final/bin/collision-warning",
+          "track",
+          "--source",
+          "data/external/kitti-0005-acceptance.mkv",
+          "--weights",
+          "models/yolo11n.pt",
+          "--clip-manifest",
+          "data/external/kitti-0005-acceptance.json",
+          "--model-manifest",
+          "models/yolo11n.json",
+          "--device",
+          "cuda:99",
+          "--max-frames",
+          "2",
+          "--output",
+          "outputs/phase2-acceptance/failure-checks/invalid_cuda"
+        ]
+      },
+      {
+        "case": "corrupt_video",
+        "passed": true,
+        "exit_code": 1,
+        "state": "failed",
+        "command": [
+          ".cache/phase2-gpu-final/bin/collision-warning",
+          "track",
+          "--source",
+          "outputs/phase2-acceptance/failure-checks/corrupt.mkv",
+          "--weights",
+          "models/yolo11n.pt",
+          "--clip-manifest",
+          "outputs/phase2-acceptance/failure-checks/corrupt.json",
+          "--model-manifest",
+          "models/yolo11n.json",
+          "--device",
+          "cuda:0",
+          "--max-frames",
+          "2",
+          "--output",
+          "outputs/phase2-acceptance/failure-checks/corrupt_video"
+        ]
+      },
+      {
+        "case": "incompatible_floor",
+        "passed": true,
+        "exit_code": 1,
+        "state": "rejected_before_output",
+        "command": [
+          ".cache/phase2-gpu-final/bin/collision-warning",
+          "track",
+          "--source",
+          "data/external/kitti-0005-acceptance.mkv",
+          "--weights",
+          "models/yolo11n.pt",
+          "--clip-manifest",
+          "data/external/kitti-0005-acceptance.json",
+          "--model-manifest",
+          "models/yolo11n.json",
+          "--device",
+          "cuda:0",
+          "--max-frames",
+          "2",
+          "--output",
+          "outputs/phase2-acceptance/failure-checks/incompatible_floor",
+          "--conf",
+          ".25"
+        ]
+      }
+    ]
+  },
+  "hosted_integration": {
+    "pull_request": "https://github.com/izar-hasson/monocular-collision-warning/pull/8",
+    "implementation_commit": "591c71f883044c751beb1bd6599b19f84c26e6b5",
+    "reviewed_source_tree": "5f5631dc5389c9c568ee58c73d53f5ce663f311b",
+    "required_check": "CPU checks",
+    "implementation_cpu_ci": {
+      "conclusion": "success",
+      "run_id": 39018631762,
+      "run_url": "https://github.com/izar-hasson/monocular-collision-warning/actions/runs/39018631762",
+      "job_id": 117355777207,
+      "all_steps_passed": true
+    },
+    "merge_policy": "Normal PR merge after required CPU checks pass on the current head, with expected head SHA; no force, direct main push or protection changes",
+    "final_documentation_head": "This evidence/handoff update is documentation only; its current required gate and merge result are visible on PR #8",
+    "publication": "Connected GitHub app Git-data API; remote tree hash verified against committed local tree; shell push credentials unavailable",
+    "protection_administration_changed": false,
+    "administration_read": "GitHub app lacks branch-protection administration read permission; no administration setting was changed"
+  },
+  "environment": {
+    "path": ".cache/phase2-gpu-final",
+    "installation": "New venv; complete cached upstream torch/torchvision/scipy wheels installed by exact version requirements, then final locked GPU/tracking sync from upstream uv cache; built project wheel installed without dependency changes; no installed baseline files copied",
+    "package_count": 71,
+    "installed_versions": {
+      "charset-normalizer": "3.5.2",
+      "urllib3": "2.8.0",
+      "triton": "3.8.0",
+      "defusedxml": "0.7.1",
+      "cycler": "0.12.1",
+      "trackers": "2.6.1",
+      "networkx": "3.6.1",
+      "nvidia-cusparse": "12.6.3.3",
+      "nvidia-nccl-cu13": "2.30.7",
+      "numpy": "2.5.2",
+      "mdurl": "0.1.2",
+      "markupsafe": "3.0.3",
+      "pyyaml": "6.0.3",
+      "nvidia-cuda-nvrtc": "13.0.88",
+      "cuda-toolkit": "13.0.3.0",
+      "h11": "0.16.0",
+      "ultralytics": "8.4.172",
+      "nvidia-nvshmem-cu13": "3.4.5",
+      "setuptools": "84.0.0",
+      "nvidia-cufile": "1.15.1.6",
+      "rich": "15.0.0",
+      "contourpy": "1.4.0",
+      "idna": "3.20",
+      "polars": "1.44.2",
+      "pygments": "2.21.0",
+      "nvidia-cusolver": "12.0.4.66",
+      "requests": "2.34.2",
+      "mpmath": "1.3.0",
+      "pyparsing": "3.3.3",
+      "jinja2": "3.1.6",
+      "opencv-python": "5.0.0.93",
+      "ultralytics-platform": "0.1.78",
+      "anyio": "4.15.1",
+      "packaging": "26.3",
+      "typing-extensions": "4.16.0",
+      "nvidia-nvtx": "13.0.85",
+      "nvidia-nvjitlink": "13.3.33",
+      "pydeprecate": "0.13.0",
+      "kiwisolver": "1.5.1",
+      "monocular-collision-warning": "0.1.0.dev0",
+      "nvidia-cusparselt-cu13": "0.8.1",
+      "cuda-pathfinder": "1.6.0",
+      "supervision": "0.30.9",
+      "six": "1.17.0",
+      "torchvision": "0.29.1+cu130",
+      "av": "19.0.1",
+      "tqdm": "4.70.1",
+      "fsspec": "2026.7.0",
+      "polars-runtime-32": "1.44.2",
+      "psutil": "7.2.2",
+      "matplotlib": "3.11.2",
+      "ultralytics-thop": "2.2.2",
+      "nvidia-cuda-runtime": "13.0.96",
+      "markdown-it-py": "4.2.0",
+      "sympy": "1.14.0",
+      "torch": "2.14.1+cu130",
+      "certifi": "2026.7.22",
+      "scipy": "1.18.1",
+      "filelock": "3.32.3",
+      "httpcore": "1.0.9",
+      "nvidia-cudnn-cu13": "9.24.0.43",
+      "nvidia-cuda-cupti": "13.0.85",
+      "nvidia-curand": "10.4.0.35",
+      "httpx": "0.28.1",
+      "fonttools": "4.66.1",
+      "nvidia-ml-py": "13.615.71",
+      "python-dateutil": "2.9.0.post0",
+      "nvidia-cublas": "13.1.1.3",
+      "nvidia-cufft": "12.0.0.61",
+      "cuda-bindings": "13.3.1",
+      "pillow": "12.3.0"
+    },
+    "all_versions_match_lock": true,
+    "direct_cached_wheels": [
+      {
+        "wheel": "torch-2.14.1+cu130-cp312-cp312-manylinux_2_28_x86_64.whl",
+        "sha256": "5359b255ac68c0cabb8293952b38e00f0d1a570815cd87f19b61af702c071410",
+        "matches_lock": true
+      },
+      {
+        "wheel": "torchvision-0.29.1+cu130-cp312-cp312-manylinux_2_28_x86_64.whl",
+        "sha256": "ce6b51d5ffad41eb1d22ff61cb304415a95c1bfa431dc00a80c8ece06822c3b7",
+        "matches_lock": true
+      },
+      {
+        "wheel": "scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "sha256": "f55fa87b6c612ecd6b058f167c53231b1d14e412efe361d3d6e38b3631c73218",
+        "matches_lock": true
+      }
+    ],
+    "cuda": {
+      "available": true,
+      "device": "NVIDIA GeForce RTX 5070 Ti",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "torch": "2.14.1+cu130",
+      "cuda_build": "13.0",
+      "driver": "616.64"
+    },
+    "preserved_environments": {
+      ".cache/phase1-gpu-recovery": {
+        "packages": 61,
+        "all_versions_unchanged": true
+      },
+      ".venv-gpu": {
+        "packages": 61,
+        "all_versions_unchanged": true
+      },
+      "../collision-warning/.venv": {
+        "packages": 66,
+        "all_versions_unchanged": true
+      }
+    }
+  },
+  "installed_distribution": {
+    "wheel": ".cache/phase2-final-dist/monocular_collision_warning-0.1.0.dev0-py3-none-any.whl",
+    "sha256": "873be2a98b869350f641d513b0b9886b0d941bc7df55a7728f93ae69a10ac109",
+    "all_modules_match_reviewed_source": true,
+    "sdist_and_wheel_exclude_assets_and_caches": true
+  },
+  "protocol": {
+    "repeats_per_mode": 3,
+    "warmup_frames": 10,
+    "max_frames": 100,
+    "batch_size": 1,
+    "image_size": 640,
+    "confidence": 0.1,
+    "headless_comparison": true,
+    "order": "detect/track, track/detect, alternating each pair",
+    "timing": "Source PTS; synchronized CUDA inference; perf_counter durations",
+    "includes": [
+      "decode",
+      "inference",
+      "CPU tracking",
+      "JSONL writes"
+    ],
+    "excludes": [
+      "startup",
+      "loading",
+      "checksums",
+      "output finalization"
+    ]
+  },
+  "inputs": {
+    "source": "data/external/kitti-0005-acceptance.mkv",
+    "source_sha256": "ecf0183b84df7362764e028706926cb351bbf7987d020f5e908f669c03dde1fd",
+    "weights": "models/yolo11n.pt",
+    "weights_sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+    "reference_detections": "outputs/phase1-clean-gpu-acceptance/gpu-1/detections.jsonl",
+    "reference_sha256": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+    "class_ids": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7
+    ],
+    "precision": "float32",
+    "device": "cuda:0"
+  },
+  "matched_runs": [
+    {
+      "mode": "detect",
+      "output": "outputs/phase2-acceptance/detect-1",
+      "process_wall_s": 8.997487371001625,
+      "model_load_s": 1.6205360559979454,
+      "tracking_load_s": null,
+      "frames": 100,
+      "frames_dropped": 0,
+      "cold_first_frame_s": 4.472707105000154,
+      "warmed_processed_fps": 44.846083733572364,
+      "source_observed_rate_hz": 9.680258140217072,
+      "warmup_frames_actual": 10,
+      "latency": {
+        "decode": {
+          "count": 90,
+          "p50_s": 0.004747477498312946,
+          "p95_s": 0.013520067300851223
+        },
+        "detect": {
+          "count": 90,
+          "p50_s": 0.017867948503408115,
+          "p95_s": 0.03143600125185912
+        },
+        "track": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "preview": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "serialize": {
+          "count": 90,
+          "p50_s": 9.39130040933378e-05,
+          "p95_s": 0.00013344014660106042
+        },
+        "output": {
+          "count": 90,
+          "p50_s": 0.0001408689931849949,
+          "p95_s": 0.00019567970157368108
+        },
+        "total": {
+          "count": 90,
+          "p50_s": 0.024625743499200325,
+          "p95_s": 0.037062620801589216
+        }
+      },
+      "tracking": null,
+      "manifest_sha256": "77dcb3615e873e14ef30f3f35078b443ec3e24cf6ccd98e99302177a1aa71e9c",
+      "artifact_sha256": {
+        "detections.jsonl": "a109211016a30d3a8852eb033a73f7c1f7985bd9eb07667241631c9758c9290a"
+      }
+    },
+    {
+      "mode": "track",
+      "output": "outputs/phase2-acceptance/track-1",
+      "process_wall_s": 7.211890741993557,
+      "model_load_s": 1.1595846510026604,
+      "tracking_load_s": 1.2783083459944464,
+      "frames": 100,
+      "frames_dropped": 0,
+      "cold_first_frame_s": 1.764906273005181,
+      "warmed_processed_fps": 41.04494291640143,
+      "source_observed_rate_hz": 9.680258140217072,
+      "warmup_frames_actual": 10,
+      "latency": {
+        "decode": {
+          "count": 90,
+          "p50_s": 0.004555402992991731,
+          "p95_s": 0.004915538304339861
+        },
+        "detect": {
+          "count": 90,
+          "p50_s": 0.02021791450533783,
+          "p95_s": 0.03184605194837786
+        },
+        "track": {
+          "count": 90,
+          "p50_s": 0.0005482060005306266,
+          "p95_s": 0.000667041793349199
+        },
+        "preview": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "serialize": {
+          "count": 90,
+          "p50_s": 0.00024281800142489374,
+          "p95_s": 0.00031772549627930854
+        },
+        "output": {
+          "count": 90,
+          "p50_s": 0.0002974009985337034,
+          "p95_s": 0.0003840183948341291
+        },
+        "total": {
+          "count": 90,
+          "p50_s": 0.02563196450500982,
+          "p95_s": 0.03744700795577956
+        }
+      },
+      "tracking": {
+        "counts": {
+          "unassigned": 1101,
+          "associated": 390
+        },
+        "confirmed_id_hypotheses": 16,
+        "continuity_segments": 25,
+        "ended_tracks": 10,
+        "peak_live_tracks": 9,
+        "peak_history_observations_per_track": 20,
+        "peak_total_retained_observations": 83
+      },
+      "manifest_sha256": "0a41a1cd3a794644bd071bdfea0ee6e05c97202b54ea4d86b7c98d98f81ed4a7",
+      "artifact_sha256": {
+        "detections.jsonl": "a109211016a30d3a8852eb033a73f7c1f7985bd9eb07667241631c9758c9290a",
+        "tracks.jsonl": "e3ee03274991c5476d642d251a4fd529c140785269f30b75e5096b0536e1c1fc"
+      }
+    },
+    {
+      "mode": "track",
+      "output": "outputs/phase2-acceptance/track-2",
+      "process_wall_s": 4.925728963993606,
+      "model_load_s": 0.9986392790015088,
+      "tracking_load_s": 0.35753218199533876,
+      "frames": 100,
+      "frames_dropped": 0,
+      "cold_first_frame_s": 1.5481772409984842,
+      "warmed_processed_fps": 68.24134888484257,
+      "source_observed_rate_hz": 9.680258140217072,
+      "warmup_frames_actual": 10,
+      "latency": {
+        "decode": {
+          "count": 90,
+          "p50_s": 0.004530335005256347,
+          "p95_s": 0.0048957218001305595
+        },
+        "detect": {
+          "count": 90,
+          "p50_s": 0.006939177997992374,
+          "p95_s": 0.020646643393411067
+        },
+        "track": {
+          "count": 90,
+          "p50_s": 0.0005260440011625178,
+          "p95_s": 0.0006660384991846513
+        },
+        "preview": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "serialize": {
+          "count": 90,
+          "p50_s": 0.00023198949929792434,
+          "p95_s": 0.00029511810353142207
+        },
+        "output": {
+          "count": 90,
+          "p50_s": 0.00028182649839436635,
+          "p95_s": 0.00035831670684274283
+        },
+        "total": {
+          "count": 90,
+          "p50_s": 0.012253523003892042,
+          "p95_s": 0.026099905747832962
+        }
+      },
+      "tracking": {
+        "counts": {
+          "unassigned": 1101,
+          "associated": 390
+        },
+        "confirmed_id_hypotheses": 16,
+        "continuity_segments": 25,
+        "ended_tracks": 10,
+        "peak_live_tracks": 9,
+        "peak_history_observations_per_track": 20,
+        "peak_total_retained_observations": 83
+      },
+      "manifest_sha256": "8ba74888ebf3781196d20a12be02fa24d1bc31c1c63fa247d8da2a023fa2ebbe",
+      "artifact_sha256": {
+        "detections.jsonl": "a109211016a30d3a8852eb033a73f7c1f7985bd9eb07667241631c9758c9290a",
+        "tracks.jsonl": "ca2f1fcd7787d2560027cb37b81ae7a74a158f7d3237ad823b38034598d19faf"
+      }
+    },
+    {
+      "mode": "detect",
+      "output": "outputs/phase2-acceptance/detect-2",
+      "process_wall_s": 5.368209797001327,
+      "model_load_s": 1.0044770009990316,
+      "tracking_load_s": null,
+      "frames": 100,
+      "frames_dropped": 0,
+      "cold_first_frame_s": 1.5908041509974282,
+      "warmed_processed_fps": 42.021969225644014,
+      "source_observed_rate_hz": 9.680258140217072,
+      "warmup_frames_actual": 10,
+      "latency": {
+        "decode": {
+          "count": 90,
+          "p50_s": 0.0045584254985442385,
+          "p95_s": 0.0049222889007069165
+        },
+        "detect": {
+          "count": 90,
+          "p50_s": 0.02162836150091607,
+          "p95_s": 0.030534198296663817
+        },
+        "track": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "preview": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "serialize": {
+          "count": 90,
+          "p50_s": 8.999649435281754e-05,
+          "p95_s": 0.00012991455587325616
+        },
+        "output": {
+          "count": 90,
+          "p50_s": 0.0001391969999531284,
+          "p95_s": 0.0001930875063408166
+        },
+        "total": {
+          "count": 90,
+          "p50_s": 0.026541661500232294,
+          "p95_s": 0.03531473730545258
+        }
+      },
+      "tracking": null,
+      "manifest_sha256": "c50c08e0fe34c2a261bdb87d3269ced21cfb1cb38e1ee224a2aaf024819f4558",
+      "artifact_sha256": {
+        "detections.jsonl": "a109211016a30d3a8852eb033a73f7c1f7985bd9eb07667241631c9758c9290a"
+      }
+    },
+    {
+      "mode": "detect",
+      "output": "outputs/phase2-acceptance/detect-3",
+      "process_wall_s": 4.868584397001541,
+      "model_load_s": 1.200322855002014,
+      "tracking_load_s": null,
+      "frames": 100,
+      "frames_dropped": 0,
+      "cold_first_frame_s": 1.6858010580035625,
+      "warmed_processed_fps": 68.88530012464066,
+      "source_observed_rate_hz": 9.680258140217072,
+      "warmup_frames_actual": 10,
+      "latency": {
+        "decode": {
+          "count": 90,
+          "p50_s": 0.004540806003205944,
+          "p95_s": 0.004856343199207913
+        },
+        "detect": {
+          "count": 90,
+          "p50_s": 0.006810274506278802,
+          "p95_s": 0.028813790247659198
+        },
+        "track": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "preview": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "serialize": {
+          "count": 90,
+          "p50_s": 8.713649731362239e-05,
+          "p95_s": 0.0001264378493942786
+        },
+        "output": {
+          "count": 90,
+          "p50_s": 0.00012756799696944654,
+          "p95_s": 0.00017791010177461427
+        },
+        "total": {
+          "count": 90,
+          "p50_s": 0.011485525508760475,
+          "p95_s": 0.03318666494524222
+        }
+      },
+      "tracking": null,
+      "manifest_sha256": "2acecff05f52096d3419a044c0a44fc107a7dc0639976986821553b6ed121de5",
+      "artifact_sha256": {
+        "detections.jsonl": "a109211016a30d3a8852eb033a73f7c1f7985bd9eb07667241631c9758c9290a"
+      }
+    },
+    {
+      "mode": "track",
+      "output": "outputs/phase2-acceptance/track-3",
+      "process_wall_s": 5.302394653990632,
+      "model_load_s": 1.0300717710051686,
+      "tracking_load_s": 0.35114804600016214,
+      "frames": 100,
+      "frames_dropped": 0,
+      "cold_first_frame_s": 1.5650743930018507,
+      "warmed_processed_fps": 54.44297070145565,
+      "source_observed_rate_hz": 9.680258140217072,
+      "warmup_frames_actual": 10,
+      "latency": {
+        "decode": {
+          "count": 90,
+          "p50_s": 0.004522619994531851,
+          "p95_s": 0.004922343852376798
+        },
+        "detect": {
+          "count": 90,
+          "p50_s": 0.008135494499583729,
+          "p95_s": 0.020725599495926873
+        },
+        "track": {
+          "count": 90,
+          "p50_s": 0.0005323415025486611,
+          "p95_s": 0.0007099712471244857
+        },
+        "preview": {
+          "count": 90,
+          "p50_s": 0.0,
+          "p95_s": 0.0
+        },
+        "serialize": {
+          "count": 90,
+          "p50_s": 0.00023544399300590158,
+          "p95_s": 0.00028854875054094007
+        },
+        "output": {
+          "count": 90,
+          "p50_s": 0.00028691249463008717,
+          "p95_s": 0.000363018498319434
+        },
+        "total": {
+          "count": 90,
+          "p50_s": 0.013517603998479899,
+          "p95_s": 0.026025154747185298
+        }
+      },
+      "tracking": {
+        "counts": {
+          "unassigned": 1101,
+          "associated": 390
+        },
+        "confirmed_id_hypotheses": 16,
+        "continuity_segments": 25,
+        "ended_tracks": 10,
+        "peak_live_tracks": 9,
+        "peak_history_observations_per_track": 20,
+        "peak_total_retained_observations": 83
+      },
+      "manifest_sha256": "b3a3999a59b37c398cbddf54ac382ac375487436453aeb6a8e5c607738e36729",
+      "artifact_sha256": {
+        "detections.jsonl": "a109211016a30d3a8852eb033a73f7c1f7985bd9eb07667241631c9758c9290a",
+        "tracks.jsonl": "568f7b17d9649dd4e4b2653c2bf7c1a6d7f5c3f65f1e451fb51e2e2f3f698b09"
+      }
+    }
+  ],
+  "summary": {
+    "detect": {
+      "warmed_fps": [
+        44.846083733572364,
+        42.021969225644014,
+        68.88530012464066
+      ],
+      "median_warmed_fps": 44.846083733572364,
+      "track_p50_ms": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "track_p95_ms": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "total_p95_ms": [
+        37.06262080158922,
+        35.31473730545258,
+        33.18666494524222
+      ]
+    },
+    "track": {
+      "warmed_fps": [
+        41.04494291640143,
+        68.24134888484257,
+        54.44297070145565
+      ],
+      "median_warmed_fps": 54.44297070145565,
+      "track_p50_ms": [
+        0.5482060005306266,
+        0.5260440011625178,
+        0.5323415025486611
+      ],
+      "track_p95_ms": [
+        0.667041793349199,
+        0.6660384991846513,
+        0.7099712471244857
+      ],
+      "total_p95_ms": [
+        37.447007955779554,
+        26.099905747832963,
+        26.025154747185297
+      ]
+    }
+  },
+  "throughput_interpretation": "Run-to-run hardware/system variability exceeds consistent pairwise differences. No reliable causal total-FPS penalty or speedup is established. Isolated adapter invocation p50 is 0.526-0.548 ms and p95 0.666-0.710 ms.",
+  "preview_run": {
+    "mode": "track",
+    "output": "outputs/phase2-acceptance/preview",
+    "process_wall_s": 7.324832794009126,
+    "model_load_s": 0.9748235779989045,
+    "tracking_load_s": 0.3385684749955544,
+    "frames": 100,
+    "frames_dropped": 0,
+    "cold_first_frame_s": 1.60580068899435,
+    "warmed_processed_fps": 29.247196390179674,
+    "source_observed_rate_hz": 9.680258140217072,
+    "warmup_frames_actual": 10,
+    "latency": {
+      "decode": {
+        "count": 90,
+        "p50_s": 0.0044456430041464046,
+        "p95_s": 0.005106542599241947
+      },
+      "detect": {
+        "count": 90,
+        "p50_s": 0.02026324150210712,
+        "p95_s": 0.029476947244984328
+      },
+      "track": {
+        "count": 90,
+        "p50_s": 0.0005463334964588284,
+        "p95_s": 0.0007032574001641478
+      },
+      "preview": {
+        "count": 90,
+        "p50_s": 0.008403473504586145,
+        "p95_s": 0.022966854355036048
+      },
+      "serialize": {
+        "count": 90,
+        "p50_s": 0.00024960599694168195,
+        "p95_s": 0.0003259126504417509
+      },
+      "output": {
+        "count": 90,
+        "p50_s": 0.008691532493685372,
+        "p95_s": 0.023235987903171915
+      },
+      "total": {
+        "count": 90,
+        "p50_s": 0.03461781999794766,
+        "p95_s": 0.04826607650029473
+      }
+    },
+    "tracking": {
+      "counts": {
+        "unassigned": 1101,
+        "associated": 390
+      },
+      "confirmed_id_hypotheses": 16,
+      "continuity_segments": 25,
+      "ended_tracks": 10,
+      "peak_live_tracks": 9,
+      "peak_history_observations_per_track": 20,
+      "peak_total_retained_observations": 83
+    },
+    "manifest_sha256": "daaf97c6d618f80c66c7f9b59624de071d898c755e39495b7af8d5a87b4275ec",
+    "artifact_sha256": {
+      "frame-000012.jpg": "f6e38238c3c3fa7eaedcbb42755a104b6ba16345ad5cdda42d410eeaef2de803",
+      "frame-000039.jpg": "7cb6415342663fc66011efe00da63bf8bc8c8739303360717caef379ce1977fa",
+      "frame-000083.jpg": "cff23d9c6a22cc17c7d0895640e900df16c7db11c8c41fd98e3bcdf884c76ffb",
+      "frame-000000.jpg": "ce6c9c8dba3a9d9da173d0a06b5b87573eb1df51075e8f93b8064ae48c99dbb8",
+      "frame-000073.jpg": "3f2d6126f6dc7c613448dd06f038152bd0ef2f8b06849188899cb0546248d55d",
+      "frame-000009.jpg": "f9965acb674db364fb82ce3c6496a993b5ba4072a7ada69b69830ea5f7794e4b",
+      "frame-000067.jpg": "61e9b6962ae42e09acfce519720aa83408dd106126e99b5e0b1379d99de3a1c8",
+      "frame-000037.jpg": "7df8e4bcbb41b1a63c88ed0a2bb3904163564dfd00bba3a23fbd920c2efb4972",
+      "frame-000013.jpg": "83562e37d2d73b1bc1c94f7ff5e6be325cd6564af173a332fa8d350010b2a19f",
+      "frame-000062.jpg": "ac22d96df5c7859066efb9c8cd50d2448389e27e16718df670323ba58ac634de",
+      "frame-000001.jpg": "0a906a0afc58b6e6a4e18ac67d8f3e0e80306d175e0c9bc741ad210c0ce0a158",
+      "frame-000026.jpg": "0d5613d3d69ec5c4a902eede375edeb12b88cf4e2d64e4cccda0ef07fdf72667",
+      "frame-000045.jpg": "9b558cfb0bb88e0a2a695f23b2e37f32905b07c19ed7b8520b93a58c11381360",
+      "frame-000023.jpg": "441cc9ac9f4ee52746e823a1e76e7d1863674cfd8abcdc0cdffdf957f124cd18",
+      "frame-000019.jpg": "bef055498329b8fdda3eeb2156ed7b029e359837bf6382be5354f9c69bdf3716",
+      "frame-000099.jpg": "d91b0cd43b0cc9c6ad4c00b2d060102ac80f0aeba02f00f074963364126d3d79",
+      "frame-000010.jpg": "b5e17c7a5dbcd5e557a2168faaa920db3d3135a9be964b3ac41a6b63dd935eae",
+      "frame-000048.jpg": "9068118576b4c8a415d43cf82d212e3e8c38d42574b88006fb58ec2bb6d08f68",
+      "frame-000064.jpg": "006476947d0a77ab4ed082ce281292ca309f0f84c710ededa8208da3e66119a4",
+      "frame-000043.jpg": "2ee16493fc7dbfb388ac7e7ba2c6c724bee825242a11b123650682c912fe2acb",
+      "frame-000008.jpg": "65118979072282d0fb95298f49c38007f34913d0ed1041567c551579f840bced",
+      "frame-000070.jpg": "010b752bb776d40148de19c199bdf52dc1264454371a02bf0069c9f3919df065",
+      "tracking.mp4": "a66d0a50ae547016c4de047b777421d62daea02a538714ff664b02da1f065bda",
+      "frame-000068.jpg": "871c58a0ab672fefb8d246a5df89279e25b13807ff141b755fb956af4955be29",
+      "frame-000094.jpg": "ffee8c1d19278deb5f18c9bf19700d3918d47f6fdee8df397230be3cedd31278",
+      "frame-000057.jpg": "272877ec56b434c05c0165a25e3be0b7c10e83b3d444cc0dbccd12948850c761",
+      "frame-000054.jpg": "0d19c388b58cb45e668d98569de27c4d04fee866fbb3af607e770efe2f451bb8",
+      "frame-000006.jpg": "e28a9683eb76a6a2c4b5b266ae6c7415a7430db9c705907d7c80c48a8a283e61",
+      "frame-000005.jpg": "b7e6153f65a965f213800b6bcefbf75de53051577aa379a0a363ce8e600a708d",
+      "frame-000059.jpg": "575ad9d4c2e23a21842d2e3c6aecabe44b6517789d4daeaf9da19ca9ab51ae13",
+      "frame-000033.jpg": "1a48f276308ad8960bb89d84ebdbfd0ca359f086b5a2f27fdfb5d052f7ffa9b5",
+      "frame-000014.jpg": "9c42b859aac97c91710f573f780eef8b2b2af448f8a1c48426123e9fe9c9be61",
+      "frame-000002.jpg": "8a56b95a8fd88a5cf939c4a4c859e2808502e41e6144a3c744f34a645293c924",
+      "detections.jsonl": "8cb8af31019f7aee20c2fe9d2a1d4b8c3e2137bd43c598b05fc6a35762d76648",
+      "frame-000003.jpg": "43bca799ffd8160698ff288086cbfd2859f2c96d312f7c2ecb8d34815a673425",
+      "frame-000076.jpg": "183d00e5cfa057fb85e95388d6cf60ad7ddeeeee3335320de1b17e9f7fc68329",
+      "frame-000027.jpg": "d69dfdaf21bb6da156eefd985d5379e7a83df419bea87e3c12ecc69d079ba066",
+      "frame-000089.jpg": "6990ed897c95a72fcbbabb6944742f65e729f01f111d53507e4f51ac859c3240",
+      "frame-000065.jpg": "33d623fcb5ff0ccd9009b10926a901b0e7b2adbd395846d515e270b031a6f5b9",
+      "frame-000069.jpg": "249896963942611d17527e72302129cdecb4a951fb533b59375f14fd215528d1",
+      "frame-000061.jpg": "f18af0727725906916f98dcbe9e30710d1d98a5a21e184ada6b4631e06fbadcc",
+      "frame-000032.jpg": "86bdefb8d21c7d97cf12e90400564368a542b94b804c7123a013111d44aa1018",
+      "frame-000017.jpg": "486da5f54425e8fb2b9f350c0d2d73a1536e547ea0a193f9ddce4893917823d1",
+      "frame-000075.jpg": "6817f772386d01e6a8c36f387e3338cb4f981eb57494594f5691276c4a3a18be",
+      "frame-000082.jpg": "b3f48244ced41e0fe6d510676a0f368361d63e9349b385dab6caaa810caf990f",
+      "frame-000049.jpg": "05c92512042c97c17e5491cfbfb10be76537c52224599c95e84732756abbaf3a",
+      "frame-000036.jpg": "daa42ee5abef8a621333fce48af60e02922d9e8c5bf2f04bb62f510dfc79c374",
+      "frame-000090.jpg": "7843bdd7f59ded326c3c2c884979fa231637749cdb3ce27c7abdf15ac9e83289",
+      "frame-000079.jpg": "bcd8270b95c4c22514831fcbb588a9a6533bcb5f65bbe442e95c9bc64868f0de",
+      "frame-000020.jpg": "f5cbf6f36dbc70f82cc4eb7089becff00e00b8207773240fd9e36117bfa7eae2",
+      "frame-000088.jpg": "94ba80593d57dead28f9ed22a7f00df95d04b9812cad9f7fee5c7b2113302a67",
+      "frame-000021.jpg": "3572690dd8dda1b8b1fb5e5705275b020b049f040f2f5aa39bbe6f455f075b52",
+      "frame-000050.jpg": "077c048754a9f7510e5ba90beb74dabc6735b42d786cc37c5bf3e8a6e6f49671",
+      "frame-000074.jpg": "20531de3d1b018c32f8558a78332f96848f3239fec5f8334e5bc8eadd5121a4f",
+      "frame-000047.jpg": "648f751a198b554013ae1bed79ae33f4498dac43c5a971d7490150c8df275b8b",
+      "frame-000041.jpg": "0dcda1b9487894fadefc240733b9f761e83366644ffb619916d55d865f6c5199",
+      "frame-000092.jpg": "b89f7a60c77c654bd2fc6dad67a51472c2fe174b7ee26f8a47ba1385e95582aa",
+      "tracks.jsonl": "93b5c3d5c4d0a785d44717d6f7c4fd6d7026cf2b97ec26c7eb6ddf37bdc1416f",
+      "frame-000044.jpg": "f4e76f9cb872b30446d9043d28d5e933696673e9f0cbabe966e7759faf49d07d",
+      "frame-000007.jpg": "40bc7daea17f22a7d42ed5bd171e3a25075247848d6429c4b2696e6153774f9f",
+      "frame-000052.jpg": "8fa2dc87ec86e6077111b748bf8c2b22846f3ee6bbd98a5c386c332b5d98bc8f",
+      "frame-000035.jpg": "932c8b1869d50ddc4d2bdfd0067c525086aebaf97221d3f5096e7c88574d89dd",
+      "frame-000060.jpg": "d6e2b50830d094ecae19b97801d1600839d858fc90d4029186053497439f8e2f",
+      "frame-000038.jpg": "df4ef342c9b53207ae2d9c10bd164c657125a9d8fad46b2449068a085280706a",
+      "frame-000078.jpg": "624b93ff88b06b6a824f2a58f74615390a7a12cdc68aefc10aa9771ed9273a0f",
+      "frame-000086.jpg": "652572a23fc259c812980e2c819bfc45178d3796012e83de247c9a1b60ba59f5",
+      "frame-000046.jpg": "1b8a342ba534e7f57158f5f60fc4744465694f199a000072716cded0845de348",
+      "frame-000091.jpg": "f54f93dac5bb47566b7e76de69dbf32f12fff3d7a0a669863672fa1a9ed70883",
+      "frame-000071.jpg": "199a7896f5af593085669035a0cb3ea5f1d914d61140f747fdb31d17bf0ff71b",
+      "frame-000051.jpg": "700647e8d3961026f38de8164c69104ed127c4bfac1973b3e7cad83c20913351",
+      "frame-000031.jpg": "29c1583129c1e8e4d778a8920c71f6ba409a11ad1f47904e6957727cb0b2492b",
+      "frame-000011.jpg": "ded0574288d34025a0300c4d54dcc01384546d18bc2bc8d752b52b09d9bf63ad",
+      "frame-000022.jpg": "b71b56f30d7fc08064479a48182eed005a6730214aa5b4a6183f77f73287ec50",
+      "frame-000087.jpg": "3993eb985e4faf9e273ed51d49f84a1f4967b5795504960c380c7c48c93e01c2",
+      "frame-000024.jpg": "05baabb28d07c65e36d63f2c227decfbe0a5172e3f8b3bc68b29e79cc24d6693",
+      "frame-000042.jpg": "1a04f408fc0f19cbf79ed62e82f830cb3aa6c2f5dfa326cc37cb8d67030d29a6",
+      "frame-000080.jpg": "684e60245dee326a54bb56d3d7a5efd38e9e512c712a38bca3fb0461f79e87a3",
+      "frame-000055.jpg": "c8bf73ea5b05c466f2de22d8d74b82103ab7bb310dc3043f131a17d1cf78c8ce",
+      "frame-000095.jpg": "7c984f2c45333ac31a7057535b08f2c2ef0372916c615bf0ce1af7b984b8e91a",
+      "frame-000018.jpg": "80b7de89f5937016dc1fc4586514763bded3dc8b134e874fb98c3f7124f5ff05",
+      "frame-000066.jpg": "aa54ad18da127b343058891cec8601f360ad32949c55af9ac169247cd1db83ea",
+      "frame-000004.jpg": "12c5eff30000c9f3d6f2735a1db8774cc180b787248766a19b58bb3e41d8f348",
+      "frame-000034.jpg": "a8e5015f9328e2e3e2090f76dd30acb2af8cc21444ddd113900ebf7d643a9a37",
+      "frame-000085.jpg": "cdd5c8e0b09aa2a6b32846602bb8d76ce411431c5b50d7d309ab9df4cf23764a",
+      "frame-000029.jpg": "0b0fff1f0391c4fa5952920a69094b96b40de072f458002ddcb3663ccf7e4722",
+      "frame-000072.jpg": "ef008a8e8614af61e14cc56d04b95846adc42fb82c3c301ff0e248067e5c7d59",
+      "frame-000081.jpg": "ca40937e979c93d4ec96b612003156aa5208f67e607f298e78eea9198517f9ae",
+      "frame-000097.jpg": "d5f66e4bccf68d11d77f83f900af872d35030c908737f309fc31053ba6254ce4",
+      "frame-000058.jpg": "35a6e45a99d5dc94b897d4ed3bf487c294074765487eb919adcc4cb746b6ec87",
+      "frame-000030.jpg": "9023785d55638572dfbd36bd6e724c3364fce4ec67c42720003505132dc40cb7",
+      "frame-000063.jpg": "912ca5b5f14fc3e4dd2a1c23d3e40234ca7b3468d58c6e1c545341ad37369ae6",
+      "frame-000040.jpg": "ba0d5433e2be7078a35462002f478c3ec9b191b3f7e6b15564150aa8f8c39f8f",
+      "frame-000084.jpg": "a6bee851a6c6bf9da5a04086bc227cebf8efb3e175c0d3d210ee28510a456499",
+      "frame-000028.jpg": "b7a9788d2208dcedd79c67bd7e87d4b86484568c06062300bf5dd260b8b48032",
+      "frame-000056.jpg": "34d22982e9db2dfb3f01b82c8e41e147a27fd7d411351de201fd958f5989cb0f",
+      "frame-000015.jpg": "d67ec131295459704c2add33d0b0563c87babab93d7ec886c8ea1fb58428e821",
+      "frame-000093.jpg": "37445bf7809b5d679d3af390c980decb0e641353265c3a3a167aeed215df6487",
+      "frame-000098.jpg": "1886bc00537f7f3606dcd57b1ff092cb9ff6c1e002ab3e716746e93b5a2d6c0c",
+      "frame-000053.jpg": "645970ee7bdf32bcfa3bb7d8ebe90a20c0a41c9e081a26e20f44c86b6eac2ee2",
+      "frame-000077.jpg": "79de12a969839966c199f8b4ba3ecbc02c1a737b032f1d21275c67353d6e00c7",
+      "frame-000025.jpg": "75579685699962b04ab9ffba519414e55fb6ab9bbd95fba38ae2c08ca57d8b91",
+      "frame-000096.jpg": "12475125a432fa833ef48aafa280697179e3652e8d149538971c6bb645afde12",
+      "frame-000016.jpg": "f0352504cbf6a6192b595e24104517780f7d3e9514ae5a0c1e64161f1a447052"
+    }
+  },
+  "verification": {
+    "all_1491_observations_match_phase1_in_every_run": true,
+    "decoded_preview_frames": 100,
+    "source_frame_intervals_preserved_to_s": 1e-06,
+    "source_dimensions": [
+      1242,
+      375
+    ],
+    "preview_dimensions": [
+      1242,
+      376
+    ],
+    "output_clock_origin_s": 0,
+    "tracking_counts": {
+      "unassigned": 1101,
+      "associated": 390,
+      "low_score_associated": 85
+    },
+    "history_limits": {
+      "max_observations": 30,
+      "max_source_age_s": 2
+    },
+    "retention": {
+      "ended": {
+        "expired": 10
+      },
+      "continuity_segments": 25,
+      "peak_history_per_track": 20,
+      "peak_retained_observations": 83,
+      "peak_live_tracks": 9
+    },
+    "continuous_examples": [
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/0/1",
+        "segment_id": 0,
+        "class_id": 0,
+        "consecutive_observations": 99,
+        "review_frames": [
+          1,
+          50,
+          99
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/1/0",
+        "segment_id": 0,
+        "class_id": 1,
+        "consecutive_observations": 56,
+        "review_frames": [
+          1,
+          29,
+          56
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/2/0",
+        "segment_id": 2,
+        "class_id": 2,
+        "consecutive_observations": 50,
+        "review_frames": [
+          43,
+          68,
+          92
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/3/0",
+        "segment_id": 0,
+        "class_id": 3,
+        "consecutive_observations": 2,
+        "review_frames": [
+          91,
+          92,
+          92
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/7/0",
+        "segment_id": 0,
+        "class_id": 7,
+        "consecutive_observations": 7,
+        "review_frames": [
+          39,
+          42,
+          45
+        ]
+      }
+    ],
+    "reacquisition_examples": [
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/2/0",
+        "class_id": 2,
+        "segments": [
+          0,
+          1
+        ],
+        "review_frames": [
+          22,
+          24
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/2/0",
+        "class_id": 2,
+        "segments": [
+          1,
+          2
+        ],
+        "review_frames": [
+          36,
+          43
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/7/0",
+        "class_id": 7,
+        "segments": [
+          0,
+          1
+        ],
+        "review_frames": [
+          45,
+          47
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/7/0",
+        "class_id": 7,
+        "segments": [
+          1,
+          2
+        ],
+        "review_frames": [
+          48,
+          52
+        ]
+      },
+      {
+        "track_id": "cf95938e3b294280a33f3e52d4e88864/0/2/2",
+        "class_id": 2,
+        "segments": [
+          0,
+          1
+        ],
+        "review_frames": [
+          53,
+          55
+        ]
+      }
+    ]
+  },
+  "visual_review": {
+    "frames": [
+      1,
+      22,
+      24,
+      50,
+      99
+    ],
+    "findings": [
+      "Person #0:1 visually follows the striped-shirt cyclist through frames 1/50/99; no reference-ID metric.",
+      "The white van has car #2:0 on frames 22/24; frame 23 has no confirmed assignment, and frame 24 starts a new segment.",
+      "Person/bicycle boxes overlap and weak-label text remains crowded. Detector ambiguities and identity switches are possible."
+    ],
+    "identity_ground_truth_available": false
+  },
+  "artifacts": {
+    "root": "outputs/phase2-acceptance",
+    "full_acceptance_report_sha256": "3b5c67fc3f998d9e0d335ae2f36bcb378c13ce1022cfd48bfca94c546ebd9327",
+    "environment_verification_sha256": "0ccab733a9c48e65cda19ddde62695a256ff4cce9e59ebc1fba7542d7d89ca2f",
+    "failure_results_sha256": "a3326f75e6cfa8365ef04410d71ae2b7706cc0b22afcc0be6abbcdd7a5c64034",
+    "raw_and_derived_media_ignored_local": true
+  },
+  "licenses": {
+    "tracking_inventory": "docs/tracking-license-inventory.json",
+    "dataset": "CC-BY-NC-SA-3.0",
+    "permitted_use": "Local noncommercial research demonstration",
+    "attribution": "Andreas Geiger, Philip Lenz, Christoph Stiller, Raquel Urtasun; Vision meets Robotics: The KITTI Dataset (2013)",
+    "new_dependencies_since_backend_proof": false,
+    "source_license_selection": "unchanged; no release/binary redistribution in this task"
+  },
+  "limitations": [
+    "One short KITTI development sequence, not independent evaluation clips.",
+    "No reference identities or tracking accuracy/ID-switch count.",
+    "Paired overhead includes JSONL/statistics; track stage is isolated.",
+    "GPU clocks/system load are uncontrolled; report short-run variability.",
+    "H.264/JPEG preview is measured separately from the headless comparison.",
+    "No numerical TTC, metric range, ego-motion, path-overlap or collision-warning outputs.",
+    "No independent held-out sequence or reference identity accuracy result.",
+    "The 30-FPS aspiration is not a validated sustained guarantee."
+  ],
+  "next_phase": "Await an explicit Phase 3 request; do not infer authorization to implement numerical estimators from Phase 2 finalization."
+}

@@ -13,8 +13,33 @@ from complete verified upstream wheels, final locked sync and three additional
 passing CUDA repetitions with identical observations/previews. The documented
 GPU-only CDN/cache fallback resolves this workstation's index-host timeout
 without copying installed baseline files or changing the lock. Phase 1 acceptance
-is complete; merge PR #7 with final required CPU checks before Phase 2, which has
-not started.
+is complete; PR #7 subsequently merged as `4049432`.
+
+Update 2026-10-16: the owner authorized only Phase 2 milestone 1. Select and pin
+an independent CPU ByteTrack backend, characterize its actual association behavior,
+and document the decision. See [ADR-0003](adr/0003-tracking-backend.md) and the
+[backend guide](tracking-backend.md). This does not authorize the remaining
+adapter/history, application integration or video/performance milestones.
+
+Update 2026-10-17: the owner requested annotated tracking video. A standalone
+`track-preview` command now replays saved detection runs on CPU, writes measured
+boxes with class-scoped IDs to H.264 MP4 and records assignments/provenance. See
+the [preview guide](tracking-preview.md). This narrow addition brings forward
+preview inspection; it does not complete domain histories, continuity segments,
+full application tracking or Phase 2 accuracy/performance acceptance.
+
+Subsequent authorization, 2026-10-17: implement milestone 2's domain adapter,
+lifecycle and bounded observation histories. The [shared adapter](tracking.md)
+now implements those contracts and is consumed by the preview. Local evidence
+is in [phase2-tracking-adapter.json](evidence/phase2-tracking-adapter.json).
+That record captures the milestone-2 state before full orchestration.
+
+Finalization authorization, 2026-10-17: complete Phase 2. The shared `track` command
+now orchestrates detection/tracking/output; local acceptance passed with a newly
+installed wheel, three matched GPU repetitions per mode, real annotated video,
+continuity inspection and failure checks. [The acceptance report](phase2-acceptance.md)
+records timing variability without claiming reference identity accuracy. Hosted
+checks/protected integration are recorded in [final evidence](evidence/phase2-tracking.json).
 
 ## Phase 1
 
@@ -41,6 +66,14 @@ latency/FPS with declared hardware/config. No detection-accuracy claim without
 reference boxes. Hosted CPU checks are still required before a merge.
 
 ## Phase 2
+
+Deliver sequentially: (1) backend selection and real synthetic CPU proof,
+(2) domain tracking adapter/lifecycle/bounded histories, (3) application command,
+outputs and previews, and (4) recorded-video continuity/performance acceptance.
+All four milestones passed implementation/acceptance checks, including the live
+shared pipeline and matched video/performance report. Hosted implementation CPU
+CI passed; PR #8 records normal protected integration and its final required
+documentation gate. Standalone replay alone was not closure.
 
 After the Phase 1 gate, feed detections to an independent ByteTrack adapter.
 Do not combine inference and tracking through `YOLO.track()`: a future detector

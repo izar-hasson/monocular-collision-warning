@@ -35,7 +35,7 @@ reviewed tooling update.
 ## Tests and hooks
 
 Default pytest uses importlib mode, strict configuration/markers, and excludes
-`gpu`, `slow`, and `benchmark`. Small CPU `integration` tests remain eligible.
+`gpu`, `slow`, `benchmark`, and `tracking`. Small CPU `integration` tests remain eligible.
 The suite includes installed-package/CLI checks and deterministic video/detector
 contract and pipeline tests. Generated PyAV integration cases are opt-in (`slow`)
 and use the locked `video` extra:
@@ -48,6 +48,28 @@ uv run --locked --extra video pytest -q -m slow tests/integration/test_generated
 The base package remains dependency-free. The extra installs PyAV/NumPy without
 model or GPU packages.
 Do not add passing placeholder tests.
+
+The optional `tracking` extra supplies the real CPU ByteTrack backend. Use a
+separate environment for its synthetic association proof:
+
+```bash
+UV_PROJECT_ENVIRONMENT=.cache/phase2-tracking-cpu uv sync --locked --extra tracking
+UV_PROJECT_ENVIRONMENT=.cache/phase2-tracking-cpu uv run --locked --extra tracking pytest -q -m tracking tests/integration/test_tracking_backend.py
+```
+
+These tests run without models, CUDA, media or network. The required CPU CI job
+installs the extra and runs them explicitly; selecting them without installation
+fails instead of skipping. See [the backend guide](tracking-backend.md) and
+[ADR-0003](adr/0003-tracking-backend.md). The saved-detection
+[tracking preview](tracking-preview.md) additionally needs `--extra video`;
+its generated-video tests are in `tests/integration/test_tracking_preview.py`.
+The [shared tracking adapter](tracking.md) is covered by
+`tests/integration/test_tracking_adapter.py` with the `tracking` marker.
+Dependency-free history/contract tests are part of the default CPU suite.
+`tests/integration/test_tracking_run.py` exercises the live command with real
+decoding, association and encoding plus a synthetic detector; hosted CI runs it
+with the tracking/video extras. Recorded GPU acceptance uses
+`scripts/accept_tracking.py` and the protocol in [phase2-acceptance.md](phase2-acceptance.md).
 
 When real tests exist, opt in with `uv run --locked pytest -m gpu`, `-m slow`, or
 `-m benchmark`. These explicit selectors replace the default marker selection.

@@ -4,6 +4,11 @@ The target is one offline process with small replaceable adapters and independen
 numerical logic. Phase 1 introduces timestamped video, a detector adapter,
 immutable observations and streamed run output. Tracking and later numerical
 components remain gated by the [implementation plan](detection-tracking-plan.md).
+Phase 2 now supplies a shared [tracking adapter](tracking.md), immutable track
+snapshots, explicit loss/end/reset events and bounded measurement histories.
+Live `detect`/`track` execution shares one pipeline; standalone saved-detection
+previews consume the same adapter, record serializer and measured-box renderer.
+Tracking/output costs are measured independently. Numerical estimators remain deferred.
 
 ```mermaid
 flowchart TD
@@ -39,7 +44,7 @@ hierarchy or plugin framework is required for the foundation.
 | --- | --- |
 | Frame | Source ID, frame index, source presentation timestamp in seconds, dimensions, explicit BGR/RGB payload |
 | Detection | Class, score, source frame, finite `xyxy` pixel box with documented bounds policy |
-| Track | Identity, timestamped history, age/quality; invalidate derived motion on identity changes and long gaps |
+| Track | Namespaced identity, observed/lost state, bounded current-segment measurements, age/counts; gaps clear continuity |
 | Estimate | Optional value, unit, method, validity, evidence; unavailable is not zero |
 | RelativeState | Camera-frame lateral X and longitudinal Z in meters, velocities in m/s; publish only under valid calibration assumptions |
 | RiskAssessment | Track ID; UNKNOWN, NO_CURRENT_WARNING, or WARNING; TTC/path evidence, reasons, limitations |

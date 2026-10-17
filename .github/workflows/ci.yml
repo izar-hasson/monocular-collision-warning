@@ -50,6 +50,10 @@ jobs:
         run: |
           uv sync --locked --extra video
           uv run --locked --extra video pytest -q -m slow tests/integration/test_generated_video.py
+      - name: Verify ByteTrack and annotated video replay on CPU
+        run: |
+          uv sync --locked --extra tracking --extra video
+          uv run --locked --extra tracking --extra video pytest -q -m tracking tests/integration/test_tracking_backend.py tests/integration/test_tracking_adapter.py tests/integration/test_tracking_preview.py tests/integration/test_tracking_run.py
       - name: Build distributions and verify installed wheel
         run: |
           uv build --out-dir dist

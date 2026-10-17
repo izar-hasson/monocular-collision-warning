@@ -1,11 +1,18 @@
 """Actual JSONL, temporal ordering and failure behavior using a fake detector."""
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from collision_warning.domain import Detection, Frame, FrameInfo
+from collision_warning.domain import (
+    Detection,
+    Frame,
+    FrameInfo,
+    TrackedDetection,
+    TrackingResult,
+)
 from collision_warning.pipeline import latency_summary, run_detection
 from collision_warning.run import read_asset_manifest
 
@@ -93,3 +100,76 @@ def test_missing_provenance_cannot_be_treated_as_reviewed(tmp_path: Path) -> Non
     path.write_text('{"schema_version": 1, "status": "template"}')
     with pytest.raises(ValueError, match="requires"):
         read_asset_manifest(path, "clip")
+
+
+class FakeTracker:
+    def __init__(self):
+        self.frames = []
+
+    def update(self, info, detections):
+        assert isinstance(info, FrameInfo)
+        self.frames.append(info)
+        return TrackingResult(
+            info,
+            tuple(
+                TrackedDetection(i, d, None, None, "unassigned")
+                for i, d in enumerate(detections)
+            ),
+            (),
+            (),
+            None,
+        )
+
+    def reset(self):
+        return ()
+
+
+def test_shared_pipeline_calls_tracker_even_on_empty_frames(tmp_path):
+    tracker = FakeTracker()
+    metrics = run_detection(
+        iter(frames()),
+        FakeDetector(),
+        tmp_path / "detections",
+        tracker=tracker,
+        tracking_output=tmp_path / "tracks",
+        warmup_frames=1,
+    )
+    assert [f.index for f in tracker.frames] == [0, 1, 2]
+    records = [
+        json.loads(line) for line in (tmp_path / "tracks").read_text().splitlines()
+    ]
+    assert records[1]["observations"] == []
+    assert metrics["latency"]["track"]["count"] == 2
+    assert metrics["tracking"]["counts"] == {"unassigned": 2}
+
+
+@pytest.mark.parametrize("options", ["tracker_only", "output_only", "same_path"])
+def test_tracking_output_contract_fails_before_writing(tmp_path, options):
+    path = tmp_path / "detections"
+    tracker = FakeTracker() if options != "output_only" else None
+    output = None if options == "tracker_only" else path
+    with pytest.raises(ValueError):
+        run_detection(
+            iter(frames()),
+            FakeDetector(),
+            path,
+            tracker=tracker,
+            tracking_output=output,
+        )
+    assert not path.exists()
+
+
+def test_wrong_tracker_frame_is_rejected(tmp_path):
+    class WrongTracker(FakeTracker):
+        def update(self, info, detections):
+            result = super().update(info, detections)
+            return replace(result, frame=replace(info, source_id="wrong"))
+
+    with pytest.raises(ValueError, match="Tracker returned"):
+        run_detection(
+            iter(frames()),
+            FakeDetector(),
+            tmp_path / "detections",
+            tracker=WrongTracker(),
+            tracking_output=tmp_path / "tracks",
+        )

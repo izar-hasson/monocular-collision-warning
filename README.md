@@ -44,7 +44,22 @@ its three repetitions measured 34.66–43.12 warmed FPS and produced identical
 observations/previews to the original runs. See the
 [closure evidence](docs/evidence/phase1-closure.json). Integration is reviewed in
 [PR #7](https://github.com/izar-hasson/monocular-collision-warning/pull/7) under the
-required CPU checks. Phase 2 tracking follows that merge.
+required CPU checks. PR #7 merged as `4049432`.
+
+Phase 2 milestone 1 selects a pinned CPU ByteTrack backend and adds a synthetic
+association proof through the optional `tracking` extra. See the
+[backend guide](docs/tracking-backend.md) and [ADR-0003](docs/adr/0003-tracking-backend.md).
+A saved-detection `track-preview` command now creates annotated tracking MP4s on
+CPU without rerunning inference. See the [tracking preview guide](docs/tracking-preview.md).
+The shared [tracking adapter](docs/tracking.md) now supplies observed/lost lifecycle,
+reset-safe IDs, continuity segments and histories bounded by count and source age.
+`collision-warning track` runs detection and tracking together, with separate
+stage timings, JSONL lifecycle output and optional annotated video. Local Phase 2
+acceptance passed on the 100-frame development clip; see the
+[acceptance report](docs/phase2-acceptance.md) and
+[evidence](docs/evidence/phase2-tracking.json). Hosted implementation CPU checks passed;
+[PR #8](https://github.com/izar-hasson/monocular-collision-warning/pull/8) records protected
+integration and its final required gate. Reference identity accuracy is not evaluated.
 
 To test detections now, use [scripts/test_detection.py](scripts/test_detection.py).
 It accepts an image, video or acquired KITTI image sequence and saves annotated
